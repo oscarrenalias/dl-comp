@@ -66,6 +66,27 @@
       <version>[6.1.6,)</version>
       <scope>test</scope>
     </dependency>
+    <!-- nicer library for handling http calls in Scala -->
+    <dependency>
+      <groupId>net.databinder</groupId>
+      <artifactId>dispatch-http_2.7.7</artifactId>
+      <version>0.7.2</version>
+    </dependency>    
+    <dependency>
+      <groupId>net.databinder</groupId>
+      <artifactId>dispatch-json_2.7.7</artifactId>
+      <version>0.7.2</version>
+    </dependency>
+    <dependency>
+      <groupId>net.databinder</groupId>
+      <artifactId>dispatch-http-json_2.7.7</artifactId>
+      <version>0.7.2</version>
+    </dependency>
+    <dependency>
+      <groupId>net.databinder</groupId>
+      <artifactId>dispatch-lift-json_2.7.7</artifactId>
+      <version>0.7.2</version>
+    </dependency>
     <!-- for LiftConsole -->
     <dependency>
       <groupId>org.scala-lang</groupId>
@@ -74,7 +95,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <build>
     <sourceDirectory>src/main/scala</sourceDirectory>
     <testSourceDirectory>src/test/scala</testSourceDirectory>
