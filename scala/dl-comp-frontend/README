@@ -1,0 +1,18 @@
+How to get started:
+
+1) Install the Scala plugin for Eclipse. Use the following URL as the source for the software in Eclipse 
+via (Help->Install new software...): http://www.scala-lang.org/node/94
+
+2) Install the Egit plugin for Eclipse. Use this URL for the software download: http://download.eclipse.org/egit/updates
+
+3) Import the project data from the git repository:
+
+3.1) In eclipse, go to File->Import...
+3.2) Select "Git Repository" under Git
+3.3) Enter the following data in the URI field: git+ssh://git@github.com/phunkphorce/dl-comp.git. Let 
+the git importer fill in the rest of values
+3.4) Select the master branch
+3.5) Select where to import the project and click Finish
+
+Once completed, you should have the "dl-comp-frontend" project installed in your Eclipse.
+
