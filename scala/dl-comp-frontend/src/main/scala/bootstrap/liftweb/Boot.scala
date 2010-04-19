@@ -22,10 +22,14 @@ class Boot {
     // where to search snippet
     LiftRules.addToPackages("com.accenture.webshop.frontend")
     
-    Schemifier.schemify(true, Log.infoF _, User)     
-
+    Schemifier.schemify(true, Log.infoF _, User)
+  
     // Build SiteMap
-    val entries = Menu(Loc("Home", List("index"), "Home")) :: Nil
+    val entries = Menu(Loc("Home", List("index"), "Home")) :: 
+      Menu(Loc("Item", List("item"), "Item data")) :: 
+      Menu(Loc("Catalog", List("catalog"), "Item catalog")) :: 
+      Nil  
+              
     LiftRules.setSiteMap(SiteMap(entries:_*))
     
     /*
