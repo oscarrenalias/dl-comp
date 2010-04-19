@@ -16,6 +16,14 @@ the git importer fill in the rest of values
 
 Once completed, you should have the "dl-comp-frontend" project installed in your Eclipse.
 
+Adding the Scala JAR files
+--------------------------
+If not defined yet, the Maven repository folder needs to be defined.
+
+Right click where it says "Referenced Libraries" and then select Build Path->Configure Build Path...
+Make sure that the variable M2_REPO is defined and pointing to your Maven repository, with a value
+like /Users/oscar/.m2/repository (in Unix-like systems), or TBD (in Windows)
+
 How to commit files
 -------------------
 1) make your changes to the file. If it's a new file:
@@ -36,5 +44,11 @@ Password: you can type it now or you will be asked later
 In the next screen, click "Add all branches spec" and click Finish. If everything went well
 you should see a message in green background with the push id.
 
+How to run the application
+--------------------------
+From the application folder, run the following maven task:
 
+mvn jetty:run
 
+Alternatively, you can create an external tool configuration to execute jetty:run automatically
+from within the IDE
