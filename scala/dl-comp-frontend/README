@@ -22,7 +22,7 @@ If not defined yet, the Maven repository folder needs to be defined.
 
 Right click where it says "Referenced Libraries" and then select Build Path->Configure Build Path...
 Make sure that the variable M2_REPO is defined and pointing to your Maven repository, with a value
-like /Users/oscar/.m2/repository (in Unix-like systems), or TBD (in Windows)
+like /Users/oscar/.m2/repository (in Unix-like systems), or c:\Users\oscar.renalias\.m2\repository (in Windows)
 
 How to commit files
 -------------------
