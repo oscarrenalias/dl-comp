@@ -2,6 +2,8 @@ package com.accenture.webshop.frontend.model
 
 import _root_.net.liftweb.mapper._
 import _root_.net.liftweb.util._
+import net.liftweb.http._ 
+
 
 /**
  * The singleton that has methods for accessing the database
@@ -16,6 +18,23 @@ object User extends User with MetaMegaProtoUser[User] {
 
   // comment this line out to require email validations
   override def skipEmailValidation = true
+  
+  def formLogin: LiftRules.DispatchPF = { 
+    case Req("form_login" :: Nil, _, PostRequest) if !loggedIn_? => 
+      () => { 
+    	  (for { 
+    		  uname <- S.param("username") 
+    		  pw <- S.param("password") 
+    		  user <- find(By(email, uname)) if user.validated && 
+    		  user.password.match_?(pw) 
+    	  } yield user) match { 
+    	  	case Full(user) => logUserIn(user) 
+    	  	S.notice("Logged In") 
+    	  	case _ => S.error("Unable to verify username/password") 
+    	  } 
+    	  S.redirectTo(S.referer openOr "/") 
+      } 
+  }  
 }
 
 /**

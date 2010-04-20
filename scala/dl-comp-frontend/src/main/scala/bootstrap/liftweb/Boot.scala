@@ -9,6 +9,7 @@ import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConn
 import _root_.java.sql.{Connection, DriverManager}
 import _root_.com.accenture.webshop.frontend.model._
 import _root_.javax.servlet.http.{HttpServletRequest}
+import com.accenture.webshop.frontend.snippet._
 
 /**
   * A class that's instantiated early and run.  It allows the application
@@ -23,11 +24,14 @@ class Boot {
     LiftRules.addToPackages("com.accenture.webshop.frontend")
     
     Schemifier.schemify(true, Log.infoF _, User)
+    
+    val AuthRequired = If(() => isLoggedIn.get, () => RedirectResponse("/login"))    
   
     // Build SiteMap
-    val entries = Menu(Loc("Home", List("index"), "Home")) :: 
-      Menu(Loc("Item", List("item"), "Item data")) :: 
-      Menu(Loc("Catalog", List("catalog"), "Item catalog")) :: 
+    val entries = Menu(Loc("Home", List("index"), "Home", AuthRequired)) :: 
+      Menu(Loc("Item", List("item"), "Item data", AuthRequired)) :: 
+      Menu(Loc("Catalog", List("catalog"), "Item catalog", AuthRequired)) :: 
+      Menu(Loc("Login", List("login"), "Log in page")) ::
       Nil  
               
     LiftRules.setSiteMap(SiteMap(entries:_*))
@@ -45,7 +49,7 @@ class Boot {
       Full(() => LiftRules.jsArtifacts.hide("ajax-loader").cmd)
 
     LiftRules.early.append(makeUtf8)
-
+    
     S.addAround(DB.buildLoanWrapper)    
   }
   
