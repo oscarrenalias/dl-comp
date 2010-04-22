@@ -1,0 +1,158 @@
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0
+}
+html {
+	background: #fff
+}
+body {
+	color: #000;
+	font: 100.01%/1.1 "Lucida Sans", Arial, "Times New Roman", Times, sans-serif
+}
+h1 {
+	font-size: 1.2em;
+	margin-bottom: 10px
+}
+h2 {
+	font-size: 1.05em;
+	border-left: 5px solid #666;
+	padding-left: 5px;
+	margin-top: 20px
+}
+h1,h2 {
+	margin-left: 10px;
+	font-weight: normal
+}
+code {
+	display: block;
+	margin-left: 25px;
+	padding-bottom: 20px
+}
+ol {
+	margin: 8px 0 0 10px
+}
+ol li {
+	display: inline;
+	margin-right: 5px
+}
+ul {
+	margin-left: 10px;
+	margin-top: 10px
+}
+ul li {
+	margin-right: 9px;
+	list-style: none
+}
+img {
+	border: 0;
+	margin: 10px 0
+}
+#sub-section div {
+	text-align: center
+}
+p {
+	margin: 10px 10px
+}
+pre {
+	white-space: normal
+}
+#header,#menu,#content,#sub-section,#footer {
+	padding: 10px 0;
+	font-size: .9em
+}
+#content div {
+	margin: 10px
+}
+.bold {
+	padding: 10px;
+	background: #fff;
+	border: 1px dotted #666
+}
+.highlight {
+	background-color: #ffc
+}
+
+#header {
+	background: #fcc
+}
+#footer {
+	background: #ccf
+}
+#content ul li {
+	margin-left: 20px;
+	list-style: disc !important
+}
+#content div {
+	margin-right: 20px
+}
+#content div img {
+	display: inline;
+	vertical-align: middle
+}
+body {
+	min-width: 640px
+}
+/* MSIE display:inline-block is to make sure MSIE doesn't paint the backround above the containers, the overflow declaration is to make sure the containers do not drop below siblings if content pushes the width (in modern browsers it doesn't drop, but it spawns an orizontal scrollbar) */
+#header,#menu,#content,#sub-section,#footer {
+	overflow: hidden;
+	display: inline-block
+}
+#header,#footer {
+	width: 100%
+}
+/* safari and opera need this */
+#menu,#content,#sub-section {
+	float: left
+}
+#content {
+	width: 57%;
+	margin-left: 20%;
+	display: inline
+}
+/* opera 7 shoots this container at the top left corner of the viewport */
+#menu {
+	width: 18%;
+	margin-left: -77%;
+	display: inline
+}
+#sub-section {
+	width: 22%
+}
+#footer {
+	clear: both
+}
+
+/* default styles from Lift */
+.sidebar ul {
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #ccc;
+}
+	 
+
+.sidebar ul li {
+	margin:0;
+	padding:0;
+	list-style:none;
+	border:1px solid #ccc;
+	border-bottom:none;
+}
+
+.sidebar ul li a {
+	display:block;
+	padding:3px;
+	text-indent:30px;
+	text-decoration:none;
+}
+
+.sidebar ul li span {
+	display:block;
+	padding:3px;
+	text-indent:30px;
+	text-decoration:none;
+}
+
+.sidebar ul li a:hover {
+	background-color: #eee;
+}

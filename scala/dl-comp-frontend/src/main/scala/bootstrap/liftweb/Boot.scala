@@ -25,14 +25,11 @@ class Boot {
     
     Schemifier.schemify(true, Log.infoF _, User)
     
-    val AuthRequired = If(() => isLoggedIn.get, () => RedirectResponse("/login"))    
-  
     // Build SiteMap
-    val entries = Menu(Loc("Home", List("index"), "Home", AuthRequired)) :: 
-      Menu(Loc("Item", List("item"), "Item data", AuthRequired)) :: 
-      Menu(Loc("Catalog", List("catalog"), "Item catalog", AuthRequired)) :: 
-      Menu(Loc("Login", List("login"), "Log in page")) ::
-      Nil  
+    val entries = Menu(Loc("Home", List("index"), "Home")) ::  
+      Menu(Loc("Catalog", List("catalog"), "Item catalog")) ::
+      Menu(Loc("Details", List("item"), "Item details" )) ::
+      Nil
               
     LiftRules.setSiteMap(SiteMap(entries:_*))
     

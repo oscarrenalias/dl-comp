@@ -1,4 +1,20 @@
 <lift:surround with="default" at="content">
-		<h2>Here we display the catalogue</h2>
+	<h2>Catalog</h2>
+	<table>
+		<thead>
+			<td width="15%">Item</td>
+			<td width="70%">Description</td>
+			<td width="15%">Price</td>
+		</thead>
+		<tbody>
+		<lift:Items.list>
+			<tr>
+				<td><item:id /></td>
+				<td><item:description /></td>
+				<td><item:price /></td>
+			</tr>
+		</lift:Items.list>
+		</tbody>
+	</table>
 </lift:surround>
 
