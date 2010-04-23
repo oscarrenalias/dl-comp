@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>DC_Test~0~rest(2fext(2flib~demo.accenture.com</name>
+	<comment>SAP Development Component Project</comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>com.sap.ide.dii05.lib.dcnature</nature>
+	</natures>
+</projectDescription>

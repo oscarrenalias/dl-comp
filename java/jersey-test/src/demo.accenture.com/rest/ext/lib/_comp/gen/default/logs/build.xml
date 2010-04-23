@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    development component
+                     name: rest/ext/lib
+                   vendor: demo.accenture.com
+                     type: External Library
+                 sub-type: 
+              type-vendor: sap.com
+
+       software component
+                     name: DemoComponents
+                   vendor: demo.accenture.com
+
+                 location: DC_Test
+          source location: oscar.renalias@ACN7440R8RFFF8
+            build variant: default
+
+    building on ACN7440R8RFFF8, Windows Vista/x86, version 6.0
+    using Java VM 'Java HotSpot(TM) Client VM', version 14.3-b01 (Sun Microsystems Inc.)
+    build started at 2010-04-22 00:47:45 GMT+03:00 (EEST)
+
+    Build Plugin 'ExternalArchivePlugin', Version 7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:56:00 +0200, CL69489)
+    detailed versions:
+    sap.com:tc/bi/anttasks#def           7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:14 +0200, CL69489)
+    sap.com:tc/bi/bp/externalarchive#lib 7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:56:00 +0200, CL69489)
+    sap.com:tc/bi/core#def               7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:55:23 +0200, CL69489)
+    sap.com:tc/bi/exception#def          7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:13 +0200, CL69489)
+    sap.com:tc/bi/extddicdb#def          7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:20 +0200, CL69489)
+    sap.com:tc/bi/extsql#def             7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:16 +0200, CL69489)
+    sap.com:tc/bi/framework#def          7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:51:19 +0200, CL69489)
+    sap.com:tc/bi/i18n#def               7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:04 +0200, CL69489)
+    sap.com:tc/bi/javatech#def           7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:52:18 +0200, CL69489)
+    sap.com:tc/bi/jlincbs#def            7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:32 +0200, CL69489)
+    sap.com:tc/bi/settings#version       7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:56:13 +0200, CL69489)
+    sap.com:tc/bi/util#util              7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:51:45 +0200, CL69489)
+    sap.com:tc/bi/velocity#def           7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:03 +0200, CL69489)
+    sap.com:tc/bi/xml#def                7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:06 +0200, CL69489)
+ -->
+<project name="DC Build"
+         default="build"
+         basedir=".">
+<taskdef name="jlinppcheck" classname="com.sap.tc.buildplugin.pp.ant.JLinEECheckTask"/>
+<taskdef name="pppacker" classname="com.sap.tc.buildplugin.pp.PPPackTask"/>
+<taskdef name="propertybag" classname="com.sap.tools.ant.taskdefs.PropertyBag"/>
+<taskdef name="timer" classname="com.sap.tools.ant.taskdefs.Timer"/>
+
+<target name="createPublicParts">
+<timer/>
+<pppacker ppname="api">
+</pppacker>
+<timer message="Packing of public part 'api' finished in "/>
+<timer/>
+<pppacker ppname="archives">
+</pppacker>
+<timer message="Packing of public part 'archives' finished in "/>
+<jlinppcheck/>
+</target>
+
+<target name="build" depends="createPublicParts">
+
+</target>
+</project>

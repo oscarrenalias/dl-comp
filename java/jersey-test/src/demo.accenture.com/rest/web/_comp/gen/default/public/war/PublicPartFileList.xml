@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<content version="4">
+<metadata>
+<development-component>
+<name>rest/web</name>
+<vendor>demo.accenture.com</vendor>
+<component-type>
+<vendor>sap.com</vendor>
+<type>J2EE</type>
+<sub-type>WebModule</sub-type>
+</component-type>
+</development-component>
+<public-part>
+<name>war</name>
+<purpose>assembly</purpose>
+</public-part>
+<dependencies>
+<dependency>
+<dc-ref>
+<name>rest/ext/lib</name>
+<vendor>demo.accenture.com</vendor>
+<component-type>
+<vendor>sap.com</vendor>
+<type>External Library</type>
+<sub-type/>
+</component-type>
+</dc-ref>
+<pp-ref purpose="assembly">archives</pp-ref>
+<pp-ref purpose="compilation">api</pp-ref>
+<at-runtime/>
+</dependency>
+<dependency>
+<dc-ref>
+<name>rest/ext/lib</name>
+<vendor>demo.accenture.com</vendor>
+<component-type>
+<vendor>sap.com</vendor>
+<type>External Library</type>
+<sub-type/>
+</component-type>
+</dc-ref>
+<pp-ref purpose="compilation">api</pp-ref>
+<at-build-time/>
+</dependency>
+<dependency>
+<dc-ref>
+<name>rest/ext/lib</name>
+<vendor>demo.accenture.com</vendor>
+<component-type>
+<vendor>sap.com</vendor>
+<type>External Library</type>
+<sub-type/>
+</component-type>
+</dc-ref>
+<pp-ref purpose="assembly">archives</pp-ref>
+<at-build-time/>
+</dependency>
+<dependency>
+<dc-ref>
+<name>engine.jee5.facade</name>
+<vendor>sap.com</vendor>
+<component-type>
+<vendor>sap.com</vendor>
+<type>J2EE Server Component</type>
+<sub-type>Primary Library</sub-type>
+</component-type>
+</dc-ref>
+<pp-ref purpose="compilation">api</pp-ref>
+<at-build-time/>
+</dependency>
+</dependencies>
+</metadata>
+<source-components>
+<source-component>
+<id>1</id>
+<development-component>
+<name>rest/ext/lib</name>
+<vendor>demo.accenture.com</vendor>
+<component-type>
+<vendor>sap.com</vendor>
+<type>External Library</type>
+<sub-type/>
+</component-type>
+</development-component>
+<dependencies/>
+</source-component>
+</source-components>
+<archives>
+<archive location="srcarchive" path="src/java/src.zip" type="zip"/>
+<archive location="war" path="lib/java/demo.accenture.com~rest~web.war" type="war">
+<property key="attributes">J2EE-Module[module-type[web]],jar,war</property>
+</archive>
+</archives>
+<entities>
+<entity>
+<name>demo.accenture.com~rest~web</name>
+<entity-type>WAR</entity-type>
+<entity-type-vendor>sap.com</entity-type-vendor>
+<fileset location="srcarchive" source-location="DC" source-path="source">
+<file path="com/accenture/demo/material/Material.java"/>
+<file path="com/accenture/demo/material/MaterialResource.java"/>
+</fileset>
+<fileset location="war" source-location="DC" source-path="WebContent">
+<file path="META-INF/MANIFEST.MF"/>
+<file path="WEB-INF/web-j2ee-engine.xml"/>
+</fileset>
+<fileset location="war" source-location="gen" source-path="classes">
+<file path="WEB-INF/classes/com/accenture/demo/material/Material.class" source-path="com/accenture/demo/material/Material.class"/>
+<file path="WEB-INF/classes/com/accenture/demo/material/MaterialResource.class" source-path="com/accenture/demo/material/MaterialResource.class"/>
+</fileset>
+</entity>
+</entities>
+<modules>
+<module>
+<location>war</location>
+<path>WEB-INF/lib/asm-3.1.jar</path>
+<property key="attributes"/>
+<source-id>1</source-id>
+<fileset location="war">
+<file path="WEB-INF/lib/asm-3.1.jar"/>
+</fileset>
+</module>
+<module>
+<location>war</location>
+<path>WEB-INF/lib/jackson-core-asl-1.1.1.jar</path>
+<property key="attributes"/>
+<source-id>1</source-id>
+<fileset location="war">
+<file path="WEB-INF/lib/jackson-core-asl-1.1.1.jar"/>
+</fileset>
+</module>
+<module>
+<location>war</location>
+<path>WEB-INF/lib/jersey-client-1.1.5.1.jar</path>
+<property key="attributes"/>
+<source-id>1</source-id>
+<fileset location="war">
+<file path="WEB-INF/lib/jersey-client-1.1.5.1.jar"/>
+</fileset>
+</module>
+<module>
+<location>war</location>
+<path>WEB-INF/lib/jersey-core-1.1.5.1.jar</path>
+<property key="attributes"/>
+<source-id>1</source-id>
+<fileset location="war">
+<file path="WEB-INF/lib/jersey-core-1.1.5.1.jar"/>
+</fileset>
+</module>
+<module>
+<location>war</location>
+<path>WEB-INF/lib/jersey-json-1.1.5.1.jar</path>
+<property key="attributes"/>
+<source-id>1</source-id>
+<fileset location="war">
+<file path="WEB-INF/lib/jersey-json-1.1.5.1.jar"/>
+</fileset>
+</module>
+<module>
+<location>war</location>
+<path>WEB-INF/lib/jersey-server-1.1.5.1.jar</path>
+<property key="attributes"/>
+<source-id>1</source-id>
+<fileset location="war">
+<file path="WEB-INF/lib/jersey-server-1.1.5.1.jar"/>
+</fileset>
+</module>
+<module>
+<location>war</location>
+<path>WEB-INF/lib/jettison-1.1.jar</path>
+<property key="attributes"/>
+<source-id>1</source-id>
+<fileset location="war">
+<file path="WEB-INF/lib/jettison-1.1.jar"/>
+</fileset>
+</module>
+<module>
+<location>war</location>
+<path>WEB-INF/lib/jsr311-api-1.1.1.jar</path>
+<property key="attributes"/>
+<source-id>1</source-id>
+<fileset location="war">
+<file path="WEB-INF/lib/jsr311-api-1.1.1.jar"/>
+</fileset>
+</module>
+</modules>
+</content>

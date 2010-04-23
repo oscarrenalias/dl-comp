@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<content version="4">
+<metadata>
+<development-component>
+<name>rest/ext/lib</name>
+<vendor>demo.accenture.com</vendor>
+<component-type>
+<vendor>sap.com</vendor>
+<type>External Library</type>
+<sub-type/>
+</component-type>
+</development-component>
+<public-part>
+<name>archives</name>
+<purpose>assembly</purpose>
+</public-part>
+<dependencies/>
+</metadata>
+<source-components/>
+<archives>
+<archive location="asm-3.1.jar" type="filesystem">
+<additional-path attributes="jar,java-library">lib/java/asm-3.1.jar</additional-path>
+</archive>
+<archive location="jackson-core-asl-1.1.1.jar" type="filesystem">
+<additional-path attributes="jar,java-library">lib/java/jackson-core-asl-1.1.1.jar</additional-path>
+</archive>
+<archive location="jersey-client-1.1.5.1.jar" type="filesystem">
+<additional-path attributes="jar,java-library">lib/java/jersey-client-1.1.5.1.jar</additional-path>
+</archive>
+<archive location="jersey-core-1.1.5.1.jar" type="filesystem">
+<additional-path attributes="jar,java-library">lib/java/jersey-core-1.1.5.1.jar</additional-path>
+</archive>
+<archive location="jersey-json-1.1.5.1.jar" type="filesystem">
+<additional-path attributes="jar,java-library">lib/java/jersey-json-1.1.5.1.jar</additional-path>
+</archive>
+<archive location="jersey-server-1.1.5.1.jar" type="filesystem">
+<additional-path attributes="jar,java-library">lib/java/jersey-server-1.1.5.1.jar</additional-path>
+</archive>
+<archive location="jettison-1.1.jar" type="filesystem">
+<additional-path attributes="jar,java-library">lib/java/jettison-1.1.jar</additional-path>
+</archive>
+<archive location="jsr311-api-1.1.1.jar" type="filesystem">
+<additional-path attributes="jar,java-library">lib/java/jsr311-api-1.1.1.jar</additional-path>
+</archive>
+</archives>
+<entities>
+<entity>
+<name>asm-3.1.jar</name>
+<entity-type>Archive</entity-type>
+<entity-sub-type>Java Library</entity-sub-type>
+<entity-type-vendor>sap.com</entity-type-vendor>
+<fileset location="asm-3.1.jar" source-location="DC" source-path="libraries">
+<file path="lib/java/asm-3.1.jar" source-path="asm-3.1.jar"/>
+</fileset>
+</entity>
+<entity>
+<name>jackson-core-asl-1.1.1.jar</name>
+<entity-type>Archive</entity-type>
+<entity-sub-type>Java Library</entity-sub-type>
+<entity-type-vendor>sap.com</entity-type-vendor>
+<fileset location="jackson-core-asl-1.1.1.jar" source-location="DC" source-path="libraries">
+<file path="lib/java/jackson-core-asl-1.1.1.jar" source-path="jackson-core-asl-1.1.1.jar"/>
+</fileset>
+</entity>
+<entity>
+<name>jersey-client-1.1.5.1.jar</name>
+<entity-type>Archive</entity-type>
+<entity-sub-type>Java Library</entity-sub-type>
+<entity-type-vendor>sap.com</entity-type-vendor>
+<fileset location="jersey-client-1.1.5.1.jar" source-location="DC" source-path="libraries">
+<file path="lib/java/jersey-client-1.1.5.1.jar" source-path="jersey-client-1.1.5.1.jar"/>
+</fileset>
+</entity>
+<entity>
+<name>jersey-core-1.1.5.1.jar</name>
+<entity-type>Archive</entity-type>
+<entity-sub-type>Java Library</entity-sub-type>
+<entity-type-vendor>sap.com</entity-type-vendor>
+<fileset location="jersey-core-1.1.5.1.jar" source-location="DC" source-path="libraries">
+<file path="lib/java/jersey-core-1.1.5.1.jar" source-path="jersey-core-1.1.5.1.jar"/>
+</fileset>
+</entity>
+<entity>
+<name>jersey-json-1.1.5.1.jar</name>
+<entity-type>Archive</entity-type>
+<entity-sub-type>Java Library</entity-sub-type>
+<entity-type-vendor>sap.com</entity-type-vendor>
+<fileset location="jersey-json-1.1.5.1.jar" source-location="DC" source-path="libraries">
+<file path="lib/java/jersey-json-1.1.5.1.jar" source-path="jersey-json-1.1.5.1.jar"/>
+</fileset>
+</entity>
+<entity>
+<name>jersey-server-1.1.5.1.jar</name>
+<entity-type>Archive</entity-type>
+<entity-sub-type>Java Library</entity-sub-type>
+<entity-type-vendor>sap.com</entity-type-vendor>
+<fileset location="jersey-server-1.1.5.1.jar" source-location="DC" source-path="libraries">
+<file path="lib/java/jersey-server-1.1.5.1.jar" source-path="jersey-server-1.1.5.1.jar"/>
+</fileset>
+</entity>
+<entity>
+<name>jettison-1.1.jar</name>
+<entity-type>Archive</entity-type>
+<entity-sub-type>Java Library</entity-sub-type>
+<entity-type-vendor>sap.com</entity-type-vendor>
+<fileset location="jettison-1.1.jar" source-location="DC" source-path="libraries">
+<file path="lib/java/jettison-1.1.jar" source-path="jettison-1.1.jar"/>
+</fileset>
+</entity>
+<entity>
+<name>jsr311-api-1.1.1.jar</name>
+<entity-type>Archive</entity-type>
+<entity-sub-type>Java Library</entity-sub-type>
+<entity-type-vendor>sap.com</entity-type-vendor>
+<fileset location="jsr311-api-1.1.1.jar" source-location="DC" source-path="libraries">
+<file path="lib/java/jsr311-api-1.1.1.jar" source-path="jsr311-api-1.1.1.jar"/>
+</fileset>
+</entity>
+</entities>
+</content>

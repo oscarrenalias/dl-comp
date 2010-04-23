@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    development component
+                     name: rest/ear
+                   vendor: demo.accenture.com
+                     type: J2EE
+                 sub-type: Enterprise Application
+              type-vendor: sap.com
+
+       software component
+                     name: DemoComponents
+                   vendor: demo.accenture.com
+
+                 location: DC_Test
+          source location: oscar.renalias@ACN7440R8RFFF8
+            build variant: default
+
+    building on ACN7440R8RFFF8, Windows Vista/x86, version 6.0
+    using Java VM 'Java HotSpot(TM) Client VM', version 14.3-b01 (Sun Microsystems Inc.)
+    build started at 2010-04-22 00:47:47 GMT+03:00 (EEST)
+
+    Build Plugin 'EnterpriseApplicationPlugin', Version 7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:57:34 +0200, CL69489)
+    detailed versions:
+    sap.com:tc/bi/anttasks#def                                   7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:14 +0200, CL69489)
+    sap.com:tc/bi/bp/enterpriseApplication#enterpriseApplication 7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:57:34 +0200, CL69489)
+    sap.com:tc/bi/core#def                                       7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:55:23 +0200, CL69489)
+    sap.com:tc/bi/exception#def                                  7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:13 +0200, CL69489)
+    sap.com:tc/bi/extddicdb#def                                  7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:20 +0200, CL69489)
+    sap.com:tc/bi/extsql#def                                     7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:16 +0200, CL69489)
+    sap.com:tc/bi/framework#def                                  7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:51:19 +0200, CL69489)
+    sap.com:tc/bi/i18n#def                                       7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:04 +0200, CL69489)
+    sap.com:tc/bi/javatech#def                                   7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:52:18 +0200, CL69489)
+    sap.com:tc/bi/jlincbs#def                                    7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:32 +0200, CL69489)
+    sap.com:tc/bi/settings#version                               7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:56:13 +0200, CL69489)
+    sap.com:tc/bi/util#util                                      7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:51:45 +0200, CL69489)
+    sap.com:tc/bi/velocity#def                                   7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:03 +0200, CL69489)
+    sap.com:tc/bi/xml#def                                        7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:50:06 +0200, CL69489)
+ -->
+<project name="DC Deploy build"
+         default="packDeployArchive"
+         basedir=".">
+<taskdef name="dcinfo" classname="com.sap.tc.buildplugin.pp.ant.DeployArchiveInfoTask"/>
+<taskdef name="jarsap" classname="com.sap.sdm.ant.JarSAP"/>
+<taskdef name="propertybag" classname="com.sap.tools.ant.taskdefs.PropertyBag"/>
+<taskdef name="srcpacker" classname="com.sap.tc.buildplugin.pp.ant.SourceArchiveCreatorTask"/>
+<taskdef name="timer" classname="com.sap.tools.ant.taskdefs.Timer"/>
+<property name="dtr-workspace" value="oscar.renalias@ACN7440R8RFFF8"/>
+
+<target name="packDeployArchive">
+<copy todir="C:\Users\oscar.renalias\nwds-workspace.jdi\0\t\CC91042161EB02764277AD4B45835B50\sda\META-INF">
+<fileset dir="C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ear\_comp\META-INF"/>
+</copy>
+<timer/>
+<srcpacker destination="C:\Users\oscar.renalias\nwds-workspace.jdi\0\t\CC91042161EB02764277AD4B45835B50\sda\src.zip" archiveLocation="srcarchive">
+<usedpublicpart dcname="rest/web"
+                dcvendor="demo.accenture.com"
+                ppname="war"/>
+</srcpacker>
+<timer message="Source archive creation finished in "/>
+<dcinfo destination="C:\Users\oscar.renalias\nwds-workspace.jdi\0\t\CC91042161EB02764277AD4B45835B50\sda\META-INF\dcbuildinfo.xml">
+<UsedPublicPart dcname="rest/web"
+                dcvendor="demo.accenture.com"
+                ppname="war">
+<file path="C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\web\_comp\gen\default\public\war\lib\java\demo.accenture.com~rest~web.war"/>
+</UsedPublicPart>
+</dcinfo>
+<timer/>
+<jarsap jarfile="C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\CC91042161EB02764277AD4B45835B50\default\deploy\demo.accenture.com~rest~ear.ear" deployfile="C:\Users\oscar.renalias\nwds-workspace.jdi\0\t\CC91042161EB02764277AD4B45835B50\sda\META-INF\sda-dd.xml">
+<component vendor="demo.accenture.com"
+           name="rest/ear"
+           location="DC_Test"
+           counter="20100421214747"
+           scvendor="demo.accenture.com"
+           scname="DemoComponents"/>
+<fileset dir="C:\Users\oscar.renalias\nwds-workspace.jdi\0\t\CC91042161EB02764277AD4B45835B50\sda">
+<exclude name="**/.cvsignore"/>
+<exclude name="**/.nfs*"/>
+<exclude name="**/SCCS/**"/>
+<exclude name="**/._*"/>
+<exclude name="**/#*#"/>
+<exclude name="**/.#*"/>
+<exclude name="**/.svn/**"/>
+<exclude name="**/vssver.scc"/>
+<exclude name="**/CVS/**"/>
+<exclude name="**/%*%"/>
+<exclude name="**/*~"/>
+</fileset>
+<fileset dir="C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\web\_comp\gen\default\public\war\lib\java">
+<include name="demo.accenture.com~rest~web.war"/>
+<exclude name="**/.cvsignore"/>
+<exclude name="**/.nfs*"/>
+<exclude name="**/SCCS/**"/>
+<exclude name="**/._*"/>
+<exclude name="**/#*#"/>
+<exclude name="**/.#*"/>
+<exclude name="**/.svn/**"/>
+<exclude name="**/vssver.scc"/>
+<exclude name="**/CVS/**"/>
+<exclude name="**/%*%"/>
+<exclude name="**/*~"/>
+</fileset>
+</jarsap>
+<timer message="JarSAP finished in "/>
+</target>
+</project>

@@ -1,0 +1,106 @@
+Development Component Build (2010-04-22 00:47:45 GMT+02:00 (EEST))
+  Component name: rest/ext/lib
+  Component vendor: demo.accenture.com
+  SC compartment: DemoComponents
+  Configuration: DC_Test
+  Location: DC_Test
+  Source code location: oscar.renalias@ACN7440R8RFFF8
+  DC root folder: C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ext\lib\_comp\
+  DC type: External Library
+  Host: ACN7440R8RFFF8
+
+DC Model check:
+   DC is available locally
+   validating dependency to build plugin "sap.com/tc/bi/bp/externalarchive"
+   DC model check OK
+
+Start build plugin:
+   using build plugin: sap.com/tc/bi/bp/externalarchive
+   starting build plugin from : C:\Users\oscar.renalias\nwds-workspace.jdi\0\SAP_BUILDT\sap.com\tc\bi\bp\externalarchive\_comp\gen\default\public\lib\
+
+
+
+Build Plugin 'ExternalArchivePlugin', Version 7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:56:00 +0200, CL69489)
+   development component:  rest/ext/lib (demo.accenture.com)
+      software component:  DemoComponents (demo.accenture.com)
+                location:  DC_Test
+                    type:  External Library
+           build variant:  default
+         source location:  oscar.renalias@ACN7440R8RFFF8
+         output location:  C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\3C9AF2C9F0612DBF88D365638F38F210\default
+       generation folder:  C:\Users\oscar.renalias\nwds-workspace.jdi\0\t\3C9AF2C9F0612DBF88D365638F38F210
+       plugin start time:  2010-04-22 00:47:45 GMT+03:00 (EEST)
+                 Java VM:  Java HotSpot(TM) Client VM, 14.3-b01 (Sun Microsystems Inc.)
+General options:
+  convert *.xlf to *.properties: yes
+  include sources for debugging: yes
+
+Checking path lengths for sources
+Path length checks finished in 0.003 seconds
+
+Preparing data context..
+Data context preparation finished in 0.024 seconds
+
+Creating Ant build file..
+  Creating output file: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\3C9AF2C9F0612DBF88D365638F38F210\default\logs\build.xml
+  Using Java class:     com.sap.tc.buildplugin.BuildExternalArchive
+Target "createPublicParts" has a dependency on "compile" but no such target exists. Dependency will be ignored.
+Build file creation finished in 0.039 seconds
+
+Starting Ant..
+  Using build file:     C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\3C9AF2C9F0612DBF88D365638F38F210\default\logs\build.xml
+  Using build target:   build
+  Using Ant version:    1.6.4
+
+createPublicParts:
+  [pppacker] Packing public part 'api'
+  [pppacker] Packed   1 file  for entity asm-3.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jackson-core-asl-1.1.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jersey-client-1.1.5.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jersey-core-1.1.5.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jersey-json-1.1.5.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jersey-server-1.1.5.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jettison-1.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jsr311-api-1.1.1.jar (Archive/Java Library)
+  [pppacker] Packed 8 entities for public part 'api'
+     [timer] Packing of public part 'api' finished in 0.138 seconds
+
+  [pppacker] Packing public part 'archives'
+  [pppacker] Packed   1 file  for entity asm-3.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jackson-core-asl-1.1.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jersey-client-1.1.5.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jersey-core-1.1.5.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jersey-json-1.1.5.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jersey-server-1.1.5.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jettison-1.1.jar (Archive/Java Library)
+  [pppacker] Packed   1 file  for entity jsr311-api-1.1.1.jar (Archive/Java Library)
+  [pppacker] Packed 8 entities for public part 'archives'
+     [timer] Packing of public part 'archives' finished in 0.117 seconds
+
+
+Ant runtime 0.279 seconds
+
+Ant build finished OK
+
+Creating Ant build file..
+  Creating output file: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\3C9AF2C9F0612DBF88D365638F38F210\default\logs\jlinreport.xml
+  Using Java class:     com.sap.tc.buildplugin.gen.JLinReport
+No build file generated.
+Build file creation finished in 0.005 seconds
+Build file C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\3C9AF2C9F0612DBF88D365638F38F210\default\logs\jlinreport.xml does not exist, skipping Ant execution.
+
+Build plugin finished at 2010-04-22 00:47:45 GMT+03:00 (EEST)
+Total build plugin runtime: 0.496 seconds
+
+Build finished OK
+
+==== Post-Processing ====   started at 2010-04-22 00:47:45.755 EEST
+Comparison of previous and actual build results took: 0.586 seconds
+
+Copy the build results 
+  from: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\3C9AF2C9F0612DBF88D365638F38F210\default\
+  to:   C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ext\lib\_comp\gen\default\
+
+The build results of the following public parts were not copied, since they have not changed:
+  archives
+  api

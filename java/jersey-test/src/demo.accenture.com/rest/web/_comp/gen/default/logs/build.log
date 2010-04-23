@@ -1,0 +1,130 @@
+Development Component Build (2010-04-22 00:47:46 GMT+02:00 (EEST))
+  Component name: rest/web
+  Component vendor: demo.accenture.com
+  SC compartment: DemoComponents
+  Configuration: DC_Test
+  Location: DC_Test
+  Source code location: oscar.renalias@ACN7440R8RFFF8
+  DC root folder: C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\web\_comp\
+  DC type: J2EE
+  DC subtype: WebModule
+  Host: ACN7440R8RFFF8
+
+DC Model check:
+   DC is available locally
+   validating dependency to build plugin "sap.com/tc/bi/bp/webmodule"
+   validating dependency to used DC "demo.accenture.com/rest/ext/lib"
+   validating dependency to  public part "api" of DC "demo.accenture.com/rest/ext/lib"
+   validating dependency to  public part "archives" of DC "demo.accenture.com/rest/ext/lib"
+   validating dependency to  public part "api" of DC "sap.com/engine.jee5.facade"
+   DC model check OK
+
+Start build plugin:
+   using build plugin: sap.com/tc/bi/bp/webmodule
+   starting build plugin from : C:\Users\oscar.renalias\nwds-workspace.jdi\0\SAP_BUILDT\sap.com\tc\bi\bp\webmodule\_comp\gen\default\public\web\
+
+
+
+Build Plugin 'WebModulePlugin', Version 7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:52:35 +0200, CL69489)
+   development component:  rest/web (demo.accenture.com)
+      software component:  DemoComponents (demo.accenture.com)
+                location:  DC_Test
+                    type:  J2EE, subtype WebModule
+           build variant:  default
+         source location:  oscar.renalias@ACN7440R8RFFF8
+         output location:  C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\8E4B9449858E49F1C70A30B046CD0AD1\default
+       generation folder:  C:\Users\oscar.renalias\nwds-workspace.jdi\0\t\8E4B9449858E49F1C70A30B046CD0AD1
+       plugin start time:  2010-04-22 00:47:46 GMT+03:00 (EEST)
+                 Java VM:  Java HotSpot(TM) Client VM, 14.3-b01 (Sun Microsystems Inc.)
+General options:
+  convert *.xlf to *.properties: yes
+  include sources for debugging: yes
+
+Checking path lengths for sources
+Path length checks finished in 0.005 seconds
+
+Preparing data context..
+No public part descriptor found in C:\Users\oscar.renalias\nwds-workspace.jdi\0\ENGFACADE\sap.com\engine.jee5.facade\_comp\gen\default\public\api, using legacy mode.
+Data context preparation finished in 0.036 seconds
+
+Creating Ant build file..
+  Creating output file: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\8E4B9449858E49F1C70A30B046CD0AD1\default\logs\build.xml
+  Using Java class:     com.sap.tc.buildplugin.BuildWebModule
+Build file creation finished in 0.048 seconds
+
+Starting Ant..
+  Using build file:     C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\8E4B9449858E49F1C70A30B046CD0AD1\default\logs\build.xml
+  Using build target:   build
+  Using Ant version:    1.6.4
+
+compile:
+      [echo] Starting Java compiler
+      [echo] Settings:
+      [echo]         debug: on
+      [echo]      optimize: off
+      [echo]   deprecation: default
+      [echo]       verbose: default
+      [echo]      encoding: UTF8
+      [echo]        source: 1.6
+      [echo]        target: 1.6
+      [echo]   source path: C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\web\_comp\source
+      [echo]    class path:
+      [echo]       C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ext\lib\_comp\gen\default\public\api\lib\java\asm-3.1.jar
+      [echo]       C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ext\lib\_comp\gen\default\public\api\lib\java\jackson-core-asl-1.1.1.jar
+      [echo]       C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ext\lib\_comp\gen\default\public\api\lib\java\jersey-client-1.1.5.1.jar
+      [echo]       C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ext\lib\_comp\gen\default\public\api\lib\java\jersey-core-1.1.5.1.jar
+      [echo]       C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ext\lib\_comp\gen\default\public\api\lib\java\jersey-json-1.1.5.1.jar
+      [echo]       C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ext\lib\_comp\gen\default\public\api\lib\java\jersey-server-1.1.5.1.jar
+      [echo]       C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ext\lib\_comp\gen\default\public\api\lib\java\jettison-1.1.jar
+      [echo]       C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ext\lib\_comp\gen\default\public\api\lib\java\jsr311-api-1.1.1.jar
+      [echo]       C:\Users\oscar.renalias\nwds-workspace.jdi\0\ENGFACADE\sap.com\engine.jee5.facade\_comp\gen\default\public\api\lib\java\engine.jee5.facade.jar
+      [echo]       C:\Users\oscar.renalias\nwds-workspace.jdi\0\ENGFACADE\sap.com\engine.jee5.facade\_comp\gen\default\public\api\lib\java\jee5.facade.jar
+      [echo]    output dir: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t\8E4B9449858E49F1C70A30B046CD0AD1\classes
+     [javac] Compiling 2 source files to C:\Users\oscar.renalias\nwds-workspace.jdi\0\t\8E4B9449858E49F1C70A30B046CD0AD1\classes
+     [timer] Java compilation finished in 0.146 seconds
+
+      [echo] Start XLF conversion
+  [xlf2prop] Found 0 XLF files to convert in folder "source"
+     [timer] XLF conversion finished in 0.002 seconds
+
+
+createPublicParts:
+  [pppacker] Packing public part 'war'
+  [pppacker] Including "asm-3.1.jar" from component "rest/ext/lib" (vendor "demo.accenture.com"), public part "archives".
+  [pppacker] Including "jackson-core-asl-1.1.1.jar" from component "rest/ext/lib" (vendor "demo.accenture.com"), public part "archives".
+  [pppacker] Including "jersey-client-1.1.5.1.jar" from component "rest/ext/lib" (vendor "demo.accenture.com"), public part "archives".
+  [pppacker] Including "jersey-core-1.1.5.1.jar" from component "rest/ext/lib" (vendor "demo.accenture.com"), public part "archives".
+  [pppacker] Including "jersey-json-1.1.5.1.jar" from component "rest/ext/lib" (vendor "demo.accenture.com"), public part "archives".
+  [pppacker] Including "jersey-server-1.1.5.1.jar" from component "rest/ext/lib" (vendor "demo.accenture.com"), public part "archives".
+  [pppacker] Including "jettison-1.1.jar" from component "rest/ext/lib" (vendor "demo.accenture.com"), public part "archives".
+  [pppacker] Including "jsr311-api-1.1.1.jar" from component "rest/ext/lib" (vendor "demo.accenture.com"), public part "archives".
+  [pppacker] Packed   6 files for entity demo.accenture.com~rest~web (WAR)
+  [pppacker] Packed 1 entity for public part 'war'
+     [timer] Packing of public part 'war' finished in 0.235 seconds
+
+
+Ant runtime 0.403 seconds
+
+Ant build finished OK
+
+Creating Ant build file..
+  Creating output file: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\8E4B9449858E49F1C70A30B046CD0AD1\default\logs\jlinreport.xml
+  Using Java class:     com.sap.tc.buildplugin.gen.JLinReport
+No build file generated.
+Build file creation finished in 0.003 seconds
+Build file C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\8E4B9449858E49F1C70A30B046CD0AD1\default\logs\jlinreport.xml does not exist, skipping Ant execution.
+
+Build plugin finished at 2010-04-22 00:47:47 GMT+03:00 (EEST)
+Total build plugin runtime: 0.672 seconds
+
+Build finished OK
+
+==== Post-Processing ====   started at 2010-04-22 00:47:47.183 EEST
+Comparison of previous and actual build results took: 0.039 seconds
+
+Copy the build results 
+  from: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\8E4B9449858E49F1C70A30B046CD0AD1\default\
+  to:   C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\web\_comp\gen\default\
+
+The build results of the following public parts were not copied, since they have not changed:
+  war

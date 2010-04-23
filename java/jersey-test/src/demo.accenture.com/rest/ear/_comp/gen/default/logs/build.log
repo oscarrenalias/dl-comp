@@ -1,0 +1,113 @@
+Development Component Build (2010-04-22 00:47:47 GMT+02:00 (EEST))
+  Component name: rest/ear
+  Component vendor: demo.accenture.com
+  SC compartment: DemoComponents
+  Configuration: DC_Test
+  Location: DC_Test
+  Source code location: oscar.renalias@ACN7440R8RFFF8
+  DC root folder: C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ear\_comp\
+  DC type: J2EE
+  DC subtype: Enterprise Application
+  Host: ACN7440R8RFFF8
+
+DC Model check:
+   DC is available locally
+   validating dependency to build plugin "sap.com/tc/bi/bp/enterpriseApplication"
+   validating dependency to used DC "demo.accenture.com/rest/web"
+   validating dependency to  public part "war" of DC "demo.accenture.com/rest/web"
+   DC model check OK
+
+Start build plugin:
+   using build plugin: sap.com/tc/bi/bp/enterpriseApplication
+   starting build plugin from : C:\Users\oscar.renalias\nwds-workspace.jdi\0\SAP_BUILDT\sap.com\tc\bi\bp\enterpriseApplication\_comp\gen\default\public\enterpriseApplication\
+
+
+
+Build Plugin 'EnterpriseApplicationPlugin', Version 7.12 SP 1 (NW720_01_REL, built on 2009-10-19 21:57:34 +0200, CL69489)
+   development component:  rest/ear (demo.accenture.com)
+      software component:  DemoComponents (demo.accenture.com)
+                location:  DC_Test
+                    type:  J2EE, subtype Enterprise Application
+           build variant:  default
+         source location:  oscar.renalias@ACN7440R8RFFF8
+         output location:  C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\CC91042161EB02764277AD4B45835B50\default
+       generation folder:  C:\Users\oscar.renalias\nwds-workspace.jdi\0\t\CC91042161EB02764277AD4B45835B50
+       plugin start time:  2010-04-22 00:47:47 GMT+03:00 (EEST)
+                 Java VM:  Java HotSpot(TM) Client VM, 14.3-b01 (Sun Microsystems Inc.)
+General options:
+  convert *.xlf to *.properties: yes
+  include sources for debugging: yes
+
+Checking path lengths for sources
+Path length checks finished in 0.001 seconds
+
+Preparing data context..
+Data context preparation finished in 0.014 seconds
+
+Creating Ant build file..
+  Creating output file: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\CC91042161EB02764277AD4B45835B50\default\logs\build.xml
+  Using Java class:     com.sap.tc.buildplugin.BuildEnterpriseApplication
+Target "createDeployArchive" has a dependency on "compile" but no such target exists. Dependency will be ignored.
+Build file creation finished in 0.027 seconds
+
+Starting Ant..
+  Using build file:     C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\CC91042161EB02764277AD4B45835B50\default\logs\build.xml
+  Using build target:   build
+  Using Ant version:    1.6.4
+
+createDeployArchive:
+       [cdu] Preparing archive for deploy unit "default"
+       [cdu]   deployment type: "J2EE"
+       [cdu] WARNING: Runtime dependency to "rest/web" ("demo.accenture.com") will be ignored because of an incompatible type.
+       [cdu] 
+       [cdu] Creating Ant build file: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\CC91042161EB02764277AD4B45835B50\default\logs\buildDeployArchive.xml
+       [cdu] 
+       [cdu] Creating descriptor META-INF/sda-dd.xml ...
+       [cdu]  
+       [cdu] Skipping creation of application.xml for JEE5 archive.
+       [cdu]  
+       [cdu] Validating descriptor C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ear\_comp\META-INF\application-j2ee-engine.xml
+       [cdu] Setting provider name to "demo.accenture.com".
+       [cdu] WARNING: No component dependency exists for reference to "rest/web" (demo.accenture.com).
+       [cdu]  
+       [cdu] Collecting modules ...
+       [cdu] Adding module 'demo.accenture.com~rest~web.war' from DC 'rest/web' (vendor 'demo.accenture.com'), public part 'war'
+       [cdu] WARNING: Missing deploy-time dependency for hard runtime reference to "rest/web" (vendor "demo.accenture.com").
+       [cdu] Ant build file creation finished in 0.086 seconds
+
+packDeployArchive:
+       [cdu] 
+       [cdu] packDeployArchive:
+       [cdu]  [srcpacker] Creating source archive
+       [cdu]  [srcpacker] Adding source archive from demo.accenture.com~rest/web
+       [cdu]      [timer] Source archive creation finished in 0.037 seconds
+       [cdu] 
+       [cdu]     [dcinfo] Creating deploy archive info
+       [cdu]     [jarsap] Info: JarSAP version 20081017.1000
+       [cdu]     [jarsap] Info: JarSAPProcessing version 20090907.1000 / JarSL version 20090728.1000
+       [cdu]     [jarsap] Building: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\CC91042161EB02764277AD4B45835B50\default\deploy\demo.accenture.com~rest~ear.ear with compression
+       [cdu]      [timer] JarSAP finished in 0.194 seconds
+       [cdu] 
+
+Ant runtime 0.397 seconds
+
+Ant build finished with WARNINGS
+
+Creating Ant build file..
+  Creating output file: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\CC91042161EB02764277AD4B45835B50\default\logs\jlinreport.xml
+  Using Java class:     com.sap.tc.buildplugin.gen.JLinReport
+No build file generated.
+Build file creation finished in 0.003 seconds
+Build file C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\CC91042161EB02764277AD4B45835B50\default\logs\jlinreport.xml does not exist, skipping Ant execution.
+
+Build plugin finished at 2010-04-22 00:47:47 GMT+03:00 (EEST)
+Total build plugin runtime: 0.574 seconds
+
+Build finished with WARNING
+
+==== Post-Processing ====   started at 2010-04-22 00:47:47.959 EEST
+Comparison of previous and actual build results took: 0 seconds
+
+Copy the build results 
+  from: C:\Users\oscar.renalias\nwds-workspace.jdi\0\t2\CC91042161EB02764277AD4B45835B50\default\
+  to:   C:\Users\oscar.renalias\nwds-workspace.jdi\0\DCs\demo.accenture.com\rest\ear\_comp\gen\default\
