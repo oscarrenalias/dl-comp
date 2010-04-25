@@ -12,11 +12,30 @@ object currentItem extends RequestVar[Box[RestfulItem]](Empty)
 
 class Items {
 	def list(xhtml:NodeSeq): NodeSeq = {	  
-		RestfulItem.getAll.flatMap( row =>
+		RestfulItem.getAll.toList.flatMap( row =>
 			bind( "item", xhtml, 
-					"id" -> row.id, 
-					"description" -> SHtml.link("/item", () => currentItem(Full(row)), Text(row.desc)),
-					"price" -> row.price.toString )
+					"id" -> row._2.id, 
+					"description" -> SHtml.link("/item", () => currentItem(Full(row._2)), Text(row._2.desc)),
+					"price" -> row._2.price.toString )
 		)
 	}
+}
+
+class Item {
+  def showInfo(xhtml: NodeSeq): NodeSeq = {
+    def showItemData(item: RestfulItem): NodeSeq = {
+      bind( "item", xhtml, 
+			"id" -> item.id, 
+			"description" -> item.desc, 
+			"longDescription" -> item.longDescription,
+			"price" -> item.price.toString,
+      		"vendor" -> item.vendor )
+    }
+    
+    currentItem.is match {
+      case Full(item) => showItemData(item)
+      case _ =>  { Text("Item not found")
+                   NodeSeq.Empty }
+    }
+  }
 }

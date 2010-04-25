@@ -1,3 +1,9 @@
 <lift:surround with="default" at="content">
-		<h2>Here we show the item data</h2>
+		<lift:Item.showInfo>
+			Item number: <item:id /><br/>
+			Description: <item:description /><br/>
+			Long description: <item:longDescription /><br/>
+			Vendor: <item:vendor /><br/>
+			Price: <item:price /><br/>	
+		</lift:Item.showInfo>		
 </lift:surround>

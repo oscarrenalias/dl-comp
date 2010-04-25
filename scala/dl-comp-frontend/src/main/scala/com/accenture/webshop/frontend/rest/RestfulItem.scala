@@ -1,26 +1,33 @@
 package com.accenture.webshop.frontend.rest
 
+import scala.collection.mutable.HashMap
+
 /**
  * Factory clas that implements the basic methods that allow to obtain
  * data from the restful interfaces
  */
 object RestfulItem {
-
-  	var a = new RestfulItem("4", "Item 4", 44)
-	a.vendor = "Vendor"
-	a.longDescription = "This is a long description"
+	type ItemDataType = HashMap[String,RestfulItem]
   
-	val items = List(new RestfulItem("1", "Item 1", 11), 
-			new RestfulItem("2", "Item 2", 22), 
-			new RestfulItem("3", "Item 3", 33), 
-			a)
-  
+	// static test data
+	val items = new ItemDataType {
+	  put("1", new RestfulItem("1", "Item 1", 11))
+	  put("2", new RestfulItem("2", "Item 2", 22))
+	  put("3", new RestfulItem("3", "Item 3", 33))
+  	  put("4", new RestfulItem("4", "Item 4", 44) {
+  	    vendor = "Vendor"
+        longDescription = "This is a long description"
+  	  })	  
+	} 
+ 
 	/**
 	 * To be fixed later. currently only returning static data 
 	 */
-	def getAll: List[RestfulItem] = {
+	def getAll: ItemDataType = {
 		items
 	}
+ 
+	def get(id: String): RestfulItem = items.get(id).get
 }
 
 /**
