@@ -156,3 +156,12 @@ body {
 .sidebar ul li a:hover {
 	background-color: #eee;
 }
+
+#shopping-cart {
+	border: 1px solid black;
+}
+
+#shopping-cart ul, #shopping-cart li {
+	margin: 0px;
+	padding: 0px;
+}

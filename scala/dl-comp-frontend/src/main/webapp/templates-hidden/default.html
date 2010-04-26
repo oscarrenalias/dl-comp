@@ -43,7 +43,12 @@
   				</lift:Login.loggedOut>
   				<lift:Login.loggedIn>
   					<a href="#">Link to your account</a> 
-  				</lift:Login.loggedIn>
+  					<div id="shopping-cart">
+  						<ul><lift:ShoppingCartData.list>  													
+						  <li><item:amount/> <item:description /></li>						
+						</lift:ShoppingCartData.list></ul>
+  					</div>
+  				</lift:Login.loggedIn>  				
 			</p>
 		</div>
 		<div id="footer">

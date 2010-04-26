@@ -7,6 +7,7 @@ import scala.collection.mutable.HashMap
  * data from the restful interfaces
  */
 object RestfulItem {
+  
 	type ItemDataType = HashMap[String,RestfulItem]
   
 	// static test data
