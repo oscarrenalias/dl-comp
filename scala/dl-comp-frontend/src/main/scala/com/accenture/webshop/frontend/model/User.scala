@@ -5,10 +5,6 @@ import _root_.net.liftweb.util._
 import net.liftweb.http._ 
 import com.accenture.webshop.frontend.logging._
 
-object userName extends SessionVar[String]("")
-object password extends SessionVar[String]("")
-object isLoggedIn extends SessionVar[Boolean](false)
-
 /**
  * The singleton that has methods for accessing the database
  */
@@ -21,21 +17,7 @@ object User extends User with MetaMegaProtoUser[User] with Logs {
   locale, timezone, password, textArea)
 
   // comment this line out to require email validations
-  override def skipEmailValidation = true
-  
-  def getUserName: String = {    
-	userName.get
-  }
-  
-  def setLoggedIn(l: Boolean): Unit = {
-    isLoggedIn.set(l)
-  }
-  
-  def loggedIn: Boolean = {
-    val str = "isLoggedIn = " + isLoggedIn.get
-    debug(str)
-    isLoggedIn.get
-  }      
+  override def skipEmailValidation = true     
 }
 
 /**

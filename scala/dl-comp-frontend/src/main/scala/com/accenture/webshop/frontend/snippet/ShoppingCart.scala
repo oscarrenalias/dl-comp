@@ -2,16 +2,18 @@ package com.accenture.webshop.frontend.snippet
 
 import net.liftweb.http._ 
 import scala.collection.mutable.ArrayBuffer
-import com.accenture.webshop.frontend.rest.RestfulItem
 import _root_.net.liftweb.util.{Box,Full,Empty,Helpers,Log}
 import _root_.scala.xml.{NodeSeq,Text,Node,Elem}
 import _root_.net.liftweb.util.Helpers._
+import scala.actors._
+import scala.collection.mutable.HashMap
+import com.accenture.webshop.frontend.rest.RestfulItem
+import com.accenture.webshop.frontend.model._
 
 object ShoppingCart extends SessionVar[ShoppingCart](new ShoppingCart) {
-  
   def addItem(item: RestfulItem) = {
-	  get.add(item)	 
-  } 
+	  get.add(item)	  
+  }
 }
 
 /**

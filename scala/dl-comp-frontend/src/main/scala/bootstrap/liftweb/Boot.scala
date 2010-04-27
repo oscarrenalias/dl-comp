@@ -26,12 +26,7 @@ class Boot {
     Schemifier.schemify(true, Log.infoF _, User)
     
     // Build SiteMap
-    val entries = Menu(Loc("Home", List("index"), "Home")) ::  
-      Menu(Loc("Catalog", List("catalog"), "Item catalog")) ::
-      Menu(Loc("Details", List("item"), "Item details" )) ::
-      Nil
-              
-    LiftRules.setSiteMap(SiteMap(entries:_*))
+    LiftRules.setSiteMap(SiteMap(MenuInfo.menu :_*))
     
     /*
      * Show the spinny image when an Ajax call starts
@@ -56,6 +51,17 @@ class Boot {
   private def makeUtf8(req: HttpServletRequest) {
     req.setCharacterEncoding("UTF-8")
   }  
+}
+
+object MenuInfo {
+    
+  import Loc._
+  val IfLoggedIn = If(() => User.currentUser.isDefined, "You must be logged in")
+  def menu: List[Menu] =  Menu(Loc("Home", List("index"), "Home")) :: 
+    Menu(Loc("Catalog", List("catalog"), "Item catalog")) ::
+    Menu(Loc("Item Details", List("item"), "Item details")) ::
+    Menu(Loc("help", List("help", "index"), "Help")) ::
+    User.sitemap
 }
 
 /**

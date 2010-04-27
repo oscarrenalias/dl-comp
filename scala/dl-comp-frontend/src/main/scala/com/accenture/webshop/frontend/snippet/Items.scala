@@ -3,8 +3,8 @@ import _root_.scala.xml.{NodeSeq,Text,Node,Elem}
 import _root_.net.liftweb.util.{Box,Full,Empty,Helpers,Log}  
 import _root_.net.liftweb.util.Helpers._
 import net.liftweb.http._
-import net.liftweb.http.js.JsCmds.SetHtml
-import net.liftweb.http.js.jquery.JqJsCmds.DisplayMessage 
+import net.liftweb.http.js.JsCmds._
+import net.liftweb.http.js.jquery.JqJsCmds._ 
 
 import com.accenture.webshop.frontend.logging._
 import com.accenture.webshop.frontend.model._
@@ -25,16 +25,13 @@ class Items {
 
 class Item {
   
-  var cnt = 0
-  
-  def showInfo(xhtml: NodeSeq): NodeSeq = {
-        
-    def showItemData(item: RestfulItem): NodeSeq = {
-      
+  def showInfo(xhtml: NodeSeq): NodeSeq = {        
+    def showItemData(item: RestfulItem): NodeSeq = {      
       def addToCart = {
         SHtml.ajaxButton(Text("Add to Cart"), {() =>
           ShoppingCart.addItem(item)
           DisplayMessage("cart-message", Text("Item added to shopping cart"), 10 seconds, 1 seconds)
+          SetHtml("shopping-cart", <lift:embed what="/templates-hidden/cart-data.html" />)          
       	})
       }      
       
