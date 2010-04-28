@@ -12,21 +12,21 @@ import com.accenture.webshop.frontend.model._
 
 object ShoppingCart extends SessionVar {
   
-  var items = new ArrayBuffer[RestfulItem]  
+  var items = new ArrayBuffer[(Int, RestfulItem)]  
   
-  def addItem(item: RestfulItem) = {
-    items += item
+  def addItem(amount: Int, item: RestfulItem) = {
+    items += (amount, item)
     dumpCartData
   }
   
-  def removeItem(item: RestfulItem) = {
-    items -= item
+  def removeItem(amount: Int, item: RestfulItem) = {
+    items -= (amount, item)
     dumpCartData
   }
   
   def dumpCartData = {
     Log.debug("Items in cart " + items.size)
-    items.foreach(i => Log.debug("item: " + i.id))
+    items.foreach(i => Log.debug("item: " + i._2.id + " - amount:" + i._1.toString))
   }  
 }
 
@@ -39,18 +39,18 @@ class ShoppingCartData {
     
     	ShoppingCart.items.flatMap( item =>
     	  bind( "item", xhtml, 
-    			"id" -> item.id, 
-    			"amount" -> 1.toString,
-    			"description" -> item.desc,       
-    			"price" -> item.price.toString,
+    			"id" -> item._2.id, 
+    			"amount" -> item._1.toString,
+    			"description" -> item._2.desc,       
+    			"price" -> item._2.price.toString,
 				"remove" -> SHtml.a({() =>
-					ShoppingCart.removeItem(item)	
+					ShoppingCart.removeItem(item._1, item._2)	
 					SetHtml("shopping-cart", <lift:embed what="/templates-hidden/cart-data.html" />)}, Text("Remove"))
 			)
     	)
     }
   
-  def toHtml: String = {
+  /*def toHtml: String = {
     {for(i <- ShoppingCart.items) yield <li>{i.id}: {i.desc}</li>}.mkString
-  }  
+  }*/ 
 }
