@@ -35,8 +35,6 @@ object ShoppingCart extends SessionVar {
  */
 class ShoppingCartData {
   def list(xhtml:NodeSeq): NodeSeq = {
-
-    
     	ShoppingCart.items.flatMap( item =>
     	  bind( "item", xhtml, 
     			"id" -> item._2.id, 
@@ -48,9 +46,5 @@ class ShoppingCartData {
 					SetHtml("shopping-cart", <lift:embed what="/templates-hidden/cart-data.html" />)}, Text("Remove"))
 			)
     	)
-    }
-  
-  /*def toHtml: String = {
-    {for(i <- ShoppingCart.items) yield <li>{i.id}: {i.desc}</li>}.mkString
-  }*/ 
+  }  
 }

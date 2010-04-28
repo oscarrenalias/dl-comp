@@ -35,7 +35,7 @@ object RestfulItem {
  * Base class that represents an item obtained from a restful call 
  * It's a simple bean for now
  */
-class RestfulItem (var id: String, var desc: String, var price: Integer ) {
+class RestfulItem (var id: String, var desc: String, var price: Int ) {
 	 var vendor = ""
 	 var longDescription = ""
 }
