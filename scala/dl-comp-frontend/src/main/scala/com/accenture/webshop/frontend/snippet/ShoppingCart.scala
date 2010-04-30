@@ -12,7 +12,9 @@ import com.accenture.webshop.frontend.model._
 
 object ShoppingCart extends SessionVar {
   
-  var items = new ArrayBuffer[(Int, RestfulItem)]  
+  type ShoppingCartLineItem = (Int, RestfulItem)
+  
+  var items = new ArrayBuffer[ShoppingCartLineItem]  
   
   def addItem(amount: Int, item: RestfulItem) = {
     items += (amount, item)
@@ -24,10 +26,14 @@ object ShoppingCart extends SessionVar {
     dumpCartData
   }
   
+  def getItems: ArrayBuffer[ShoppingCartLineItem] = items
+  
   def dumpCartData = {
     Log.debug("Items in cart " + items.size)
     items.foreach(i => Log.debug("item: " + i._2.id + " - amount:" + i._1.toString))
   }  
+  
+  def empty = items.clear
 }
 
 /**

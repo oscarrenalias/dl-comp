@@ -17,17 +17,31 @@ class OrderData {
 	  val order = Order.create
 	  
 	  def submitOrder() = {
+	    
 		  Log.debug("Submitting order to backend with the following data:")
 		  Log.debug(" ** Shopping cart:")
 		  ShoppingCart.dumpCartData
 		  Log.debug(" ** Order header data:")
 		  Log.debug("address1: " + order.address1)
 		  Log.debug("address2: " + order.address2)
-	  }	  
+    
+		  order.setLineItems(ShoppingCart.getItems)
+		  order.submit 
+    
+		  order.status match {
+		    case OrderStatusValues.PROCESSED => {
+		      // show a message
+		      S.notice("Order " + order.number + " created successfully")
+		      // clean the shopping cart
+		      ShoppingCart.empty
+		    } 
+		    case _ => S.error({for(error <- order.getErrors) yield <li>error</li>}.mkString("<ul>","", "</ul>"))
+		  }
+	  }
    
 	  def validateAndSubmit(): Unit = {
 	    order.validate match {
-	      case Nil => S.notice("Order submitted...");submitOrder
+	      case Nil => submitOrder
 	      case xs => S.error(xs);
 	    }
 	  }

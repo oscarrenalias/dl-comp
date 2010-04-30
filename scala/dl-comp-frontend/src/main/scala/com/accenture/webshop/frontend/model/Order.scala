@@ -5,6 +5,9 @@ import mapper._
 import http._ 
 import SHtml._ 
 import util._
+import scala.collection.mutable.ArrayBuffer
+import _root_.net.liftweb.util.{Box,Full,Empty}
+import com.accenture.webshop.frontend.snippet._
 
 class NonEmptyMappedString[T <: Mapper[T]](var owner: T, msg: String) extends MappedString(owner, 255) {
 	 override def validations = 
@@ -20,6 +23,54 @@ class Order extends LongKeyedMapper[Order] with IdPK {
  object postcode extends NonEmptyMappedString(this, "Postcode cannot be empty")
  object country extends NonEmptyMappedString(this, "Country cannot be empty")
  object phone extends NonEmptyMappedString(this, "Phone cannot be empty")
-} 
  
-object Order extends Order with LongKeyedMetaMapper[Order]
+ // order number, once it's been set to the ERP
+ var number = ""
+ 
+ // line items
+ var items = new ArrayBuffer[ShoppingCart.ShoppingCartLineItem]
+ 
+ // order status
+ var status = OrderStatusValues.NEW
+ 
+ def setLineItems(newItems: ArrayBuffer[ShoppingCart.ShoppingCartLineItem]) = {
+   items = newItems 
+ }
+ 
+ def addLineItems(newItems: ArrayBuffer[ShoppingCart.ShoppingCartLineItem]) = {
+   //items ++ newItems 
+ }
+ 
+ def submit: Unit = Order.submit(this)
+ 
+ def getErrors: List[String] = List("Error number 1", "Error number 2", "Error number 3" )
+}
+
+/**
+ * Constants with order status strings
+ */
+object OrderStatusValues {
+  val NEW = "New"
+  val PROCESSED = "Completed"
+}
+
+/**
+ * Companion of the Order class
+ */
+object Order extends Order with LongKeyedMetaMapper[Order] {
+  
+  def submit(order: Order): Order = {
+    order.status = OrderStatusValues.PROCESSED
+    order.number = "123456789"
+    
+    order
+  }
+  
+  def get(orderId: Int): Box[Order] = {
+    None
+  }
+  
+  def getAll(): Box[List[Order]] = {
+    Empty
+  }
+}
