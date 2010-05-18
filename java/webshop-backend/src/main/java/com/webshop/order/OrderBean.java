@@ -1,6 +1,7 @@
 package com.webshop.order;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,6 +13,8 @@ public class OrderBean {
     public String description;
     public String user;
     public ArrayList<OrderItemBean> items = new ArrayList<OrderItemBean>();
+    public Date created = new Date();
+    public Date lastUpdate = new Date();    
     
     public void insert() {
     	OrderBean newOrder = OrderManager.getInstance().addOrder(this);
@@ -24,7 +27,8 @@ public class OrderBean {
     }
     
     public void update() {
-    	
+    	OrderBean updatedOrder = OrderManager.getInstance().updateOrder(this);
+    	this.lastUpdate = updatedOrder.lastUpdate;
     }
     
     public void delete() {

@@ -1,6 +1,7 @@
 package com.webshop.order;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -11,6 +12,7 @@ public class OrderManager {
 	final static String ORDER_STATUS_NEW = "New";
 	final static String ORDER_STATUS_CREATED = "Created";
 	final static String ORDER_STATUS_DELIVERED = "Delivered";
+	final static String ORDER_STATUS_CANCELLED = "Cancelled";
 
     public HashMap<String,OrderBean> orders = new HashMap<String,OrderBean>();    
     private static OrderManager instance = null;
@@ -55,6 +57,13 @@ public class OrderManager {
 		orders.put(order.id, order);
 		
 		return(order);
+	}
+	
+	public synchronized OrderBean updateOrder(OrderBean order) {
+		// save the status
+		order.lastUpdate = new Date();
+		orders.put(order.id, order);		
+		return(order);		
 	}
 	
 	private String generateOrderId() {
