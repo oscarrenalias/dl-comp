@@ -1,8 +1,11 @@
 package com.webshop.order;
 
 import com.webshop.item.ItemBean;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name="item")
 public class OrderItemBean {
+	
 	public ItemBean item;
 	public int amount;
 	

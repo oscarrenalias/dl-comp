@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement()
+@XmlRootElement(name="Order")
 public class OrderBean {
 
     public String status = "New";
@@ -12,4 +12,22 @@ public class OrderBean {
     public String description;
     public String user;
     public ArrayList<OrderItemBean> items = new ArrayList<OrderItemBean>();
+    
+    public void insert() {
+    	OrderBean newOrder = OrderManager.getInstance().addOrder(this);
+    	this.id = newOrder.id;
+    	this.status = newOrder.status;
+    }
+    
+    public OrderBean get(String orderId) {
+    	return(OrderManager.getInstance().getOrder(orderId));
+    }
+    
+    public void update() {
+    	
+    }
+    
+    public void delete() {
+    	
+    }
 }

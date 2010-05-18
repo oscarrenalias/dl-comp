@@ -3,7 +3,7 @@ package com.webshop.item;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.webshop.catalog.*;
 
-@XmlRootElement()
+@XmlRootElement(name="Item")
 public class ItemBean {
 	public String id;
 	public String name;

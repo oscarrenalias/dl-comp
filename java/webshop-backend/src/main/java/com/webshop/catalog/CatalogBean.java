@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.webshop.item.*;
 
-@XmlRootElement()
+@XmlRootElement(name="Catalog")
 public class CatalogBean {
 
 	public CatalogBean parent;

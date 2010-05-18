@@ -2,10 +2,15 @@ package com.webshop.order;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import com.webshop.item.ItemManager;
 
-public class OrderManager {	
+public class OrderManager {
+	
+	final static String ORDER_STATUS_NEW = "New";
+	final static String ORDER_STATUS_CREATED = "Created";
+	final static String ORDER_STATUS_DELIVERED = "Delivered";
 
     public HashMap<String,OrderBean> orders = new HashMap<String,OrderBean>();    
     private static OrderManager instance = null;
@@ -21,7 +26,7 @@ public class OrderManager {
     	return(instance);
     }
     
-    public void addTestData() {
+    private void addTestData() {
     	int i = 0;
     	System.out.println("Adding test orders");    	
     	while( i++ < 10 ) {    		
@@ -40,9 +45,21 @@ public class OrderManager {
     	}
     }
 
-	public OrderBean addOrder(OrderBean order) {
+	public synchronized OrderBean addOrder(OrderBean order) {
+		if(order.id == "0") {
+			// the order has no id yet, so we should come up with one
+			order.id = generateOrderId();
+		}
+		// save the status
+		order.status = ORDER_STATUS_CREATED;
 		orders.put(order.id, order);
+		
 		return(order);
+	}
+	
+	private String generateOrderId() {
+		String orderId = Integer.toString(new Random().nextInt());
+		return(orderId);
 	}
 	
 	public OrderBean getOrder(String orderId) {
