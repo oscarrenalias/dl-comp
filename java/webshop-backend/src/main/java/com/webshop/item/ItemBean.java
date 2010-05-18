@@ -9,5 +9,6 @@ public class ItemBean {
 	public String name;
 	public String description;
 	public Double price;
-	public CatalogBean parent = null;	
+	public CatalogBean parent = null;
+	public String currency = "EUR";
 }
