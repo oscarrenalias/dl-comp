@@ -1,4 +1,4 @@
-package com.accenture.webshop.frontend.snippet
+package com.webshop.frontend.snippet
 
 import net.liftweb.http._ 
 import scala.collection.mutable.ArrayBuffer
@@ -6,11 +6,22 @@ import _root_.net.liftweb.util.{Box,Full,Empty,Helpers,Log}
 import _root_.scala.xml.{NodeSeq,Text,Node,Elem}
 import _root_.net.liftweb.util.Helpers._
 import net.liftweb.http.js.JsCmds._
+import net.liftweb.http.js.JsCmds
 import net.liftweb.http.js.jquery.JqJsCmds._
-import com.accenture.webshop.frontend.rest.RestfulItem
-import com.accenture.webshop.frontend.model._
+import com.webshop.frontend.rest.RestfulItem
+import com.webshop.frontend.model._
 
-class OrderData {  
+class OrderData {
+  
+	var checkoutOk = false
+  
+	def checkoutOk(xhtml: NodeSeq): NodeSeq = {
+	  if (checkoutOk) xhtml else Text("") 
+	}
+ 
+ 	def checkoutNotOk(xhtml: NodeSeq): NodeSeq = {
+	  if (!checkoutOk) xhtml else Text("")
+	}
   
 	def add(xhtml: NodeSeq): NodeSeq = {
 	  
@@ -34,8 +45,13 @@ class OrderData {
 		      S.notice("Order " + order.number + " created successfully")
 		      // clean the shopping cart
 		      ShoppingCart.empty
+        
+		      checkoutOk = true
 		    } 
-		    case _ => S.error({for(error <- order.getErrors) yield <li>error</li>}.mkString("<ul>","", "</ul>"))
+		    case _ => { 
+		      S.error({for(error <- order.getErrors) yield <li>error</li>}.mkString("<ul>","", "</ul>"))
+		      checkoutOk = false
+		     }
 		  }
 	  }
    

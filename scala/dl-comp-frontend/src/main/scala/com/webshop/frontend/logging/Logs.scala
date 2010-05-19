@@ -1,4 +1,4 @@
-package com.accenture.webshop.frontend.logging
+package com.webshop.frontend.logging
 
 import org.apache.log4j._
 

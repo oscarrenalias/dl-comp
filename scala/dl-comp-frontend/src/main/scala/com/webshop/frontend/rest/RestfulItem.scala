@@ -1,4 +1,4 @@
-package com.accenture.webshop.frontend.rest
+package com.webshop.frontend.rest
 
 import scala.collection.mutable.HashMap
 

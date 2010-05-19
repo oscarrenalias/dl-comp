@@ -1,9 +1,9 @@
-package com.accenture.webshop.frontend.model
+package com.webshop.frontend.model
 
 import _root_.net.liftweb.mapper._
 import _root_.net.liftweb.util._
 import net.liftweb.http._ 
-import com.accenture.webshop.frontend.logging._
+import com.webshop.frontend.logging._
 
 /**
  * The singleton that has methods for accessing the database

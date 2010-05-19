@@ -1,4 +1,4 @@
-package com.accenture.webshop.frontend.snippet
+package com.webshop.frontend.snippet
 import _root_.scala.xml.{NodeSeq,Text,Node,Elem}  
 import _root_.net.liftweb.util.{Box,Full,Empty,Helpers,Log}  
 import _root_.net.liftweb.util.Helpers._
@@ -8,9 +8,9 @@ import net.liftweb.http.js.jquery.JqJsCmds._
 import net.liftweb.http.js.JE.JsRaw
 import net.liftweb.http.js._
 
-import com.accenture.webshop.frontend.logging._
-import com.accenture.webshop.frontend.model._
-import com.accenture.webshop.frontend.rest._
+import com.webshop.frontend.logging._
+import com.webshop.frontend.model._
+import com.webshop.frontend.rest._
 
 object currentItem extends RequestVar[Box[RestfulItem]](Empty)
 

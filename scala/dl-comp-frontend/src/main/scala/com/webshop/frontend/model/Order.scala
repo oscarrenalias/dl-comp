@@ -1,4 +1,4 @@
-package com.accenture.webshop.frontend.model
+package com.webshop.frontend.model
 
 import net.liftweb._ 
 import mapper._ 
@@ -7,7 +7,7 @@ import SHtml._
 import util._
 import scala.collection.mutable.ArrayBuffer
 import _root_.net.liftweb.util.{Box,Full,Empty}
-import com.accenture.webshop.frontend.snippet._
+import com.webshop.frontend.snippet._
 
 class NonEmptyMappedString[T <: Mapper[T]](var owner: T, msg: String) extends MappedString(owner, 255) {
 	 override def validations = 

@@ -1,4 +1,6 @@
 <lift:surround with="basic" at="content">
+<lift:OrderData.checkoutNotOk>
+<div id="checkout">
 <div id="shopping-cart">
 	<lift:embed what="/templates-hidden/cart-data.html" />
  </div>
@@ -13,4 +15,9 @@
  	<tr><td><data:submit /></td></tr>
  	</table>
  </lift:OrderData.add>
+ </div>
+ </lift:OrderData.checkoutNotOk>
+ <lift:OrderData.checkoutOk>
+  <a href="/">Continue shopping</a>
+ </lift:OrderData.checkoutOk>
 </lift:surround>

@@ -7,9 +7,9 @@ import _root_.net.liftweb.sitemap.Loc._
 import Helpers._
 import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConnectionIdentifier, ConnectionIdentifier}
 import _root_.java.sql.{Connection, DriverManager}
-import _root_.com.accenture.webshop.frontend.model._
+import _root_.com.webshop.frontend.model._
 import _root_.javax.servlet.http.{HttpServletRequest}
-import com.accenture.webshop.frontend.snippet._
+import com.webshop.frontend.snippet._
 
 /**
   * A class that's instantiated early and run.  It allows the application
@@ -21,7 +21,7 @@ class Boot {
       DB.defineConnectionManager(DefaultConnectionIdentifier, DBVendor)
 
     // where to search snippet
-    LiftRules.addToPackages("com.accenture.webshop.frontend")
+    LiftRules.addToPackages("com.webshop.frontend")
     
     Schemifier.schemify(true, Log.infoF _, User)
     

@@ -1,4 +1,4 @@
-package com.accenture.webshop.frontend.snippet
+package com.webshop.frontend.snippet
 
 import net.liftweb.http._ 
 import scala.collection.mutable.ArrayBuffer
@@ -7,8 +7,8 @@ import _root_.scala.xml.{NodeSeq,Text,Node,Elem}
 import _root_.net.liftweb.util.Helpers._
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.jquery.JqJsCmds._
-import com.accenture.webshop.frontend.rest.RestfulItem
-import com.accenture.webshop.frontend.model._
+import com.webshop.frontend.rest.RestfulItem
+import com.webshop.frontend.model._
 
 object ShoppingCart extends SessionVar {
   
