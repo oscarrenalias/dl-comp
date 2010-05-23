@@ -8,9 +8,8 @@
   <name>dl-comp-frontend</name>
   <inceptionYear>2007</inceptionYear>
   <properties>
-    <scala.version>2.7.3</scala.version>
+    <scala.version>2.7.7</scala.version>
   </properties>
-
   <repositories>
     <repository>
       <id>scala-tools.org</id>
@@ -18,7 +17,6 @@
       <url>http://scala-tools.org/repo-releases</url>
     </repository>
   </repositories>
-
   <pluginRepositories>
     <pluginRepository>
       <id>scala-tools.org</id>
@@ -26,7 +24,6 @@
       <url>http://scala-tools.org/repo-releases</url>
     </pluginRepository>
   </pluginRepositories>
-
   <dependencies>
     <dependency>
       <groupId>org.scala-lang</groupId>
@@ -92,6 +89,11 @@
       <artifactId>dispatch-lift-json_2.7.7</artifactId>
       <version>0.7.2</version>
     </dependency>
+    <dependency>
+    	<groupId>com.sun.jersey</groupId>
+    	<artifactId>jersey-client</artifactId>
+    	<version>1.1.5.1</version>
+    </dependency>    
     <!-- for LiftConsole -->
     <dependency>
       <groupId>org.scala-lang</groupId>

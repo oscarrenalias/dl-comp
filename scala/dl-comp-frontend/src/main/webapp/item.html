@@ -1,10 +1,9 @@
 <lift:surround with="default" at="content">
 		<div id="cart-message"></div>
-		<lift:Item.showInfo form="post">
+		<lift:ItemInfo.show form="post">
 			Item number: <item:id /><br/>
-			Description: <item:description /><br/>
-			Long description: <item:longDescription /><br/>
-			Vendor: <item:vendor /><br/>
+			Description: <item:name /><br/>
+			Long description: <item:description /><br/>
 			Price: <item:price /><br/>
 			<br/>
 			<lift:Login.loggedIn>			  
@@ -13,5 +12,5 @@
 			<lift:Login.loggedOut>
 			  Please log in to add items to your shopping cart.
 			</lift:Login.loggedOut>
-		</lift:Item.showInfo>		
+		</lift:ItemInfo.show>		
 </lift:surround>

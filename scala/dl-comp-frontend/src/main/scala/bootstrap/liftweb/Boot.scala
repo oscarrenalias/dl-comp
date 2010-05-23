@@ -58,7 +58,7 @@ object MenuInfo {
   import Loc._
   val IfLoggedIn = If(() => User.currentUser.isDefined, "You must be logged in")
   def menu: List[Menu] =  Menu(Loc("Home", List("index"), "Home")) :: 
-    Menu(Loc("Catalog", List("catalog"), "Item catalog")) ::
+    Menu(Loc("Catalog", List("browse"), "Item catalog")) ::
     Menu(Loc("Checkout", List("checkout"), "Checkout", IfLoggedIn)) ::
     Menu(Loc("Item Details", List("item"), "Item details")) ::
     Menu(Loc("help", List("help", "index"), "Help")) ::
