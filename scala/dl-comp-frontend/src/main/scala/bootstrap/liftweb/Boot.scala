@@ -1,6 +1,7 @@
 package bootstrap.liftweb
 
 import _root_.net.liftweb.util._
+import _root_.net.liftweb.common._
 import _root_.net.liftweb.http._
 import _root_.net.liftweb.sitemap._
 import _root_.net.liftweb.sitemap.Loc._
@@ -40,17 +41,10 @@ class Boot {
     LiftRules.ajaxEnd =
       Full(() => LiftRules.jsArtifacts.hide("ajax-loader").cmd)
 
-    LiftRules.early.append(makeUtf8)
+	LiftRules.early.append{ _.setCharacterEncoding("UTF-8") }    
     
-    S.addAround(DB.buildLoanWrapper)    
-  }
-  
-  /**
-   * Force the request to be UTF-8
-   */
-  private def makeUtf8(req: HttpServletRequest) {
-    req.setCharacterEncoding("UTF-8")
-  }  
+	S.addAround(DB.buildLoanWrapper)    
+  } 
 }
 
 object MenuInfo {

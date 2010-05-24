@@ -6,7 +6,7 @@ import http._
 import SHtml._ 
 import util._
 import scala.collection.mutable.ArrayBuffer
-import _root_.net.liftweb.util.{Box,Full,Empty}
+import _root_.net.liftweb.common.{Box,Full,Empty}
 import com.webshop.frontend.snippet._
 
 class NonEmptyMappedString[T <: Mapper[T]](var owner: T, msg: String) extends MappedString(owner, 255) {

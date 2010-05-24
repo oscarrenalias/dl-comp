@@ -1,6 +1,7 @@
 package com.webshop.frontend.snippet
 import _root_.scala.xml.{NodeSeq,Text,Node,Elem}  
-import _root_.net.liftweb.util.{Box,Full,Empty,Helpers,Log}  
+import _root_.net.liftweb.common.{Box,Full,Empty}  
+import _root_.net.liftweb.util.Log
 import _root_.net.liftweb.util.Helpers._
 import net.liftweb.http._
 import net.liftweb.http.js.JsCmds._

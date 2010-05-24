@@ -2,13 +2,14 @@ package com.webshop.frontend.model
 
 import _root_.net.liftweb.mapper._
 import _root_.net.liftweb.util._
-import net.liftweb.http._ 
-import com.webshop.frontend.logging._
+import _root_.net.liftweb.common.Full
+import _root_.net.liftweb.http._ 
+
 
 /**
  * The singleton that has methods for accessing the database
  */
-object User extends User with MetaMegaProtoUser[User] with Logs {
+object User extends User with MetaMegaProtoUser[User] {
   override def dbTableName = "users" // define the DB table name
   override def screenWrap = Full(<lift:surround with="default" at="content">
 			       <lift:bind /></lift:surround>)

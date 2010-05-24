@@ -3,7 +3,8 @@ package com.webshop.frontend.restclient
 import java.net.URI
 import com.sun.jersey.api.client._
 import net.liftweb.json.JsonParser._
-import _root_.net.liftweb.util.{Box,Full,Failure,Empty,Log} 
+import _root_.net.liftweb.common.{Box,Full,Failure,Empty} 
+import _root_.net.liftweb.util.Log
 import com.webshop.frontend.model._
 import com.webshop.{WebshopConfig => config}
 

@@ -1,6 +1,7 @@
 package com.webshop.frontend.model
 
-import _root_.net.liftweb.util.{Box,Full,Empty,Log} 
+import _root_.net.liftweb.common.{Box,Full,Empty} 
+import _root_.net.liftweb.util.Log
 import com.webshop.frontend.restclient.RestClient
 
 /**
