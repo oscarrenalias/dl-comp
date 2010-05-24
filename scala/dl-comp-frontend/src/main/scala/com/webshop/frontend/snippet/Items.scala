@@ -11,7 +11,6 @@ import net.liftweb.http.js._
 
 import com.webshop.frontend.logging._
 import com.webshop.frontend.model.{Item => ModelItem,Catalog => ModelCatalog,CatalogCategory,RootCatalogCategory}
-import com.webshop.frontend.rest._
 
 object currentItem extends RequestVar[Box[ModelItem]](Empty)
 object currentCategory extends RequestVar[Box[CatalogCategory]](Empty)

@@ -9,7 +9,6 @@ import _root_.net.liftweb.util.Helpers._
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.JsCmds
 import net.liftweb.http.js.jquery.JqJsCmds._
-import com.webshop.frontend.rest.RestfulItem
 import com.webshop.frontend.model._
 
 class OrderData {
