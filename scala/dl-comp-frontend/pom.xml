@@ -7,7 +7,9 @@
   <name>dl-comp-frontend</name>
   <inceptionYear>2007</inceptionYear>
   <properties>
-    <scala.version>2.7.3</scala.version>
+    <scala.version>2.7.7</scala.version>
+	<jersey.version>1.1.5.1</jersey.version>
+	<lift.version>1.1-M8</lift.version>
   </properties>
   <repositories>
     <repository>
@@ -32,17 +34,17 @@
     <dependency>
       <groupId>net.liftweb</groupId>
       <artifactId>lift-util</artifactId>
-      <version>1.0</version>
+      <version>${lift.version}</version>
     </dependency>
     <dependency>
       <groupId>net.liftweb</groupId>
       <artifactId>lift-webkit</artifactId>
-      <version>1.0</version>
+      <version>${lift.version}</version>
     </dependency>
     <dependency>
       <groupId>net.liftweb</groupId>
       <artifactId>lift-mapper</artifactId>
-      <version>1.0</version>
+      <version>${lift.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.derby</groupId>
@@ -74,6 +76,18 @@
       <version>${scala.version}</version>
       <scope>test</scope>
     </dependency>
+	<!-- Jersey client library, used for rest calls -->
+	<dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>${jersey.version}</version>
+    </dependency>
+	<!-- Lift's json parser -->
+	<dependency>
+      <groupId>net.liftweb</groupId>
+      <artifactId>lift-json</artifactId>
+      <version>${lift.version}</version>
+    </dependency>	
   </dependencies>
   <build>
     <sourceDirectory>src/main/scala</sourceDirectory>

@@ -9,29 +9,67 @@ import net.liftweb.http.js.JE.JsRaw
 import net.liftweb.http.js._
 
 import com.webshop.frontend.logging._
-import com.webshop.frontend.model._
+import com.webshop.frontend.model.{Item => ModelItem,Catalog => ModelCatalog,CatalogCategory,RootCatalogCategory}
 import com.webshop.frontend.rest._
 
-object currentItem extends RequestVar[Box[RestfulItem]](Empty)
+object currentItem extends RequestVar[Box[ModelItem]](Empty)
+object currentCategory extends RequestVar[Box[CatalogCategory]](Empty)
 
-class Items {
+class Catalog {
 	def list(xhtml:NodeSeq): NodeSeq = {	  
-		RestfulItem.getAll.toList.flatMap( row =>
+		/*ModelCatalog.getRoot.flatMap( row =>
 			bind( "item", xhtml, 
 					"id" -> row._2.id, 
-					"description" -> SHtml.link("/item", () => currentItem(Full(row._2)), Text(row._2.desc)),
-					"price" -> row._2.price.toString )
-		)
+					"name" -> SHtml.link("/item", () => currentItem(Full(row._2)), Text(row._2.name)),
+					"price" -> row.price.toString )
+		)*/
+		currentCategory.is match {
+		  case Empty => {
+			  ModelCatalog.getRoot.toList.flatMap( row =>
+			  	bind( "category", xhtml, 
+			  		  "id" -> row._2.id,
+				      "description" -> row._2.description,
+				      "name" -> SHtml.link("/browse", () => currentCategory(Full(row._2)), Text(row._2.name)))
+			  	)		    
+		    }
+		  case _ => {
+			  ModelCatalog.getLevel("2").toList.flatMap( row =>
+			  	bind( "category", xhtml, 
+			  		  "id" -> row._2.id,
+				      "description" -> row._2.description,
+				      "name" -> SHtml.link("/browse", () => currentCategory(Full(row._2)), Text(row._2.name)))
+			  	)		    
+		  } 
+		}
+
+	}
+ 
+	def items(xhtml:NodeSeq): NodeSeq = {	   
+	  val category = currentCategory openOr RootCatalogCategory
+	  ModelCatalog.getItems(category.id) match {
+	    case None => {
+	      Text("Items not found")
+	      NodeSeq.Empty
+	    }
+        case Some(i) => {
+        	i.flatMap( row =>
+			  bind( "item", xhtml, 
+					"id" -> row.id, 
+					"name" -> SHtml.link("/item", () => currentItem(Full(row)), Text(row.name)),
+					"price" -> row.price.toString )
+			)          
+        }
+      }
 	}
 }
 
-class Item {
+class ItemInfo {
   
-  def showInfo(xhtml: NodeSeq): NodeSeq = {        
+  def show(xhtml: NodeSeq): NodeSeq = {        
     
     var amount = "1";    
     
-    def showItemData(item: RestfulItem): NodeSeq = {      
+    def showItemData(item: ModelItem): NodeSeq = {      
             
       def addToCart(): JsCmd = {
           ShoppingCart.addItem(amount.toInt, item)          
@@ -40,10 +78,9 @@ class Item {
       
       SHtml.ajaxForm(bind( "item", xhtml, 
 			"id" -> item.id, 
-			"description" -> item.desc, 
-			"longDescription" -> item.longDescription,
-			"price" -> item.price.toString,
-      		"vendor" -> item.vendor,
+			"name" -> item.name, 
+			"description" -> item.description,
+			"price" -> item.price,
       		"amountToCart" -> SHtml.text(amount, amount = _),
       		"addToCart" -> SHtml.submit("Add to cart", addToCart )
         ) ++ SHtml.hidden(addToCart))

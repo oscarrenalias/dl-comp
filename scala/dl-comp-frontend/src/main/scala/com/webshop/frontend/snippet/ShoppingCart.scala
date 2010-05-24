@@ -7,21 +7,20 @@ import _root_.scala.xml.{NodeSeq,Text,Node,Elem}
 import _root_.net.liftweb.util.Helpers._
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.jquery.JqJsCmds._
-import com.webshop.frontend.rest.RestfulItem
 import com.webshop.frontend.model._
 
 object ShoppingCart extends SessionVar {
   
-  type ShoppingCartLineItem = (Int, RestfulItem)
+  type ShoppingCartLineItem = (Int, Item)
   
   var items = new ArrayBuffer[ShoppingCartLineItem]  
   
-  def addItem(amount: Int, item: RestfulItem) = {
+  def addItem(amount: Int, item: Item) = {
     items += (amount, item)
     dumpCartData
   }
   
-  def removeItem(amount: Int, item: RestfulItem) = {
+  def removeItem(amount: Int, item: Item) = {
     items -= (amount, item)
     dumpCartData
   }
@@ -45,8 +44,8 @@ class ShoppingCartData {
     	  bind( "item", xhtml, 
     			"id" -> item._2.id, 
     			"amount" -> item._1.toString,
-    			"description" -> item._2.desc,       
-    			"price" -> item._2.price.toString,
+    			"description" -> item._2.description,       
+    			"price" -> item._2.price,
 				"remove" -> SHtml.a({() =>
 					ShoppingCart.removeItem(item._1, item._2)	
 					SetHtml("shopping-cart", <lift:embed what="/templates-hidden/cart-data.html" />)}, Text("Remove"))

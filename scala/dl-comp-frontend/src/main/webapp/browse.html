@@ -1,0 +1,32 @@
+<lift:surround with="default" at="content">
+	<h2>Catalog</h2>
+	<table>
+		<thead>
+			<td width="100%">Description</td>
+		</thead>
+		<tbody>
+		<lift:Catalog.list>
+			<tr>
+				<td><category:name /></td>
+			</tr>
+		</lift:Catalog.list>
+		</tbody>
+	</table>
+	<table>
+		<thead>
+			<td width="10%">Id</td>
+			<td width="70%">Name</td>
+			<td width="20%">Price</td>
+		</thead>
+		<tbody>		
+		<lift:Catalog.items>		
+			<tr>
+				<td><item:id /></td>
+				<td><item:name /></td>
+				<td><item:price /></td>
+			</tr>
+		</lift:Catalog.items>				
+		</tbody>
+	</table>
+</lift:surround>
+
