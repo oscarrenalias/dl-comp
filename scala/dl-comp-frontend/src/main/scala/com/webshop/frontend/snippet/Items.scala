@@ -17,31 +17,23 @@ object currentCategory extends RequestVar[Box[CatalogCategory]](Empty)
 
 class Catalog {
 	def list(xhtml:NodeSeq): NodeSeq = {	  
-		/*ModelCatalog.getRoot.flatMap( row =>
-			bind( "item", xhtml, 
-					"id" -> row._2.id, 
-					"name" -> SHtml.link("/item", () => currentItem(Full(row._2)), Text(row._2.name)),
-					"price" -> row.price.toString )
-		)*/
-		currentCategory.is match {
-		  case Empty => {
-			  ModelCatalog.getRoot.toList.flatMap( row =>
-			  	bind( "category", xhtml, 
-			  		  "id" -> row._2.id,
-				      "description" -> row._2.description,
-				      "name" -> SHtml.link("/browse", () => currentCategory(Full(row._2)), Text(row._2.name)))
-			  	)		    
-		    }
-		  case _ => {
-			  ModelCatalog.getLevel("2").toList.flatMap( row =>
-			  	bind( "category", xhtml, 
-			  		  "id" -> row._2.id,
-				      "description" -> row._2.description,
-				      "name" -> SHtml.link("/browse", () => currentCategory(Full(row._2)), Text(row._2.name)))
-			  	)		    
-		  } 
-		}
-
+	  val category = currentCategory openOr RootCatalogCategory
+      category.getChildren.flatMap( row =>
+      bind( "category", xhtml, 
+            "id" -> row.id,
+            "description" -> row.description, 
+            "name" -> SHtml.link("/browse", () => currentCategory(Full(row)), Text(row.name)))
+      )  
+	}
+ 
+	def category(xhtml:NodeSeq): NodeSeq = {
+	  val category = currentCategory openOr RootCatalogCategory
+	  bind("category", xhtml,
+		   "id" -> category.id,
+		   "description" -> category.description,
+		   "name" -> category.name,
+		   "link" -> SHtml.link("/browse", () => currentCategory(Full(category)), Text(category.name)),
+		   "breadcrumbs" -> Text("bread -> crumbs"))
 	}
  
 	def items(xhtml:NodeSeq): NodeSeq = {	   

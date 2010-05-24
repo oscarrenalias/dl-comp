@@ -1,5 +1,9 @@
 <lift:surround with="default" at="content">
 	<h2>Catalog</h2>
+	<lift:Catalog.category>
+		<h2><category:name/></h2>
+		<category:breadcrumbs/>
+	</lift:Catalog.category>
 	<table>
 		<thead>
 			<td width="100%">Description</td>
