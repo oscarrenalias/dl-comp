@@ -1,4 +1,3 @@
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>dl-comp-frontend</groupId>
@@ -10,7 +9,6 @@
   <properties>
     <scala.version>2.7.3</scala.version>
   </properties>
-
   <repositories>
     <repository>
       <id>scala-tools.org</id>
@@ -18,7 +16,6 @@
       <url>http://scala-tools.org/repo-releases</url>
     </repository>
   </repositories>
-
   <pluginRepositories>
     <pluginRepository>
       <id>scala-tools.org</id>
@@ -26,7 +23,6 @@
       <url>http://scala-tools.org/repo-releases</url>
     </pluginRepository>
   </pluginRepositories>
-
   <dependencies>
     <dependency>
       <groupId>org.scala-lang</groupId>
@@ -70,27 +66,6 @@
       <artifactId>jetty</artifactId>
       <version>[6.1.6,)</version>
       <scope>test</scope>
-    </dependency>
-    <!-- nicer library for handling http calls in Scala -->
-    <dependency>
-      <groupId>net.databinder</groupId>
-      <artifactId>dispatch-http_2.7.7</artifactId>
-      <version>0.7.2</version>
-    </dependency>    
-    <dependency>
-      <groupId>net.databinder</groupId>
-      <artifactId>dispatch-json_2.7.7</artifactId>
-      <version>0.7.2</version>
-    </dependency>
-    <dependency>
-      <groupId>net.databinder</groupId>
-      <artifactId>dispatch-http-json_2.7.7</artifactId>
-      <version>0.7.2</version>
-    </dependency>
-    <dependency>
-      <groupId>net.databinder</groupId>
-      <artifactId>dispatch-lift-json_2.7.7</artifactId>
-      <version>0.7.2</version>
     </dependency>
     <!-- for LiftConsole -->
     <dependency>
