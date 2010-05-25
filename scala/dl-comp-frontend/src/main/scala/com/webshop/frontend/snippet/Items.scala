@@ -16,8 +16,12 @@ object currentItem extends RequestVar[Box[ModelItem]](Empty)
 object currentCategory extends RequestVar[Box[CatalogCategory]](Empty)
 
 class Catalog {
+	
+	/**
+	 * Provides a list of all the subcategories in the current category
+	 */
 	def list(xhtml:NodeSeq): NodeSeq = {	  
-	  val category = currentCategory openOr RootCatalogCategory
+	  val category = currentCategory openOr RootCatalogCategory	  
       category.getChildren.flatMap( row =>
       bind( "category", xhtml, 
             "id" -> row.id,
@@ -25,17 +29,66 @@ class Catalog {
             "name" -> SHtml.link("/browse", () => currentCategory(Full(row)), Text(row.name)))
       )  
 	}
- 
-	def category(xhtml:NodeSeq): NodeSeq = {
-	  val category = currentCategory openOr RootCatalogCategory
-	  bind("category", xhtml,
-		   "id" -> category.id,
-		   "description" -> category.description,
-		   "name" -> category.name,
-		   "link" -> SHtml.link("/browse", () => currentCategory(Full(category)), Text(category.name)),
-		   "breadcrumbs" -> Text("bread -> crumbs"))
+	
+	/**
+	 * Similar to breadcrumbs, but this one must be placed in a block and allows to select
+	 * which parts are shown
+	 */
+	def history(xhtml:NodeSeq): NodeSeq = {
+		val category = currentCategory openOr RootCatalogCategory
+		category.getParents.reverse.flatMap( row => 
+			bind( "category", xhtml,
+				  "id" -> row.id,
+				  "description" -> row.description,
+				  "name" -> SHtml.link("/browse", () => currentCategory(Full(row)), Text(row.name)))
+		)
+	}
+	
+	/**
+	 * Provides a link to the root of the catalog
+	 */
+	def root: NodeSeq = {
+		SHtml.link("/browse", () => currentCategory(Empty), Text("Start"))
+	}
+	
+	/**
+	 * Easily generates a nice "bread crubms" navigator
+	 */
+	def breadcrumbs: NodeSeq = {
+		def showBreadCrumbs(c:CatalogCategory) = {
+			c.getParents.reverse.flatMap(
+				{ x => List(SHtml.link("/browse", () => currentCategory(Full(x)), Text(x.name))) ::: List(Text(" / ")) }
+			)			
+		}
+		
+		currentCategory.is match {
+			case Full(x) => showBreadCrumbs(x)
+			case _ => NodeSeq.Empty
+		}		
 	}
  
+  	/**
+ 	 * Allows to provide information about the currently selected category
+  	 */
+	def category(xhtml:NodeSeq): NodeSeq = {
+
+	  def showCurrentCategory(c:CatalogCategory) = {
+		  bind("category", xhtml,
+			   "id" -> c.id,
+			   "description" -> c.description,
+			   "name" -> c.name,		
+			   "link" -> SHtml.link("/browse", () => currentCategory(Full(c)), Text(c.name)))		
+	  }
+		
+	  currentCategory.is match {
+		case Full(x) => showCurrentCategory(x)
+		case _ => NodeSeq.Empty
+	  }
+	}
+ 
+	/**
+	 * Provides a list of all the items available in the current category
+	 */
 	def items(xhtml:NodeSeq): NodeSeq = {	   
 	  val category = currentCategory openOr RootCatalogCategory
 	  ModelCatalog.getItems(category.id) match {

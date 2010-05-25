@@ -1,21 +1,22 @@
 <lift:surround with="default" at="content">
-	<h2>Catalog</h2>
+	<!--h2>Navigation</h2> 	
+	<lift:Catalog.history>
+		<category:name/> /
+	</lift:Catalog.history -->
+	
+	<h2>Navigation:</h2>
+	<lift:Catalog.root/> / <lift:Catalog.breadcrumbs />
+	
 	<lift:Catalog.category>
-		<h2><category:name/></h2>
-		<category:breadcrumbs/>
-	</lift:Catalog.category>
-	<table>
-		<thead>
-			<td width="100%">Description</td>
-		</thead>
-		<tbody>
+		<category:link/>
+	</lift:Catalog.category>	
+	<h2>Subcategories</h2>
+	<ul>
 		<lift:Catalog.list>
-			<tr>
-				<td><category:name /></td>
-			</tr>
+			<li><category:name /></li>
 		</lift:Catalog.list>
-		</tbody>
-	</table>
+	</ul>
+	<h2>Items in this category</h2>
 	<table>
 		<thead>
 			<td width="10%">Id</td>
