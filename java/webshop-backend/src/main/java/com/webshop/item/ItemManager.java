@@ -35,6 +35,12 @@ public class ItemManager {
 			item.description = "Description of item " + i;
 			item.price = 100.0;
 			
+			// set some test images
+			item.imgsSmall.add("http://pan3.fotovista.com/dev/3/2/03554423/t_03554423.jpg");
+			item.imgsSmall.add("http://pan3.fotovista.com/dev/3/2/03554423/t_03554423.jpg");
+			item.imgsLarge.add("http://pan3.fotovista.com/dev/3/2/03554423/u_03554423.jpg");
+			item.imgsLarge.add("http://pan3.fotovista.com/dev/3/2/03554423/u_03554423.jpg");
+			
 			items.put(item.id, item);
 		}		
 	}
