@@ -127,6 +127,8 @@ class ItemInfo {
 			"description" -> item.description,
 			"price" -> item.price,
       		"amountToCart" -> SHtml.text(amount, amount = _),
+			"thumb" -> item.imgsSmall(0),
+			"image" -> item.imgsLarge(0),
       		"addToCart" -> SHtml.submit("Add to cart", addToCart )
         ) ++ SHtml.hidden(addToCart))
     }       
@@ -136,5 +138,9 @@ class ItemInfo {
       case _ =>  { Text("Item not found")
                    NodeSeq.Empty }
     }
+  }
+
+  def images(xhtml:NodeSeq): NodeSeq = {
+	 NodeSeq.Empty
   }
 }

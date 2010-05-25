@@ -7,7 +7,11 @@ import com.webshop.frontend.restclient.RestClient
 /**
  * Bean that holds information about an item  
  */
-case class Item(var id: String, var name: String, var description: String, var price: String, var currency: String )
+case class Item(var id: String, 
+				var name: String, 
+				var description: String, 
+				var price: String, 
+				var currency: String, var imgsSmall: List[String], var imgsLarge: List[String])
 
 object Item {      
   def get(id: String): Box[Item] = RestClient.Items.get(id)
