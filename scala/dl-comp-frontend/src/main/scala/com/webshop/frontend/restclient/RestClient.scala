@@ -18,6 +18,11 @@ trait RestfulOperator {
 		Log.debug("Executing GET - path = " + path)
 		r.path(path).get(Request().acceptLanguageString("en"))
 	}
+	
+	def doPut(path: String, data: String) = {
+		Log.debug("Executing PUT - path = " + path)
+		r.path(path).put(Request().acceptLanguageString("en"))
+	}
 }
 
 object RestClient {
