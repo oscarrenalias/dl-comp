@@ -27,11 +27,17 @@ class Order extends LongKeyedMapper[Order] with IdPK {
  // order number, once it's been set to the ERP
  var number = ""
  
+ // order description
+ var description = ""
+ 
  // line items
  var items = new ArrayBuffer[ShoppingCart.ShoppingCartLineItem]
  
  // order status
  var status = OrderStatusValues.NEW
+ 
+ // user
+ var user = User.currentUserId openOr "nouser"
  
  def setLineItems(newItems: ArrayBuffer[ShoppingCart.ShoppingCartLineItem]) = {
    items = newItems 
