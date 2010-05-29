@@ -35,11 +35,15 @@ public class ItemManager {
 			item.description = "Description of item " + i;
 			item.price = 100.0;
 			
-			// set some test images
-			item.imgsSmall.add("http://pan3.fotovista.com/dev/3/2/03554423/t_03554423.jpg");
-			item.imgsSmall.add("http://pan3.fotovista.com/dev/3/2/03554423/t_03554423.jpg");
-			item.imgsLarge.add("http://pan3.fotovista.com/dev/3/2/03554423/u_03554423.jpg");
-			item.imgsLarge.add("http://pan3.fotovista.com/dev/3/2/03554423/u_03554423.jpg");
+			// some test images
+			ItemBeanImageData imgData1 = new ItemBeanImageData();
+			imgData1.small = "http://pan3.fotovista.com/dev/3/2/03554423/t_03554423.jpg";
+			imgData1.large = "http://pan3.fotovista.com/dev/3/2/03554423/u_03554423.jpg";
+			ItemBeanImageData imgData2 = new ItemBeanImageData();
+			imgData2.small = "http://pan3.fotovista.com/dev/3/2/03554423/t_03554423.jpg";
+			imgData2.large = "http://pan3.fotovista.com/dev/3/2/03554423/u_03554423.jpg";
+			item.images.add(imgData1);
+			item.images.add(imgData2);
 			
 			items.put(item.id, item);
 		}		

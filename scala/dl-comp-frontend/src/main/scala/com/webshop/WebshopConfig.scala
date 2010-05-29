@@ -9,4 +9,7 @@ object WebshopConfig {
     val ORDERS = "orders"
     val ORDER = "order"
   }
+  
+  val IMAGE_NOT_AVAILABLE = "http://server.com/imgs/image_not_available.png"
+  val THUMBNAIL_NOT_AVAILABLE = "http://server.com/imgs/image_not_available.png"
 }

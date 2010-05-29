@@ -1,16 +1,26 @@
 <lift:surround with="default" at="content">
 		<div id="cart-message"></div>
 		<lift:ItemInfo.show form="post">
-			Item number: <item:id /><br/>
-			Description: <item:name /><br/>
-			Long description: <item:description /><br/>
-			Price: <item:price /><br/>
-			<br/>
-			<lift:Login.loggedIn>			  
-			  <item:amountToCart /><item:addToCart />			 
-			</lift:Login.loggedIn>
+			<div id="item-thumbnails">
+				<lift:ItemInfo.thumbnails mode="withLinks">
+					<thumbnail:url />				
+				</lift:ItemInfo.thumbnails>
+			</div>
+			<div id="item-data-wrapper">
+				<li id="item-data">
+					<li>Item number: <item:id /></li>
+					<li>Description: <item:name /></li>
+					<li>Long description: <item:description /></li>
+					<li>Price: <item:price /></li>
+				</li>
+				<lift:Login.loggedIn>			  
+			  		<item:amountToCart /><item:addToCart />			 
+				</lift:Login.loggedIn>
+			</div>
 			<lift:Login.loggedOut>
-			  Please log in to add items to your shopping cart.
+				<div id="please-log-in">
+			  		Please log in to add items to your shopping cart.
+			  	</div>
 			</lift:Login.loggedOut>
 		</lift:ItemInfo.show>		
 </lift:surround>

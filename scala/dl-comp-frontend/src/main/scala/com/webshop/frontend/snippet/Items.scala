@@ -97,10 +97,17 @@ class Catalog {
 	      NodeSeq.Empty
 	    }
         case Some(i) => {
+          /** 
+              TODO: this is the same information that ItemInfo.show is showing - how can we have the same
+              code for both? Recursive/embedded snippet? 
+           **/
         	i.flatMap( row =>
 			  bind( "item", xhtml, 
 					"id" -> row.id, 
 					"name" -> SHtml.link("/item", () => currentItem(Full(row)), Text(row.name)),
+					"description" -> row.description,
+					"image" -> <img src={row.getImage(0)} alt="Image" />,
+					"thumbnail" -> <img src={row.getThumbnail(0)} alt="Thumbnail" />,		
 					"price" -> row.price.toString )
 			)          
         }
@@ -127,11 +134,11 @@ class ItemInfo {
 			"description" -> item.description,
 			"price" -> item.price,
       		"amountToCart" -> SHtml.text(amount, amount = _),
-			"thumb" -> item.imgsSmall(0),
-			"image" -> item.imgsLarge(0),
+			"image" -> item.getImage(0),
+			"thumbnail" -> item.getThumbnail(0),
       		"addToCart" -> SHtml.submit("Add to cart", addToCart )
         ) ++ SHtml.hidden(addToCart))
-    }       
+    }    
     
     currentItem.is match {
       case Full(item) => showItemData(item)
@@ -139,8 +146,35 @@ class ItemInfo {
                    NodeSeq.Empty }
     }
   }
-
+  
   def images(xhtml:NodeSeq): NodeSeq = {
-	 NodeSeq.Empty
+	 currentItem.is match {
+	   case Full(item) => {
+	     item.getImages.flatMap( image =>
+	       bind("image", xhtml, "url" -> <img class="item-image" src={image} alt="Image" /> )
+         )
+	   }
+	   case _ => NodeSeq.Empty 
+	 }		  
+  }
+  
+  def thumbnails(xhtml:NodeSeq): NodeSeq = {
+    val mode = S.attr("mode") openOr "default"
+	 
+    currentItem.is match {
+	   case Full(item) => {
+	     if( mode == "withLinks" ) {
+	    	 item.images.flatMap( image =>
+	    	 bind("thumbnail", xhtml, "url" -> <a href={image.large} class="image-thumbnail-link"><img class="item-thumbnail" data-large={image.large} src={image.small} alt="Image" /></a> )
+	    	 )       
+	     }
+	     else {
+	    	 item.images.flatMap( image =>
+	    	 bind("thumbnail", xhtml, "url" -> <img class="item-thumbnail" data-large={image.large} src={image.small} alt="Image" /> )
+	    	 )	       
+	     } 	     
+	   }
+	   case _ => NodeSeq.Empty 
+	 }
   }
 }
