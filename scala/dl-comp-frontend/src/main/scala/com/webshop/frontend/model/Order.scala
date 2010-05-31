@@ -8,6 +8,7 @@ import util._
 import scala.collection.mutable.ArrayBuffer
 import _root_.net.liftweb.common.{Box,Full,Empty}
 import com.webshop.frontend.snippet._
+import com.webshop.frontend.restclient._
 
 class NonEmptyMappedString[T <: Mapper[T]](var owner: T, msg: String) extends MappedString(owner, 255) {
 	 override def validations = 
@@ -65,9 +66,11 @@ object OrderStatusValues {
  */
 object Order extends Order with LongKeyedMetaMapper[Order] {
   
-  def submit(order: Order): Order = {
+  def submit(order: Order): Order = {    
+    RestClient.Orders.create(this)
+
     order.status = OrderStatusValues.PROCESSED
-    order.number = "123456789"
+    order.number = "123456789"    
     
     order
   }

@@ -35,27 +35,59 @@ class OrderSerializerTest extends TestCase("serializer") {
   /**
    * Test serialization of an empty order
    */
-  def testEmptyOrder() = {
-    val expectedJson = """{"address1":"","address2":"","city":"","postcode":"","phone":"","user":"nouser","country":"","number":"","status":"New","description":"","items":[]}"""
+  def testSerializeEmptyOrder() = {
+    val expectedJson = """{"address1":"","address2":"","city":"","postcode":"","phone":"","user":"nouser","country":"","id":"","status":"New","description":"","items":[]}"""
     val o = new Order
-    val jsonOrder = compact(JsonAST.render(f(o)))    
+    val jsonOrder = compact(JsonAST.render(f(o)))
+    
+    Log.debug("testSerializeEmptyOrder: Serialized json = " + jsonOrder)    
+    
     assertEquals(expectedJson, jsonOrder)
   }
   
   /**
    * Test the serialization of Order objects with line items
    */
-  def testOrderWithLineItems() = {
+  def testSerializeOrderWithLineItems() = {
     // build an order object
     val i1 = new Item("1","Name 1","Description 1","10", "EUR", List())
     val i2 = new Item("2","Name 2","Description 2","10", "USD", List())
     val o  = new Order
     o.items append ((1,i1), (2,i2))
     
-    val expectedJson = """{"address1":"","address2":"","city":"","postcode":"","phone":"","user":"nouser","country":"","number":"","status":"New","description":"","items":[{"amount":1,"item":{"id":"1"}},{"amount":2,"item":{"id":"2"}}]}"""
+    val expectedJson = """{"address1":"","address2":"","city":"","postcode":"","phone":"","user":"nouser","country":"","id":"","status":"New","description":"","items":[{"amount":1,"item":{"id":"1"}},{"amount":2,"item":{"id":"2"}}]}"""
     val jsonOrder = compact(JsonAST.render(f(o)))
+    
+    Log.debug("testSerializeOrderWithLineItems: Serialized json = " + jsonOrder)
+    
     assertEquals(expectedJson, jsonOrder)
   }
+  
+  /**
+   * Deserialize an empty order
+   */
+  def testDeserializeEmptyOrder() = {
+    val inputJson = """{"address1":"","address2":"","city":"","postcode":"","phone":"","user":"nouser","country":"","id":"","status":"New","description":"","items":[]}"""
+    val o = new Order
+     
+    serializer.deserialize(inputJson) match {
+      case Full(newOrder) => assertTrue(o == newOrder)
+      case _ => assertTrue(false)
+    }
+  }
+    
+  /**
+   * Returns a Failure object
+   */
+  def testDeserializeBadJson() = {
+    val inputJson = """aaa{"address1":"","address2":"","city":"","postcode":"","phone":"","user":"nouser","country":"","id":"","status":"New","description":"","items":[]}"""
+    val o = new Order
+     
+    serializer.deserialize(inputJson) match {
+      case Full(x) => assertTrue(false)
+      case _ => assertTrue(true)
+    }    
+  }  
 }
 
 /**
