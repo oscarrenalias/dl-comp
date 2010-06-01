@@ -13,6 +13,8 @@ public class OrderManager {
 	final static String ORDER_STATUS_CREATED = "Created";
 	final static String ORDER_STATUS_DELIVERED = "Delivered";
 	final static String ORDER_STATUS_CANCELLED = "Cancelled";
+	
+	final static int HIGHEST_ORDER_NUMBER_RANGE = 99999999;
 
     public HashMap<String,OrderBean> orders = new HashMap<String,OrderBean>();    
     private static OrderManager instance = null;
@@ -48,10 +50,8 @@ public class OrderManager {
     }
 
 	public synchronized OrderBean addOrder(OrderBean order) {
-		if(order.id == "0") {
-			// the order has no id yet, so we should come up with one
-			order.id = generateOrderId();
-		}
+		order.id = generateOrderId();
+		
 		// save the status
 		order.status = ORDER_STATUS_CREATED;
 		orders.put(order.id, order);
@@ -67,7 +67,14 @@ public class OrderManager {
 	}
 	
 	private String generateOrderId() {
-		String orderId = Integer.toString(new Random().nextInt());
+		String orderId = null;
+		boolean valid = false;
+		
+		while(!valid) {
+			orderId = Integer.toString(new Random().nextInt(HIGHEST_ORDER_NUMBER_RANGE));
+			// is it already being used?
+			valid = orders.containsKey(orderId) ? false : true;
+		}
 		return(orderId);
 	}
 	
