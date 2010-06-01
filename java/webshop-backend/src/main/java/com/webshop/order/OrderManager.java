@@ -39,13 +39,24 @@ public class OrderManager {
     		order.status = "Processed";
     		order.description = "Description of order " + order.id;
     		order.user = "user@user.com";
-    		// add one line item
+    		order.address1 = "Address 1";
+    		order.address2 = "Address 2";
+    		order.city = "City";
+    		order.country = "Country";
+    		order.postcode = "postcode";
+    		order.phone = "phone";
+    		// add line items
     		OrderItemBean item = new OrderItemBean();
     		item.setData(ItemManager.getInstance().getItem("1"), 5);
     		order.items.add(item);
+    		// add line items
+    		OrderItemBean item2 = new OrderItemBean();
+    		item2.setData(ItemManager.getInstance().getItem("1"), 15);
+    		order.items.add(item2);    		
     		
-    		// add the order to the global list
+    		// add the order to the global list    		
     		addOrder(order);
+    		System.out.println("order id: " + order.id);
     	}
     }
 
