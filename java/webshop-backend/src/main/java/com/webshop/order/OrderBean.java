@@ -12,12 +12,9 @@ public class OrderBean {
     public String id = "0";
     public String description;
     public String user;
-    public String address1;
-    public String address2;
-    public String city;
-    public String country;
-    public String phone;
-    public String postcode;
+    public AddressInfo address;
+    public ContactInfo contact;
+    
     public ArrayList<OrderItemBean> items = new ArrayList<OrderItemBean>();
     public Date created = new Date();
     public Date lastUpdate = new Date();    

@@ -39,12 +39,18 @@ public class OrderManager {
     		order.status = "Processed";
     		order.description = "Description of order " + order.id;
     		order.user = "user@user.com";
-    		order.address1 = "Address 1";
-    		order.address2 = "Address 2";
-    		order.city = "City";
-    		order.country = "Country";
-    		order.postcode = "postcode";
-    		order.phone = "phone";
+    		AddressInfo address = new AddressInfo();
+    		address.address1 = "Address 1";
+    		address.address2 = "Address 2";
+    		address.city = "City";
+    		address.country = "Country";
+    		address.postcode = "postcode";
+    		order.address = address;
+    		ContactInfo contact = new ContactInfo();
+    		contact.phone = "phone";
+    		contact.name = "Name";
+    		contact.email = "a@a.com";
+    		order.contact = contact;
     		// add line items
     		OrderItemBean item = new OrderItemBean();
     		item.setData(ItemManager.getInstance().getItem("1"), 5);
