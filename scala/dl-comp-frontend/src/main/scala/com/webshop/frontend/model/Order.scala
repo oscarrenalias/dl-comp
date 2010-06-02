@@ -18,17 +18,18 @@ case class LineItemInfo(var item: String, var amount: String) {
 
 case class Order(var id: String, var description: String, var user: String, var status: String, var address: AddressInfo, var contact: ContactInfo, var items: List[LineItemInfo]) extends JsonSerializable { 
 	// constructor without parameters
-	def this() = {
+	/*def this() = {
 		this("", "", "", "",
 			 new AddressInfo("", "", "", "", ""), 
 			 new ContactInfo("", "", ""),
 			 List[LineItemInfo]())
-	}
+	}*/
 	
 	def submit: Box[Order] = {
 		val result = Order.submit(this)
 		result match {
     		case Full(x) => {
+    			Log.debug(x.toString)
     			id = x.id
     			status = x.status    			
     		}
@@ -71,6 +72,13 @@ object OrderStatusValues {
  * Companion of the Order class
  */
 object Order {
+		
+	def apply() = {
+		new Order("", "", "", "",
+			 new AddressInfo("", "", "", "", ""), 
+			 new ContactInfo("", "", ""),
+			 List[LineItemInfo]())
+	}	
   
   def submit(order: Order): Box[Order] = {    
     RestClient.Orders.create(order)

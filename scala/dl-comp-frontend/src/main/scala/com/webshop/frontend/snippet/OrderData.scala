@@ -25,15 +25,11 @@ class OrderData {
   
 	def add(xhtml: NodeSeq): NodeSeq = {
 	  
-	  val order = new Order
+	  val order = Order()
 	  
 	  def submitOrder() = {
-	    
-		  Log.debug("Submitting order to backend with the following data:")
-		  Log.debug(" ** Shopping cart:")
     
 		  order.items = ShoppingCart.getItemsForOrder
-		  order.submit 
     
 		  order.submit match {
 		 	  case Full(o) => {
@@ -41,12 +37,16 @@ class OrderData {
 		 		  ShoppingCart.empty
 		 		  checkoutOk = true		 	 	  
 		 		  // show a message
-		 	 	  S.redirectTo("/browse", () => S.notice("Order " + order.id + " created successfully"))
+		 	 	  S.redirectTo("/browse", () => S.notice("Order " + o.id + " created successfully"))
 		 	  }
 		 	  case Failure(msg, x, y) => {
 		 		  //S.error({for(error <- order.getErrors) yield <li>error</li>}.mkString("<ul>","", "</ul>"))
 		 		  S.error(msg)
 		 		  checkoutOk = false		 	 	  
+		 	  }
+		 	  case _ => {
+		 	 	  S.error("Unkown error")
+		 	 	  checkoutOk = false
 		 	  }
 		  }
 	  }
@@ -55,6 +55,7 @@ class OrderData {
 	    order.validate match {
 	      case None => submitOrder
 	      case Some(errors) => errors.foreach(S.error(_))
+	      case _ => S.error("Unknown validation error")
 	    }
 	  }
         
