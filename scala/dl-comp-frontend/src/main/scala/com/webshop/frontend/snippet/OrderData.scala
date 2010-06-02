@@ -2,7 +2,7 @@ package com.webshop.frontend.snippet
 
 import net.liftweb.http._ 
 import scala.collection.mutable.ArrayBuffer
-import _root_.net.liftweb.common.{Box,Full,Empty}
+import _root_.net.liftweb.common.{Box,Full,Empty,Failure}
 import _root_.net.liftweb.util.Log
 import _root_.scala.xml.{NodeSeq,Text,Node,Elem}
 import _root_.net.liftweb.util.Helpers._
@@ -31,37 +31,31 @@ class OrderData {
 	    
 		  Log.debug("Submitting order to backend with the following data:")
 		  Log.debug(" ** Shopping cart:")
-		  ShoppingCart.dumpCartData
-		  Log.debug(" ** Order header data:")
-		  Log.debug("address1: " + order.address.address1)
-		  Log.debug("address2: " + order.address.address2)
     
-		  //order.setLineItems(ShoppingCart.getItems)
 		  order.items = ShoppingCart.getItemsForOrder
 		  order.submit 
     
-		  order.status match {
-		    case OrderStatusValues.PROCESSED => {
-		      // show a message
-		      S.notice("Order " + order.id + " created successfully")
-		      // clean the shopping cart
-		      ShoppingCart.empty
-        
-		      checkoutOk = true
-		    } 
-		    case _ => { 
-		      //S.error({for(error <- order.getErrors) yield <li>error</li>}.mkString("<ul>","", "</ul>"))
-		      checkoutOk = false
-		     }
+		  order.submit match {
+		 	  case Full(o) => {
+		 		  // clean the shopping cart
+		 		  ShoppingCart.empty
+		 		  checkoutOk = true		 	 	  
+		 		  // show a message
+		 	 	  S.redirectTo("/browse", () => S.notice("Order " + order.id + " created successfully"))
+		 	  }
+		 	  case Failure(msg, x, y) => {
+		 		  //S.error({for(error <- order.getErrors) yield <li>error</li>}.mkString("<ul>","", "</ul>"))
+		 		  S.error(msg)
+		 		  checkoutOk = false		 	 	  
+		 	  }
 		  }
 	  }
    
 	  def validateAndSubmit(): Unit = {
-	    /*order.validate match {
-	      case Nil => submitOrder
-	      case xs => S.error(xs);
-	    }*/
-	 	submitOrder
+	    order.validate match {
+	      case None => submitOrder
+	      case Some(errors) => errors.foreach(S.error(_))
+	    }
 	  }
         
       bind("data", xhtml,
