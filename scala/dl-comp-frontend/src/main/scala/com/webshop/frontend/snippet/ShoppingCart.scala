@@ -1,7 +1,6 @@
 package com.webshop.frontend.snippet
 
 import net.liftweb.http._ 
-import scala.collection.mutable.ArrayBuffer
 import _root_.net.liftweb.common.{Box,Full,Empty}
 import _root_.net.liftweb.util.Log
 import _root_.scala.xml.{NodeSeq,Text,Node,Elem}
@@ -10,32 +9,6 @@ import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.jquery.JqJsCmds._
 import com.webshop.frontend.model._
 import com.webshop.frontend.model.{Item=>ModelItem}
-
-object ShoppingCart extends SessionVar {
-  
-  type ShoppingCartLineItem = (Int, ModelItem)
-  
-  var items = new ArrayBuffer[ShoppingCartLineItem]  
-  
-  def addItem(amount: Int, item: ModelItem) = {
-    items += (amount, item)
-    dumpCartData
-  }
-  
-  def removeItem(amount: Int, item: ModelItem) = {
-    items -= (amount, item)
-    dumpCartData
-  }
-  
-  def getItems: ArrayBuffer[ShoppingCartLineItem] = items
-  
-  def dumpCartData = {
-    Log.debug("Items in cart " + items.size)
-    items.foreach(i => Log.debug("item: " + i._2.id + " - amount:" + i._1.toString))
-  }  
-  
-  def empty = items.clear
-}
 
 /**
  * Snippet for displaying shopping cart data

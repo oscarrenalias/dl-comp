@@ -17,7 +17,7 @@ import com.webshop.frontend.model._
 object AppTest {
   def suite: Test = {
     val suite = new TestSuite(classOf[AppTest])
-    suite.addTestSuite(classOf[OrderSerializerTest])
+    suite.addTestSuite(classOf[JsonTests])
     suite
   }
 
@@ -26,68 +26,14 @@ object AppTest {
   }
 }
 
-class OrderSerializerTest extends TestCase("serializer") {
-  
-  implicit val formats = Serialization.formats(NoTypeHints)      
-  val serializer = new OrderSerializer
-  val f = serializer.serialize  
-  
-  /**
-   * Test serialization of an empty order
-   */
-  def testSerializeEmptyOrder() = {
-    val expectedJson = """{"address1":"","address2":"","city":"","postcode":"","phone":"","user":"nouser","country":"","id":"","status":"New","description":"","items":[]}"""
-    val o = new Order
-    val jsonOrder = compact(JsonAST.render(f(o)))
-    
-    Log.debug("testSerializeEmptyOrder: Serialized json = " + jsonOrder)    
-    
-    assertEquals(expectedJson, jsonOrder)
-  }
-  
-  /**
-   * Test the serialization of Order objects with line items
-   */
-  def testSerializeOrderWithLineItems() = {
-    // build an order object
-    val i1 = new Item("1","Name 1","Description 1","10", "EUR", List())
-    val i2 = new Item("2","Name 2","Description 2","10", "USD", List())
-    val o  = new Order
-    o.items append ((1,i1), (2,i2))
-    
-    val expectedJson = """{"address1":"","address2":"","city":"","postcode":"","phone":"","user":"nouser","country":"","id":"","status":"New","description":"","items":[{"amount":1,"item":{"id":"1"}},{"amount":2,"item":{"id":"2"}}]}"""
-    val jsonOrder = compact(JsonAST.render(f(o)))
-    
-    Log.debug("testSerializeOrderWithLineItems: Serialized json = " + jsonOrder)
-    
-    assertEquals(expectedJson, jsonOrder)
-  }
-  
-  /**
-   * Deserialize an empty order
-   */
-  def testDeserializeEmptyOrder() = {
-    val inputJson = """{"address1":"","address2":"","city":"","postcode":"","phone":"","user":"nouser","country":"","id":"","status":"New","description":"","items":[]}"""
-    val o = new Order
-     
-    serializer.deserialize(inputJson) match {
-      case Full(newOrder) => assertTrue(o == newOrder)
-      case _ => assertTrue(false)
-    }
-  }
-    
-  /**
-   * Returns a Failure object
-   */
-  def testDeserializeBadJson() = {
-    val inputJson = """aaa{"address1":"","address2":"","city":"","postcode":"","phone":"","user":"nouser","country":"","id":"","status":"New","description":"","items":[]}"""
-    val o = new Order
-     
-    serializer.deserialize(inputJson) match {
-      case Full(x) => assertTrue(false)
-      case _ => assertTrue(true)
-    }    
-  }  
+class JsonTests extends TestCase("json") {
+	def testEmptyOrder() = {
+		import com.webshop.frontend.model.Order
+		
+		val expected = """{"items":[],"contact":{"email":"","phone":"","name":""},"address":{"postcode":"","country":"","city":"","address2":"","address1":""},"status":"","user":"","description":"","id":""}"""
+		val o = new Order
+		assertEquals(expected, o.toJson)
+	}
 }
 
 /**
@@ -107,42 +53,42 @@ class AppTest extends TestCase("app") {
    * Finds every *.html and *.xml file in src/main/webapp (and its
    * subdirectories) and tests to make sure they are well-formed.
    */
-  def testXml() = {
-    var failed: List[File] = Nil
-
-    def handledXml(file: String) =
-      file.endsWith(".xml")
-
-    def handledXHtml(file: String) =
-      file.endsWith(".html") || file.endsWith(".htm") || file.endsWith(".xhtml")
-
-    def wellFormed(file: File) {
-      if (file.isDirectory)
-        for (f <- file.listFiles) wellFormed(f)
-
-      if (file.isFile && handledXml(file.getName)) {
-        try {
-          XML.loadFile(file)
-        } catch {
-          case e: _root_.org.xml.sax.SAXParseException => failed = file :: failed
-        }
-      }
-      if (file.isFile && handledXHtml(file.getName)) {
-        PCDataXmlParser(new java.io.FileInputStream(file.getAbsolutePath)) match {
-          case Full(_) => // file is ok
-          case _ => failed = file :: failed
-        }
-      }
-    }
-
-    wellFormed(new File("src/main/webapp"))
-
-    val numFails = failed.size
-    if (numFails > 0) {
-      val fileStr = if (numFails == 1) "file" else "files"
-      val msg = "Malformed XML in " + numFails + " " + fileStr + ": " + failed.mkString(", ")
-      println(msg)
-      fail(msg)
-    }
-  }
+//  def testXml() = {
+//    var failed: List[File] = Nil
+//
+//    def handledXml(file: String) =
+//      file.endsWith(".xml")
+//
+//    def handledXHtml(file: String) =
+//      file.endsWith(".html") || file.endsWith(".htm") || file.endsWith(".xhtml")
+//
+//    def wellFormed(file: File) {
+//      if (file.isDirectory)
+//        for (f <- file.listFiles) wellFormed(f)
+//
+//      if (file.isFile && handledXml(file.getName)) {
+//        try {
+//          XML.loadFile(file)
+//        } catch {
+//          case e: _root_.org.xml.sax.SAXParseException => failed = file :: failed
+//        }
+//      }
+//      if (file.isFile && handledXHtml(file.getName)) {
+//        PCDataXmlParser(new java.io.FileInputStream(file.getAbsolutePath)) match {
+//          case Full(_) => // file is ok
+//          case _ => failed = file :: failed
+//        }
+//      }
+//    }
+//
+//    wellFormed(new File("src/main/webapp"))
+//
+//    val numFails = failed.size
+//    if (numFails > 0) {
+//      val fileStr = if (numFails == 1) "file" else "files"
+//      val msg = "Malformed XML in " + numFails + " " + fileStr + ": " + failed.mkString(", ")
+//      println(msg)
+//      fail(msg)
+//    }
+//  }
 }

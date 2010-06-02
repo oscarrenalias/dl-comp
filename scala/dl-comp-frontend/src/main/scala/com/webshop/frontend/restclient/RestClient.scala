@@ -54,24 +54,24 @@ object RestClient {
   object Orders extends RestfulOperator {
     
     def get(id: String): Box[Order] = {
-      Failure("Method not implemented yet")
+    	try {
+    		var response:String = doGet(config.URI.ORDER + "/" + id).getEntity(classOf[String])
+    		Log.debug("Order json = " + response)
+    		Full(parse(response).extract[Order])
+    	} catch {
+    		case e:Exception => Failure(e.getMessage, Full(e), Empty)
+    	}
     }
     
     def create(o: Order): Box[Order] = {
-    	// serialize the order to a json string
-    	implicit val formats = Serialization.formats(NoTypeHints)      
-    	val serializer = new OrderSerializer
-    	val f = serializer.serialize
-    	val jsonOrder = compact(JsonAST.render(f(o)))
+    	val jsonOrder = o.toJson 
     	Log.debug("serialized json Order: " + jsonOrder)
-
     	// post the order to the server
     	try {
+    	  // call the service and extract the new order from the response
     	  var response:String = doPost(config.URI.ORDER + "/", jsonOrder).getEntity(classOf[String])
-       
     	  Log.debug("Orders.create Response = " + response)
-       
-    	  Full(o)
+    	  Full(parse(response).extract[Order])
     	} catch {
     	  case e:Exception => Failure(e.getMessage, Full(e), Empty)
     	}

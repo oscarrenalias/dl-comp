@@ -8,8 +8,7 @@ import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.jquery.JqJsCmds._ 
 import net.liftweb.http.js.JE.JsRaw
 import net.liftweb.http.js._
-
-import com.webshop.frontend.logging._
+import com.webshop.frontend.model.ShoppingCart
 import com.webshop.frontend.model.{Item => ModelItem,Catalog => ModelCatalog,CatalogCategory,RootCatalogCategory}
 
 object currentItem extends RequestVar[Box[ModelItem]](Empty)

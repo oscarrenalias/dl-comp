@@ -25,7 +25,7 @@ class OrderData {
   
 	def add(xhtml: NodeSeq): NodeSeq = {
 	  
-	  val order = Order.create
+	  val order = new Order
 	  
 	  def submitOrder() = {
 	    
@@ -33,42 +33,54 @@ class OrderData {
 		  Log.debug(" ** Shopping cart:")
 		  ShoppingCart.dumpCartData
 		  Log.debug(" ** Order header data:")
-		  Log.debug("address1: " + order.address1)
-		  Log.debug("address2: " + order.address2)
+		  Log.debug("address1: " + order.address.address1)
+		  Log.debug("address2: " + order.address.address2)
     
-		  order.setLineItems(ShoppingCart.getItems)
+		  //order.setLineItems(ShoppingCart.getItems)
+		  //order.items = ShoppingCart.getItemsForOrder
 		  order.submit 
     
 		  order.status match {
 		    case OrderStatusValues.PROCESSED => {
 		      // show a message
-		      S.notice("Order " + order.number + " created successfully")
+		      S.notice("Order " + order.id + " created successfully")
 		      // clean the shopping cart
 		      ShoppingCart.empty
         
 		      checkoutOk = true
 		    } 
 		    case _ => { 
-		      S.error({for(error <- order.getErrors) yield <li>error</li>}.mkString("<ul>","", "</ul>"))
+		      //S.error({for(error <- order.getErrors) yield <li>error</li>}.mkString("<ul>","", "</ul>"))
 		      checkoutOk = false
 		     }
 		  }
 	  }
    
 	  def validateAndSubmit(): Unit = {
-	    order.validate match {
+	    /*order.validate match {
 	      case Nil => submitOrder
 	      case xs => S.error(xs);
-	    }
+	    }*/
+	 	submitOrder
 	  }
    
-	  bind("data", xhtml,
+	  /*bind("data", xhtml,
         "address1" -> order.address1.toForm,
         "address2" -> order.address2.toForm,
         "city" -> order.city.toForm,
         "postcode" -> order.postcode.toForm,
         "country" -> order.country.toForm,
         "phone" -> order.phone.toForm,
-        "submit" -> SHtml.submit("Checkout", validateAndSubmit))
+        "submit" -> SHtml.submit("Checkout", validateAndSubmit))*/
+        
+      bind("data", xhtml,
+        "address1" -> order.address.address1,
+        "address2" -> order.address.address2,
+        "city" -> order.address.city,
+        "postcode" -> order.address.postcode,
+        "country" -> order.address.country,
+        "phone" -> order.contact.phone,
+        "email" -> order.contact.email,
+        "submit" -> SHtml.submit("Checkout", validateAndSubmit))  
 	}
 }

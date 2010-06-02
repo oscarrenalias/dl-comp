@@ -3,6 +3,7 @@ package com.webshop.frontend.model
 import _root_.net.liftweb.common.{Box,Full,Empty} 
 import _root_.net.liftweb.util.Log
 import com.webshop.frontend.restclient.RestClient
+import com.webshop.frontend.restclient.JsonSerializable
 import com.webshop.WebshopConfig
 
 /**
@@ -13,7 +14,7 @@ case class Item(var id: String,
 				var description: String, 
 				var price: String, 
 				var currency: String,
-				var images: List[ItemImageData]) {
+				var images: List[ItemImageData]) extends JsonSerializable {
 
   def getThumbnail(id: Int) = {
     if (images.isDefinedAt(id)) images(id).small else WebshopConfig.THUMBNAIL_NOT_AVAILABLE
@@ -28,7 +29,7 @@ case class Item(var id: String,
   def getImages = for (image <- images) yield image.large
 }
 
-object Item {      
+object Item extends JsonSerializable {      
   def get(id: String): Box[Item] = RestClient.Items.get(id)
 }
 

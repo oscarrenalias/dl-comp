@@ -6,51 +6,26 @@ import http._
 import SHtml._ 
 import util._
 import scala.collection.mutable.ArrayBuffer
-import _root_.net.liftweb.common.{Box,Full,Empty}
+import net.liftweb.common.{Box,Full,Empty}
 import com.webshop.frontend.snippet._
 import com.webshop.frontend.restclient._
 
-class NonEmptyMappedString[T <: Mapper[T]](var owner: T, msg: String) extends MappedString(owner, 255) {
-	 override def validations = 
-		 valMinLen(1, msg) _ :: super.validations  
+case class AddressInfo(var address1: String, var address2: String, var city: String, var country: String, var postcode: String)
+case class ContactInfo(var name: String, var phone: String, var email: String)
+case class LineItemInfo(var item: String, var amount: String) {
+	def this(item:String, amount: Int) = this(item, amount.toString)
 }
- 
-class Order extends LongKeyedMapper[Order] with IdPK { 
- def getSingleton = Order 
- 
- object address1 extends NonEmptyMappedString(this, "Address 1 cannot be empty")
- object address2 extends NonEmptyMappedString(this, "Address 2 cannot be empty")
- object city extends NonEmptyMappedString(this, "City cannot be empty")
- object postcode extends NonEmptyMappedString(this, "Postcode cannot be empty")
- object country extends NonEmptyMappedString(this, "Country cannot be empty")
- object phone extends NonEmptyMappedString(this, "Phone cannot be empty")
- 
- // order number, once it's been set to the ERP
- var number = ""
- 
- // order description
- var description = ""
- 
- // line items
- var items = new ArrayBuffer[ShoppingCart.ShoppingCartLineItem]
- 
- // order status
- var status = OrderStatusValues.NEW
- 
- // user
- var user = User.currentUserId openOr "nouser"
- 
- def setLineItems(newItems: ArrayBuffer[ShoppingCart.ShoppingCartLineItem]) = {
-   items = newItems 
- }
- 
- def addLineItems(newItems: ArrayBuffer[ShoppingCart.ShoppingCartLineItem]) = {
-   //items ++ newItems 
- }
- 
- def submit: Unit = Order.submit(this)
- 
- def getErrors: List[String] = List("Error number 1", "Error number 2", "Error number 3" )
+
+case class Order(var id: String, var description: String, var user: String, var status: String, var address: AddressInfo, var contact: ContactInfo, var items: List[LineItemInfo]) extends JsonSerializable { 
+	// constructor without parameters
+	def this() = {
+		this("", "", "", "",
+			 new AddressInfo("", "", "", "", ""), 
+			 new ContactInfo("", "", ""),
+			 List[LineItemInfo]())
+	}
+	
+	def submit: Unit = Order.submit(this)
 }
 
 /**
@@ -59,24 +34,20 @@ class Order extends LongKeyedMapper[Order] with IdPK {
 object OrderStatusValues {
   val NEW = "New"
   val PROCESSED = "Completed"
+  val CREATED = "Created"
 }
 
 /**
  * Companion of the Order class
  */
-object Order extends Order with LongKeyedMetaMapper[Order] {
+object Order {
   
-  def submit(order: Order): Order = {    
-    RestClient.Orders.create(this)
-
-    order.status = OrderStatusValues.PROCESSED
-    order.number = "123456789"    
-    
-    order
+  def submit(order: Order): Box[Order] = {    
+    RestClient.Orders.create(order)
   }
   
-  def get(orderId: Int): Box[Order] = {
-    None
+  def get(orderId: String): Box[Order] = {
+    RestClient.Orders.get(orderId)
   }
   
   def getAll(): Box[List[Order]] = {
