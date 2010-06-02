@@ -37,7 +37,7 @@ class OrderData {
 		  Log.debug("address2: " + order.address.address2)
     
 		  //order.setLineItems(ShoppingCart.getItems)
-		  //order.items = ShoppingCart.getItemsForOrder
+		  order.items = ShoppingCart.getItemsForOrder
 		  order.submit 
     
 		  order.status match {
@@ -63,24 +63,15 @@ class OrderData {
 	    }*/
 	 	submitOrder
 	  }
-   
-	  /*bind("data", xhtml,
-        "address1" -> order.address1.toForm,
-        "address2" -> order.address2.toForm,
-        "city" -> order.city.toForm,
-        "postcode" -> order.postcode.toForm,
-        "country" -> order.country.toForm,
-        "phone" -> order.phone.toForm,
-        "submit" -> SHtml.submit("Checkout", validateAndSubmit))*/
         
       bind("data", xhtml,
-        "address1" -> order.address.address1,
-        "address2" -> order.address.address2,
-        "city" -> order.address.city,
-        "postcode" -> order.address.postcode,
-        "country" -> order.address.country,
-        "phone" -> order.contact.phone,
-        "email" -> order.contact.email,
+        "address1" -> SHtml.text(order.address.address1, order.address.address1 = _),
+        "address2" -> SHtml.text(order.address.address2, order.address.address2 = _),
+        "city" -> SHtml.text(order.address.city, order.address.city = _),
+        "postcode" -> SHtml.text(order.address.postcode, order.address.postcode = _),
+        "country" -> SHtml.text(order.address.country, order.address.country = _),
+        "phone" -> SHtml.text(order.contact.phone, order.contact.phone = _),
+        "email" -> SHtml.text(order.contact.email, order.contact.email = _),
         "submit" -> SHtml.submit("Checkout", validateAndSubmit))  
 	}
 }
