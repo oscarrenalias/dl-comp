@@ -24,7 +24,7 @@ object ShoppingCart extends SessionVar {
   
   def getItems: ArrayBuffer[ShoppingCartLineItem] = items
   
-  def getItemsForOrder: List[LineItemInfo] = items.flatMap({x=>List(new LineItemInfo(x._2.id, x._1))}).toList
+  def getItemsForOrder: List[LineItemInfo] = items.flatMap({x=>List(LineItemInfo(x._2.id, x._1))}).toList
   
   def dumpCartData = {
     Log.debug("Items in cart " + items.size)

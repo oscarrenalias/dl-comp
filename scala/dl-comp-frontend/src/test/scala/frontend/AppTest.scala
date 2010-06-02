@@ -31,7 +31,7 @@ class JsonTests extends TestCase("json") {
 		import com.webshop.frontend.model.Order
 		
 		val expected = """{"items":[],"contact":{"email":"","phone":"","name":""},"address":{"postcode":"","country":"","city":"","address2":"","address1":""},"status":"","user":"","description":"","id":""}"""
-		val o = new Order
+		val o = Order()
 		assertEquals(expected, o.toJson)
 	}
 }

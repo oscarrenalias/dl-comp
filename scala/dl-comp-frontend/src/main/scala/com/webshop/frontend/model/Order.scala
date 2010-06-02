@@ -12,19 +12,13 @@ import com.webshop.frontend.restclient._
 
 case class AddressInfo(var address1: String, var address2: String, var city: String, var country: String, var postcode: String)
 case class ContactInfo(var name: String, var phone: String, var email: String)
-case class LineItemInfo(var item: String, var amount: String) {
-	def this(item:String, amount: Int) = this(item, amount.toString)
+case class LineItemInfo(var item: String, var amount: String) 
+object LineItemInfo {
+	def apply(item:String, amount: Int) = new LineItemInfo(item, amount.toString)
 }
 
-case class Order(var id: String, var description: String, var user: String, var status: String, var address: AddressInfo, var contact: ContactInfo, var items: List[LineItemInfo]) extends JsonSerializable { 
-	// constructor without parameters
-	/*def this() = {
-		this("", "", "", "",
-			 new AddressInfo("", "", "", "", ""), 
-			 new ContactInfo("", "", ""),
-			 List[LineItemInfo]())
-	}*/
-	
+case class Order(var id: String, var description: String, var user: String, var status: String, var address: AddressInfo, var contact: ContactInfo, var items: List[LineItemInfo]) extends JsonSerializable { 	
+
 	def submit: Box[Order] = {
 		val result = Order.submit(this)
 		result match {
@@ -33,7 +27,7 @@ case class Order(var id: String, var description: String, var user: String, var 
     			id = x.id
     			status = x.status    			
     		}
-    		case Failure(msg,x,y) => status = OrderStatusValues.ERROR
+    		case Failure(msg,x,y) => status = Order.Status.ERROR
 		}
 		// we return the new order so that Failure messages are passed up to the UI
 		result
@@ -59,19 +53,16 @@ case class Order(var id: String, var description: String, var user: String, var 
 }
 
 /**
- * Constants with order status strings
- */
-object OrderStatusValues {
-  val NEW = "New"
-  val PROCESSED = "Completed"
-  val CREATED = "Created"
-  val ERROR = "Error"
-}
-
-/**
  * Companion of the Order class
  */
 object Order {
+	
+	object Status {
+	  val NEW = "New"
+	  val PROCESSED = "Completed"
+	  val CREATED = "Created"
+	  val ERROR = "Error"		
+	}
 		
 	def apply() = {
 		new Order("", "", "", "",
