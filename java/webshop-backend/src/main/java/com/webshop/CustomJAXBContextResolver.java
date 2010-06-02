@@ -9,6 +9,7 @@ import com.sun.jersey.api.json.JSONJAXBContext;
 import com.webshop.item.ItemBean;
 import com.webshop.order.OrderBean;
 import com.webshop.order.OrderItemBean;
+import com.webshop.order.OrderList;
 
 /**
  * Custom JAXB context resolver that enables the "natural" json generator. The
@@ -20,7 +21,7 @@ import com.webshop.order.OrderItemBean;
 public class CustomJAXBContextResolver implements ContextResolver<JAXBContext> {
 
     private JAXBContext context;
-    private Class[] types = {OrderBean.class, OrderItemBean.class, ItemBean.class};
+    private Class[] types = {OrderBean.class, OrderItemBean.class, ItemBean.class, OrderList.class};
 
     public CustomJAXBContextResolver() throws Exception {
         this.context = new JSONJAXBContext(JSONConfiguration.natural().build(), types);

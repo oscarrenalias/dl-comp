@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * the list of orders, otherwise responses would be plain arrays
  */
 @XmlRootElement(name="Orders")	
-class OrderList {
+public class OrderList {
 	
 	public ArrayList<OrderBean> orders = new ArrayList<OrderBean>();
 		
