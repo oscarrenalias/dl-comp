@@ -56,24 +56,29 @@ public class OrderManager {
     		item.setData(ItemManager.getInstance().getItem("1"), 5);
     		order.items.add(item);
     		// add line items
-    		OrderItemBean item2 = new OrderItemBean();
-    		item2.setData(ItemManager.getInstance().getItem("1"), 15);
-    		order.items.add(item2);    		
+			if(i % 2 == 0) {
+	    		OrderItemBean item2 = new OrderItemBean();
+	    		item2.setData(ItemManager.getInstance().getItem("1"), 15);
+	    		order.items.add(item2);    		
+			}
     		
     		// add the order to the global list    		
-    		addOrder(order);
+    		addOrderWithId(order);
     		System.out.println("order id: " + order.id);
     	}
     }
 
-	public synchronized OrderBean addOrder(OrderBean order) {
-		order.id = generateOrderId();
-		
+	public synchronized OrderBean addOrderWithId(OrderBean order) {		
 		// save the status
 		order.status = ORDER_STATUS_CREATED;
 		orders.put(order.id, order);
 		
-		return(order);
+		return(order);		
+	}
+
+	public synchronized OrderBean addOrder(OrderBean order) {
+		order.id = generateOrderId();
+		return(addOrderWithId(order));
 	}
 	
 	public synchronized OrderBean updateOrder(OrderBean order) {
