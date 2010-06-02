@@ -3,18 +3,23 @@ package com.webshop.order;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import java.util.ArrayList;
 
-
-// The Java class will be hosted at the URI path "/myresource"
 @Path("/orders")
 public class OrdersResource {
 
-    @GET 
+	/**
+	 * Retrieves all the users of a given user
+	 * @param user
+	 * @return
+	 */
+    @GET
     @Produces("application/json")
-    public ArrayList<OrderBean> getOrders() {
-    	return(OrderManager.getInstance().getOrders());
+    @Path("/user/{user}")
+    public ArrayList<OrderBean> getUserOrders(@PathParam("user") String user) {
+    	return(OrderManager.getInstance().getUserOrders(user));
     }
 }

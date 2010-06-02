@@ -28,10 +28,8 @@ public class CustomJAXBContextResolver implements ContextResolver<JAXBContext> {
 
     public JAXBContext getContext(Class<?> objectType) {
     	for(Class c : types) {
-    		if(c.equals(objectType)) {
-    			System.out.println("Class found:" + objectType);
+    		if(c.equals(objectType))
     			return(context);
-    		}
     	}
     	return(null);
     }

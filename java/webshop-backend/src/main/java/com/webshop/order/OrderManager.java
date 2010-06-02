@@ -37,8 +37,8 @@ public class OrderManager {
     		OrderBean order = new OrderBean();
     		order.id = new Integer(i).toString();
     		order.status = "Processed";
-    		order.description = "Description of order " + order.id;
-    		order.user = "user@user.com";
+    		order.description = "Description of order " + order.id;    		
+    		if(i % 2 == 0) order.user = "user@user.com"; else order.user = "user2@user2.com";
     		AddressInfo address = new AddressInfo();
     		address.address1 = "Address 1";
     		address.address2 = "Address 2";
@@ -106,5 +106,19 @@ public class OrderManager {
 	
 	public ArrayList<OrderBean> getOrders() {
 		return new ArrayList<OrderBean>();
+	}
+	
+	/**
+	 * Returns all the orders that belong to the given user
+	 * @param user
+	 * @return
+	 */
+	public ArrayList<OrderBean> getUserOrders(String user) {
+		ArrayList<OrderBean> userOrders = new ArrayList<OrderBean>();
+		for(OrderBean o : orders.values()) {
+			if(o.user.equals(user))
+				userOrders.add(o);
+		}
+		return(userOrders);
 	}
 }
