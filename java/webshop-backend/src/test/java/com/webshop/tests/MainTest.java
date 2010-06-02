@@ -55,7 +55,7 @@ public class MainTest extends TestCase {
     	order.description = "Test order";
     	order.user = "test@user.com";
     	OrderItemBean item1 = new OrderItemBean();
-    	item1.item = ItemManager.getInstance().getItem("1");
+    	item1.item = ItemManager.getInstance().getItem("1").id;
     	item1.amount = 10;
     	order.items.add(item1);
     	
