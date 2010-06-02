@@ -30,7 +30,9 @@ class OrderData {
 	  def submitOrder() = {
     
 		  order.items = ShoppingCart.getItemsForOrder
-		  order.user = User.currentUserId.openOr("nouser")
+		
+		  // set the current user
+		  if (User.loggedIn_?) order.user = User.currentUser.get.email; else "nouser"
     
 		  order.submit match {
 		 	  case Full(o) => {
