@@ -6,11 +6,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import java.util.ArrayList;
-
 @Path("/orders")
 public class OrdersResource {
-
+	
 	/**
 	 * Retrieves all the users of a given user
 	 * @param user
@@ -19,7 +17,9 @@ public class OrdersResource {
     @GET
     @Produces("application/json")
     @Path("/user/{user}")
-    public ArrayList<OrderBean> getUserOrders(@PathParam("user") String user) {
-    	return(OrderManager.getInstance().getUserOrders(user));
+    public OrderList getUserOrders(@PathParam("user") String user) {    	
+    	OrderList l = new OrderList();
+    	l.setOrders(OrderManager.getInstance().getUserOrders(user));    	
+    	return(l);
     }
 }

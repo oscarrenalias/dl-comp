@@ -76,5 +76,15 @@ object RestClient {
     	  case e:Exception => Failure(e.getMessage, Full(e), Empty)
     	}
     }
+
+	def getUserOrders(user: String): Box[OrderList] = {
+    	try {
+    		var response:String = doGet(config.URI.USER_ORDERS + "/" + user).getEntity(classOf[String])
+    		Log.debug("Order json = " + response)
+    		Full(parse(response).extract[OrderList])
+    	} catch {
+    		case e:Exception => Failure(e.getMessage, Full(e), Empty)
+    	}		
+	}
   }
 }

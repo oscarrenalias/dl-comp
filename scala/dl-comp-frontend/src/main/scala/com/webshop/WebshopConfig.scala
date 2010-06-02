@@ -7,6 +7,7 @@ object WebshopConfig {
     val ITEM = "item"
     val CATALOG = "catalog"
     val ORDERS = "orders"
+	val USER_ORDERS = ORDERS + "/user"
     val ORDER = "order"
   }
   

@@ -83,3 +83,8 @@ object Order {
     Empty
   }
 }
+
+/**
+ * Case class for deserializing responses containing a ilst of orders
+ */
+case class OrderList(var orders: List[Order])
