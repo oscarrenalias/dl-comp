@@ -11,7 +11,6 @@ import net.liftweb.http.js._
 import com.webshop.frontend.model.ShoppingCart
 import com.webshop.frontend.model.{Item => ModelItem,Catalog => ModelCatalog,CatalogCategory,RootCatalogCategory}
 
-object currentItem extends RequestVar[Box[ModelItem]](Empty)
 object currentCategory extends RequestVar[Box[CatalogCategory]](Empty)
 
 class Catalog {
@@ -47,7 +46,7 @@ class Catalog {
 	 * Provides a link to the root of the catalog
 	 */
 	def root: NodeSeq = {
-		SHtml.link("/browse", () => currentCategory(Empty), Text("Start"))
+		SHtml.link("/browse", () => currentCategory(Empty), Text(RootCatalogCategory.name))
 	}
 	
 	/**
@@ -90,90 +89,45 @@ class Catalog {
 	 */
 	def items(xhtml:NodeSeq): NodeSeq = {	   
 	  val category = currentCategory openOr RootCatalogCategory
+	
 	  ModelCatalog.getItems(category.id) match {
 	    case None => {
 	      Text("Items not found")
 	      NodeSeq.Empty
 	    }
         case Some(i) => {
-          /** 
-              TODO: this is the same information that ItemInfo.show is showing - how can we have the same
-              code for both? Recursive/embedded snippet? 
-           **/
         	i.flatMap( row =>
 			  bind( "item", xhtml, 
 					"id" -> row.id, 
-					"name" -> SHtml.link("/item", () => currentItem(Full(row)), Text(row.name)),
+					"name" -> row.name,
+					"link" -%> SHtml.link("/item", () => currentItem(Full(row)), Text("Details")),
 					"description" -> row.description,
-					"image" -> <img src={row.getImage(0)} alt="Image" />,
-					"thumbnail" -> <img src={row.getThumbnail(0)} alt="Thumbnail" />,		
+					"image" -%> <img src={row.getImage(0)} />,
+					"thumbnail" -%> <img src={row.getThumbnail(0)} />,
+					"currency" -> row.currency,
+					"add_to_cart" -%> SHtml.link("/item", () => currentItem(Full(row)), Text("Add to Cart")),
 					"price" -> row.price.toString )
 			)          
         }
       }
 	}
-}
+	
+	def categories(xhtml: NodeSeq): NodeSeq = {
+		var catId = S.attr("level") openOr "0"
+		catId match {
+			case "current" => {
+				val category = currentCategory openOr RootCatalogCategory
+				catId = category.id.toString
+			}
+		}
 
-class ItemInfo {
-  
-  def show(xhtml: NodeSeq): NodeSeq = {        
-    
-    var amount = "1";    
-    
-    def showItemData(item: ModelItem): NodeSeq = {      
-            
-      def addToCart(): JsCmd = {
-          ShoppingCart.addItem(amount.toInt, item)          
-          JqSetHtml("shopping-cart", <lift:embed what="/templates-hidden/cart-data.html" />)          
-      }
-      
-      SHtml.ajaxForm(bind( "item", xhtml, 
-			"id" -> item.id, 
-			"name" -> item.name, 
-			"description" -> item.description,
-			"price" -> item.price,
-      		"amountToCart" -> SHtml.text(amount, amount = _),
-			"image" -> item.getImage(0),
-			"thumbnail" -> item.getThumbnail(0),
-      		"addToCart" -> SHtml.submit("Add to cart", addToCart )
-        ) ++ SHtml.hidden(addToCart))
-    }    
-    
-    currentItem.is match {
-      case Full(item) => showItemData(item)
-      case _ =>  { Text("Item not found")
-                   NodeSeq.Empty }
-    }
-  }
-  
-  def images(xhtml:NodeSeq): NodeSeq = {
-	 currentItem.is match {
-	   case Full(item) => {
-	     item.getImages.flatMap( image =>
-	       bind("image", xhtml, "url" -> <img class="item-image" src={image} alt="Image" /> )
-         )
-	   }
-	   case _ => NodeSeq.Empty 
-	 }		  
-  }
-  
-  def thumbnails(xhtml:NodeSeq): NodeSeq = {
-    val mode = S.attr("mode") openOr "default"
-	 
-    currentItem.is match {
-	   case Full(item) => {
-	     if( mode == "withLinks" ) {
-	    	 item.images.flatMap( image =>
-	    	 bind("thumbnail", xhtml, "url" -> <a href={image.large} class="image-thumbnail-link"><img class="item-thumbnail" data-large={image.large} src={image.small} alt="Image" /></a> )
-	    	 )       
-	     }
-	     else {
-	    	 item.images.flatMap( image =>
-	    	 bind("thumbnail", xhtml, "url" -> <img class="item-thumbnail" data-large={image.large} src={image.small} alt="Image" /> )
-	    	 )	       
-	     } 	     
-	   }
-	   case _ => NodeSeq.Empty 
-	 }
-  }
+		val cats = ModelCatalog.getCategories(catId.toInt)
+		cats.values.toList.sort({(a,b) => a.name < b.name}).flatMap(cat => 
+			bind("category", xhtml,
+			"id" -> cat.id,
+			"description" -> cat.description,
+			"name" -> cat.name,
+			"itemcount" -> cat.numProducts,
+			"link" -%> SHtml.link("/browse", () => currentCategory(Full(cat)), Text(cat.name))))
+	}
 }

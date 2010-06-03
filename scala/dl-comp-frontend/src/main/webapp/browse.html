@@ -1,32 +1,11 @@
 <lift:surround with="default" at="content">
-	<!--h2>Navigation</h2> 	
-	<lift:Catalog.history>
-		<category:name/> /
-	</lift:Catalog.history -->
-	
-	<h2>Navigation:</h2>
-	<lift:Catalog.root/> / <lift:Catalog.breadcrumbs />
-	
 	<lift:Catalog.category>
-		<category:link/>
+		<h2><category:link/></h2>
 	</lift:Catalog.category>	
-	<h2>Subcategories</h2>
-	<ul>
-		<lift:Catalog.list>
-			<li><category:name /></li>
-		</lift:Catalog.list>
-	</ul>
-	<h2>Items in this category</h2>
-	<table>
-		<tbody>		
-		<lift:Catalog.items>
-			<tr>
-				<td width="20%"><item:thumbnail /></td>
-				<td width="70%"><item:name /></td>
-				<td width="10%"><item:price /></td>				
-			</tr>
+		<!-- eager_eval is needed here so that Catalog.items is passed the results of
+		 	embedding the page, not the <lift:embed .../> code -->
+		<lift:Catalog.items eager_eval="true">
+			<lift:embed what="/templates-hidden/item-data.html" />		
 		</lift:Catalog.items>				
-		</tbody>
-	</table>
 </lift:surround>
 

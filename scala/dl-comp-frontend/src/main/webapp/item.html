@@ -1,26 +1,34 @@
 <lift:surround with="default" at="content">
-		<div id="cart-message"></div>
-		<lift:ItemInfo.show form="post">
-			<div id="item-thumbnails">
-				<lift:ItemInfo.thumbnails mode="withLinks">
-					<thumbnail:url />				
-				</lift:ItemInfo.thumbnails>
-			</div>
-			<div id="item-data-wrapper">
-				<li id="item-data">
-					<li>Item number: <item:id /></li>
-					<li>Description: <item:name /></li>
-					<li>Long description: <item:description /></li>
-					<li>Price: <item:price /></li>
-				</li>
-				<lift:Login.loggedIn>			  
-			  		<item:amountToCart /><item:addToCart />			 
-				</lift:Login.loggedIn>
-			</div>
-			<lift:Login.loggedOut>
-				<div id="please-log-in">
-			  		Please log in to add items to your shopping cart.
-			  	</div>
-			</lift:Login.loggedOut>
-		</lift:ItemInfo.show>		
+<lift:Item.info form="post">
+<div id="cart-message"></div>
+<div class="center_title_bar"><item:name/></div>
+	<div class="prod_box_big">
+        <div class="center_prod_box_big">                         
+             <div class="product_img_big">
+             <div class="thumbs">
+				<lift:Item.thumbnails mode="withLinks">
+					<thumbnail:url />
+				</lift:Item.thumbnails>
+             </div>
+             </div>
+                 <div class="details_big_box">
+                     <div class="product_title_big"><item:name/></div>
+                     <div class="specifications">
+                        Description :<span class="blue"><item:description /></span><br />
+                     </div>
+                     <div class="prod_price_big">
+						<span class="price"><item:price /><item:currency /></span>
+					</div>
+					 <lift:Login.loggedIn>
+				  		<item:amountToCart /><item:addToCart />
+					 </lift:Login.loggedIn>
+					<lift:Login.loggedOut>
+						<div id="please-log-in">
+					  		Please log in to add items to your shopping cart.
+					  	</div>
+					</lift:Login.loggedOut>
+                 </div>                        
+        </div>                          
+    </div>
+</lift:Item.info>
 </lift:surround>
