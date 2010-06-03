@@ -60,20 +60,19 @@
 	      <!-- account links -->
 	      <div class="title_box">My Account</div>
 	      <div class="border_box">  	
-	      <ul>
-			<lift:Menu.group a:class="nav" li:class="nav" ul:class="menu" group="user-operations">
+			<ul>
+			<lift:Menu.group group="user-operations">
 				<li><menu:bind /></li>
-				<li class="divider"></li>
 			</lift:Menu.group>
-			<lift:Menu.Item name="login" />
-	      </ul>
+			</ul>
 	      </div>
 	    
 	      <!-- search box area -->
 	      <div class="title_box">Search</div>
 	      <div class="border_box">
 	        <input type="text" name="newsletter" class="newsletter_input" value="keyword"/>
-	        <a href="/index" class="join">search</a> </div>
+	        <a href="/index" class="join">search</a> 
+		  </div>
 	        
 	      <!-- shopping cart area -->
 	      <div class="shopping_cart">
