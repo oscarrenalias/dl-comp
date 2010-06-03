@@ -32,4 +32,7 @@ object ShoppingCart extends SessionVar {
   }  
   
   def empty = items.clear
+  
+  def isEmpty = (items.length == 0)
+  def hasItems = (items.length > 0)
 }

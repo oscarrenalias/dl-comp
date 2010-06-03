@@ -51,11 +51,14 @@ object MenuInfo {
     
   import Loc._
   val IfLoggedIn = If(() => User.currentUser.isDefined, "You must be logged in")
-  def menu: List[Menu] =  Menu(Loc("Home", List("index"), "Home")) :: 
-    Menu(Loc("Catalog", List("browse"), "Item catalog")) ::
+  val CartHasItems = If(() => ShoppingCart.hasItems, "Nothing to check out")
+  
+  def menu: List[Menu] =  
+	Menu(Loc("Home", List("index"), "Home", LocGroup("top-level"))) :: 
+    Menu(Loc("Catalog", List("browse"), "Item catalog", LocGroup("top-level"))) ::
     Menu(Loc("Checkout", List("checkout"), "Checkout", IfLoggedIn)) ::
-    Menu(Loc("Item Details", List("item"), "Item details")) ::
-    Menu(Loc("help", List("help", "index"), "Help")) ::
+    Menu(Loc("Item Details", List("item"), "Item details", LocGroup("top-level"))) ::
+    Menu(Loc("contact", List("contact", "index"), "contact", LocGroup("top-level"))) ::
     User.sitemap
 }
 

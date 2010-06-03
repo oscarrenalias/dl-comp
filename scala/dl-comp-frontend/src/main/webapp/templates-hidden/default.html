@@ -1,48 +1,127 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		<title>Scala Webshop</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
-		<title>Scala Webshop</title>
+		<link rel="stylesheet" type="text/css" href="/css/style.css" />
+		<!--[if IE 6]>
+		<link rel="stylesheet" type="text/css" href="/css/iecss.css" />
+		<![endif]-->
+		<script type="text/javascript" src="/js/boxOver.js"></script>
     	<lift:CSS.blueprint />
     	<lift:CSS.fancyType />
     	<script id="jquery" src="/classpath/jquery.js" type="text/javascript"/>
-    	<script id="json" src="/classpath/json.js" type="text/javascript"/>
-    	<link href="/css/style.css" type="text/css" media="screen" rel="stylesheet" />
+    	<script id="json" src="/classpath/json.js" type="text/javascript"/>		
 	</head>
-	<body>
-		<div id="header">
-			<h1>
-				header
-			</h1>
-			<h2>
-				Navigation
-			</h2>
-		</div>
-		<div id="content">
+<body>
+	<div id="main_container">
+	  <div id="header">
+	    <div class="top_right">
+	      <div class="big_banner"> 
+	      	<!-- a href="http://www.free-css.com/"><img src="/images/banner728.jpg" alt="" border="0" /></a --> 
+	      </div>
+	    </div>
+	    <div id="logo"> 
+	    	<a href="/index"><img src="/images/logo.png" alt="" border="0" width="336" height="129" /></a>
+	    </div>
+	  </div>
+	  <div id="main_content">
+	    <div id="menu_tab">
+	      <ul class="menu">
+			<lift:Menu.group a:class="nav" li:class="nav" ul:class="menu" group="top-level">
+				<li><menu:bind /></li>
+				<li class="divider"></li>
+			</lift:Menu.group>
+		  </ul>
+	    </div>
+	    <!-- end of menu tab -->
+	    <div class="crumb_navigation"> Navigation: <span class="current">Home</span> </div>
+	    <div class="left_content">
+	      <div class="title_box">Categories</div>
+	      <ul class="left_menu">
+	        <li class="odd"><a href="/index">Category 1</a></li>
+	        <li class="even"><a href="/index">Category 2</a></li>
+	        <li class="odd"><a href="/index">Category 3</a></li>
+	        <li class="even"><a href="/index">Category 4</a></li>
+	        <li class="odd"><a href="/index">Category 5</a></li>
+	        <li class="even"><a href="/index">Category 6</a></li>
+	        <li class="odd"><a href="/index">Category 7</a></li>
+	        <li class="even"><a href="/index">Category 8</a></li>
+	        <li class="odd"><a href="/index">Category 9</a></li>
+	        <li class="even"><a href="/index">Category 10</a></li>
+	        <li class="odd"><a href="/index">Category 11</a></li>
+	        <li class="even"><a href="/index">Category 12</a></li>
+	      </ul>
+	      <div class="title_box">Special Products</div>
+	      <div class="border_box">
+	        <div class="product_title"><a href="http://www.free-css.com/">Makita 156 MX-VL</a></div>
+	        <div class="product_img"><a href="http://www.free-css.com/"><img src="/images/p1.jpg" alt="" border="0" /></a></div>
+	        <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
+	      </div>
+	      <div class="title_box">Newsletter</div>
+	      <div class="border_box">
+	        <input type="text" name="newsletter" class="newsletter_input" value="your email"/>
+	        <a href="http://www.free-css.com/" class="join">subscribe</a> </div>
+	      <div class="banner_adds"> <a href="http://www.free-css.com/"><img src="/images/bann2.jpg" alt="" border="0" /></a> </div>
+	    </div>
+	    <!-- end of left content -->
+		<div class="center_content">
 			<lift:snippet type="msgs"/>
-			<lift:bind name="content" />				
+			<lift:bind name="content" />		
 		</div>
-		<div id="menu">
-			<h1>
-				Menu
-			</h1>
-			<lift:Menu.builder />
-		</div>
-		<div id="sub-section">
-			<p>  				
-  				<lift:Login.loggedIn> 
-  					<div id="shopping-cart">
-						<lift:embed what="/templates-hidden/cart-data.html" />
-  					</div>
-  				</lift:Login.loggedIn>  				
-			</p>
-		</div>
-		<div id="footer">
-			<h1>
-				footer
-			</h1>
-		</div>
-	</body>
+	   <!-- end of center content -->
+	    <div class="right_content">
+	      <!-- account links -->
+	      <div class="title_box">My Account</div>
+	      <div class="border_box">  	
+	      <ul>
+			<lift:Menu.group a:class="nav" li:class="nav" ul:class="menu" group="user-operations">
+				<li><menu:bind /></li>
+				<li class="divider"></li>
+			</lift:Menu.group>
+			<lift:Menu.Item name="Login" />
+	      </ul>
+	      </div>
+	    
+	      <!-- search box area -->
+	      <div class="title_box">Search</div>
+	      <div class="border_box">
+	        <input type="text" name="newsletter" class="newsletter_input" value="keyword"/>
+	        <a href="/index" class="join">search</a> </div>
+	        
+	      <!-- shopping cart area -->
+	      <div class="shopping_cart">
+	      	<div class="title_box">Shopping cart</div>
+      		<lift:Login.loggedIn> 
+      			<lift:embed what="/templates-hidden/cart-data.html" />
+			</lift:Login.loggedIn> 	      
+		  </div>
+		  
+		  <!--  what's new area -->
+	      <div class="title_box">What’s new</div>
+	      <div class="border_box">
+	        <div class="product_title"><a href="/index">Motorola 156 MX-VL</a></div>
+	        <div class="product_img"><a href="/index"><img src="/images/p2.jpg" alt="" border="0" /></a></div>
+	        <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
+	      </div>
+	      
+	      <div class="banner_adds"> 
+	      	Banner Ad 
+	      </div>
+	    </div>
+	    <!-- end of right content -->
+	  </div>
+	  <!-- end of main content -->
+	<div class="footer">
+    	<div class="left_footer"> <img src="/images/footer_logo.png" alt="" width="89" height="42"/> </div>
+	    <div class="center_footer"> Template name. All Rights Reserved 2008<br />
+      		<a href="http://csscreme.com"><img src="/images/csscreme.jpg" alt="csscreme" title="csscreme" border="0" /></a><br />
+      		<img src="/images/payment.gif" alt="" /> </div>
+    		<div class="right_footer"> <a href="http://www.free-css.com/">home</a> <a href="http://www.free-css.com/">about</a> <a href="http://www.free-css.com/">sitemap</a> <a href="http://www.free-css.com/">rss</a> <a href="http://www.free-css.com/">contact us</a> </div>
+  		</div>
+	</div>
+<!-- end of main_container -->
+</body>
 </html>

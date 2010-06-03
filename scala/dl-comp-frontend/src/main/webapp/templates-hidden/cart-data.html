@@ -1,5 +1,16 @@
-<ul>
-	<lift:ShoppingCartData.list>  													
-		<li><item:amount/> <item:description /> <item:remove /></li>						
-	</lift:ShoppingCartData.list>
-</ul>
+<div class="cart_details" id="shopping-cart">
+	X items <br />
+	<ul>
+		<lift:ShoppingCartData.list>  													
+			<li><item:amount/> <item:description /> <item:remove /></li>						
+		</lift:ShoppingCartData.list>
+	</ul>
+	<lift:Menu.item name="Checkout" />
+	<span class="border_cart"></span> Total: <span class="price">X EUR</span>
+	<div class="cart_icon">
+		<a href="/index"><img src="images/shoppingcart.png" alt="" width="35" height="35" border="0" /></a>
+	</div>
+</div>
+
+	        
+	          
