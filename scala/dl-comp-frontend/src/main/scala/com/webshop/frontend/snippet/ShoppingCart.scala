@@ -26,5 +26,9 @@ class ShoppingCartData {
 					SetHtml("shopping-cart", <lift:embed what="/templates-hidden/cart-data.html" />)}, Text("Remove"))
 			)
     	)
-  }  
+  }
+
+  	def totalPrice: NodeSeq = {
+		Text(ShoppingCart.totalPrice + "EUR")
+	}
 }

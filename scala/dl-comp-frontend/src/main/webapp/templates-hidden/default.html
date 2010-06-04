@@ -60,9 +60,9 @@
 	      <!-- account links -->
 	      <div class="title_box">My Account</div>
 	      <div class="border_box">  	
-			<ul>
+			<ul class="left_menu" style="text-align:left">
 			<lift:Menu.group group="user-operations">
-				<li><menu:bind /></li>
+				<li class="odd"><menu:bind /></li>
 			</lift:Menu.group>
 			</ul>
 	      </div>
@@ -77,9 +77,11 @@
 	      <!-- shopping cart area -->
 	      <div class="shopping_cart">
 	      	<div class="title_box">Shopping cart</div>
+			<div class="cart_details" id="shopping-cart">
       		<lift:Login.loggedIn> 
       			<lift:embed what="/templates-hidden/cart-data.html" />
 			</lift:Login.loggedIn> 	      
+			</div>			
 		  </div>
 		  
 		  <!--  what's new area -->
