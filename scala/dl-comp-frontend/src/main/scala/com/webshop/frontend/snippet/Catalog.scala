@@ -9,7 +9,7 @@ import net.liftweb.http.js.jquery.JqJsCmds._
 import net.liftweb.http.js.JE.JsRaw
 import net.liftweb.http.js._
 import com.webshop.frontend.model.ShoppingCart
-import com.webshop.frontend.model.{Item => ModelItem,Catalog => ModelCatalog,CatalogCategory,RootCatalogCategory}
+import com.webshop.frontend.model.{Item => ModelItem,Catalog => ModelCatalog,CatalogCategory,RootCatalogCategory,User}
 
 object currentCategory extends RequestVar[Box[CatalogCategory]](Empty)
 
@@ -90,24 +90,40 @@ class Catalog {
 	def items(xhtml:NodeSeq): NodeSeq = {	   
 	  val category = currentCategory openOr RootCatalogCategory
 	
+      def addToCart(item:ModelItem): JsCmd = {
+       		ShoppingCart.addItem(1, item)          
+       		JqSetHtml("shopping-cart", <lift:embed what="/templates-hidden/cart-data.html" />)
+      }	
+	
 	  ModelCatalog.getItems(category.id) match {
 	    case None => {
 	      Text("Items not found")
 	      NodeSeq.Empty
 	    }
         case Some(i) => {
-        	i.flatMap( row =>
+			// TODO: this can probably be optimized a bit
+			if(User.loggedIn_?) i.flatMap( row =>
 			  bind( "item", xhtml, 
 					"id" -> row.id, 
 					"name" -> row.name,
 					"link" -%> SHtml.link("/item", () => currentItem(Full(row)), Text("Details")),
+					"add_to_cart" -%> SHtml.a(() => addToCart(row), Text("Add to Cart")),
 					"description" -> row.description,
 					"image" -%> <img src={row.getImage(0)} />,
 					"thumbnail" -%> <img src={row.getThumbnail(0)} />,
 					"currency" -> row.currency,
-					"add_to_cart" -%> SHtml.link("/item", () => currentItem(Full(row)), Text("Add to Cart")),
-					"price" -> row.price.toString )
-			)          
+					"price" -> row.price.toString ))
+			else i.flatMap( row =>
+			  bind( "item", xhtml, 
+					"id" -> row.id, 
+					"name" -> row.name,
+					"link" -%> SHtml.link("/item", () => currentItem(Full(row)), Text("Details")),
+					"add_to_cart" -> <span></span>,
+					"description" -> row.description,
+					"image" -%> <img src={row.getImage(0)} />,
+					"thumbnail" -%> <img src={row.getThumbnail(0)} />,
+					"currency" -> row.currency,
+					"price" -> row.price.toString ))			
         }
       }
 	}
@@ -122,12 +138,13 @@ class Catalog {
 		}
 
 		val cats = ModelCatalog.getCategories(catId.toInt)
-		cats.values.toList.sort({(a,b) => a.name < b.name}).flatMap(cat => 
+		if(cats.size > 0) cats.values.toList.sort({(a,b) => a.name < b.name}).flatMap(cat => 
 			bind("category", xhtml,
 			"id" -> cat.id,
 			"description" -> cat.description,
 			"name" -> cat.name,
 			"itemcount" -> cat.numProducts,
 			"link" -%> SHtml.link("/browse", () => currentCategory(Full(cat)), Text(cat.name))))
+		else Text("No subcategories found")
 	}
 }

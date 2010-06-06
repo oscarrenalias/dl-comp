@@ -22,6 +22,12 @@ object User extends User with MetaMegaProtoUser[User] {
   // comment this line out to require email validations
   override def skipEmailValidation = true
 
+   override lazy val sitemap: List[Menu] =  
+   List(loginMenuLoc, logoutMenuLoc, myOrdersMenuLoc, createUserMenuLoc,  
+        lostPasswordMenuLoc, resetPasswordMenuLoc,  
+        editUserMenuLoc, changePasswordMenuLoc,  
+        ).flatten(a => a)
+
    override def loginMenuLoc: Box[Menu] = {  
      Full(Menu(Loc("Login", loginPath, S.??("login"),  
 				   LocGroup("user-operations"),
@@ -93,6 +99,11 @@ object User extends User with MetaMegaProtoUser[User] {
                  S.??("validate.user"), Hidden,  
                  Template(() => wrapIt(validateUser(snarfLastItem))),  
                  If(notLoggedIn_? _, S.??("logout.first")))))
+
+	def myOrdersMenuLoc: Box[Menu] =
+   Full(Menu(Loc("myorders", List("myorders"), S.??("My Orders"),  
+				   LocGroup("user-operations"),  
+                 testLogginIn)))	
 }
 
 /**
