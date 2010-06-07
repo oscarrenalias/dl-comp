@@ -15,7 +15,7 @@ object Catalog {
      8 -> new CatalogCategory(2,"Category 4","Description of category 4",0,List("1", "2", "3")),
      9 -> new CatalogCategory(2,"Category 5","Description of category 5",0,List("1", "2", "3")),
      10 -> new CatalogCategory(2,"Category 6","Description of category 6",0,List("1", "2", "3")),
-     11 -> new CatalogCategory(2,"Category 7","Description of category 7",0,List("1", "2", "3")),	
+     11 -> new CatalogCategory(2,"Category 7","Description of category 7",0,List("1", "2", "3"))
    )
    
    def getLevel(level: Int) = data.filter(c => c._2.parent == level)

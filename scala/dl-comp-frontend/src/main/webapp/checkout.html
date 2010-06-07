@@ -1,23 +1,23 @@
 <lift:surround with="default" at="content">
-<lift:OrderData.checkoutNotOk>
-<div id="checkout">
- <lift:OrderData.add form="post">
- 	<table>
- 	<tr><td>Address Information</td></tr>
- 	<tr><td>Address 1:</td><td><data:address1 /></td></tr>
- 	<tr><td>Address 2:</td><td><data:address2 /></td></tr>
- 	<tr><td>City:</td><td><data:city /></td></tr>
- 	<tr><td>Postcode:</td><td><data:postcode /></td></tr>
- 	<tr><td>Country:</td><td><data:country /></td></tr>
- 	<tr><td>Contact Information</td></tr>
- 	<tr><td>Phone:</td><td><data:phone /></td></tr>
- 	<tr><td>Email:</td><td><data:email /></td></tr>
- 	<tr><td><data:submit /></td></tr>
- 	</table>
- </lift:OrderData.add>
- </div>
- </lift:OrderData.checkoutNotOk>
- <lift:OrderData.checkoutOk>
-  <a href="/">Continue shopping</a>
- </lift:OrderData.checkoutOk>
+<lift:Orders.checkoutNotOk>
+	<div id="checkout">
+		<lift:Orders.add form="post">
+		 	<table>
+		 	<tr><td>Address Information</td></tr>
+		 	<tr><td>Address 1:</td><td><data:address1 /></td></tr>
+		 	<tr><td>Address 2:</td><td><data:address2 /></td></tr>
+		 	<tr><td>City:</td><td><data:city /></td></tr>
+		 	<tr><td>Postcode:</td><td><data:postcode /></td></tr>
+		 	<tr><td>Country:</td><td><data:country /></td></tr>
+		 	<tr><td>Contact Information</td></tr>
+		 	<tr><td>Phone:</td><td><data:phone /></td></tr>
+		 	<tr><td>Email:</td><td><data:email /></td></tr>
+		 	<tr><td><data:submit /></td></tr>
+		 	</table>
+	 	</lift:Orders.add>
+	 </div>
+</lift:Orders.checkoutNotOk>
+<lift:Orders.checkoutOk>
+  	<a href="/">Continue shopping</a>
+</lift:Orders.checkoutOk>
 </lift:surround>

@@ -82,9 +82,16 @@ object Order {
   def getAll(): Box[List[Order]] = {
     Empty
   }
+  
+  def getUserOrders(userId: String): Box[List[Order]] = {
+	  // instead of passing the OrderList response directly, we will 
+	  // extract the List itself and return it as such, which is nicer to work with
+	  var userOrders = RestClient.Orders.getUserOrders(userId)
+	  if(userOrders.isDefined) Full(userOrders.get.orders) else Failure(userOrders.toString)
+  }
 }
 
 /**
- * Case class for deserializing responses containing a ilst of orders
+ * Case class for deserializing responses containing a list of orders
  */
 case class OrderList(var orders: List[Order])

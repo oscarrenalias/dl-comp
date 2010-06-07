@@ -11,7 +11,7 @@ import net.liftweb.http.js.JsCmds
 import net.liftweb.http.js.jquery.JqJsCmds._
 import com.webshop.frontend.model._
 
-class OrderData {
+class Orders {
   
 	var checkoutOk = false
   
@@ -71,5 +71,28 @@ class OrderData {
         "phone" -> SHtml.text(order.contact.phone, order.contact.phone = _),
         "email" -> SHtml.text(order.contact.email, order.contact.email = _),
         "submit" -> SHtml.submit("Checkout", validateAndSubmit))  
+	}
+	
+	/**
+	 * Snippet that fetches the user's most recent orders
+	 */
+	def myOrders(xhtml: NodeSeq) = {
+		Order.getUserOrders(User.currentUser.get.email) match {
+			case Full(l) => {
+				l.flatMap( order => bind("order", xhtml, 
+					"id" -> order.id,
+					"status" -> order.status,
+					"description" -> order.description,
+					"address1" -> order.address.address1,
+					"address2" -> order.address.address2,
+					"city" -> order.address.city,
+					"postcode" -> order.address.postcode,
+					"country" -> order.address.country,
+					"email" -> order.contact.email,
+					"phone" -> order.contact.phone
+				))
+			}
+			case _ => Text("No previous orders found")
+		}
 	}
 }
