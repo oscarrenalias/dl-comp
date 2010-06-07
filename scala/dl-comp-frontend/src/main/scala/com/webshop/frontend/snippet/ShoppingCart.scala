@@ -23,12 +23,8 @@ class ShoppingCartData {
     			"price" -> item._2.price,
 				"remove" -> SHtml.a({() =>
 					ShoppingCart.removeItem(item._1, item._2)	
-					SetHtml("shopping-cart", <lift:embed what="/templates-hidden/cart-data.html" />)}, Text("Remove"))
+					SetHtml("shopping-cart-", <lift:embed what="/templates-hidden/cart-data.html" />)}, Text("Remove"))
 			)
     	)
-  }
-
-  	def totalPrice: NodeSeq = {
-		Text(ShoppingCart.totalPrice + "EUR")
-	}
+  }  
 }

@@ -11,6 +11,8 @@ import net.liftweb.http.js.JsCmds
 import net.liftweb.http.js.jquery.JqJsCmds._
 import com.webshop.frontend.model._
 
+object currentOrder extends RequestVar[Box[Order]](Empty)
+
 class Orders {
   
 	var checkoutOk = false
@@ -79,10 +81,17 @@ class Orders {
 	def myOrders(xhtml: NodeSeq) = {
 		Order.getUserOrders(User.currentUser.get.email) match {
 			case Full(l) => {
-				l.flatMap( order => bind("order", xhtml, 
-					"id" -> order.id,
+				l.flatMap( order => { 
+					var orderId = "order-info-" + order.id;
+					bind("order", xhtml, 
+					"info_link" -%> SHtml.a({() =>
+						currentOrder(Full(order));
+						SetHtml("order-info-" + order.id, <lift:embed what="/templates-hidden/order-data.html" />)},
+						Text("Details")),
+					"info_container" -> <div id={orderId}></div>,
+					"id" -> order.id,						
 					"status" -> order.status,
-					"description" -> order.description,
+					"description" -> order.nicerDescription,
 					"address1" -> order.address.address1,
 					"address2" -> order.address.address2,
 					"city" -> order.address.city,
@@ -90,9 +99,30 @@ class Orders {
 					"country" -> order.address.country,
 					"email" -> order.contact.email,
 					"phone" -> order.contact.phone
-				))
+				)})
 			}
 			case _ => Text("No previous orders found")
+		}
+	}
+	
+	def order(xhtml: NodeSeq) = {
+		currentOrder.is match {
+			case Full(order) => {
+				bind("order", xhtml, "id" -> order.id)
+			}
+			case _ => Text("No order found")
+		}
+	}
+	
+	def items(xhtml: NodeSeq) = {
+		currentOrder.is match {
+			case Full(order) => {
+				order.items.flatMap(line => bind("item", xhtml, 
+						"amount" -> line.amount,
+						"description" -> line.description,
+						"id" -> line.item ))
+			}
+			case _ => Text("No order found")
 		}
 	}
 }

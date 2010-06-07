@@ -12,13 +12,19 @@ import com.webshop.frontend.restclient._
 
 case class AddressInfo(var address1: String, var address2: String, var city: String, var country: String, var postcode: String)
 case class ContactInfo(var name: String, var phone: String, var email: String)
-case class LineItemInfo(var item: String, var amount: String) 
+case class LineItemInfo(var item: String, var amount: String) {
+	def getItem = Item.get(item)
+	
+	lazy val description = getItem.get.description
+}
 object LineItemInfo {
 	def apply(item:String, amount: Int) = new LineItemInfo(item, amount.toString)
 }
 
 case class Order(var id: String, var description: String, var user: String, var status: String, var address: AddressInfo, var contact: ContactInfo, var items: List[LineItemInfo]) extends JsonSerializable { 	
 
+	lazy val nicerDescription = (if(description.equals("")) "No description" else description)
+	
 	def submit: Box[Order] = {
 		val result = Order.submit(this)
 		result match {
