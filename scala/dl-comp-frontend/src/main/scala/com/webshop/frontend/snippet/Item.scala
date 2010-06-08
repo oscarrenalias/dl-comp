@@ -23,7 +23,7 @@ class Item {
             
       def addToCart(): JsCmd = {
           ShoppingCart.addItem(amount.toInt, item)          
-          JqSetHtml("shopping-cart", <lift:embed what="/templates-hidden/cart-data.html" />)          
+          JqSetHtml("shopping-cart", <lift:embed what="/templates-hidden/summary-cart-data.html" />)          
       }
       
       SHtml.ajaxForm(bind( "item", xhtml, 

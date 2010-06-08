@@ -14,8 +14,8 @@ import com.webshop.frontend.model.{Item=>ModelItem}
  * Snippet for displaying shopping cart data
  */
 class ShoppingCartData {
-  def list(xhtml:NodeSeq): NodeSeq = {
-    	ShoppingCart.items.flatMap( item =>
+  	def list(xhtml:NodeSeq): NodeSeq = {
+		ShoppingCart.items.flatMap( item =>
     	  bind( "item", xhtml, 
     			"id" -> item._2.id, 
     			"amount" -> item._1.toString,
@@ -23,8 +23,14 @@ class ShoppingCartData {
     			"price" -> item._2.price,
 				"remove" -> SHtml.a({() =>
 					ShoppingCart.removeItem(item._1, item._2)	
-					SetHtml("shopping-cart-", <lift:embed what="/templates-hidden/cart-data.html" />)}, Text("Remove"))
+					SetHtml("shopping-cart-", <lift:embed what="/templates-hidden/summary-cart-data.html" />)}, Text("Remove"))
 			)
-    	)
-  }  
+		)
+	}
+	
+	def info(xhtml:NodeSeq): NodeSeq = {
+		bind("cart", xhtml, 
+			"number_of_items" -> ShoppingCart.items.length.toString,
+			"total_price" -> ShoppingCart.totalPrice.toString )
+	}
 }

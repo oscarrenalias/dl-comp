@@ -92,7 +92,7 @@ class Catalog {
 	
       def addToCart(item:ModelItem): JsCmd = {
        		ShoppingCart.addItem(1, item)          
-       		JqSetHtml("shopping-cart", <lift:embed what="/templates-hidden/cart-data.html" />)
+       		JqSetHtml("shopping-cart", <lift:embed what="/templates-hidden/summary-cart-data.html" />)
       }	
 	
 	  ModelCatalog.getItems(category.id) match {

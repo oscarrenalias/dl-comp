@@ -56,6 +56,7 @@ object MenuInfo {
   def menu: List[Menu] =  
 	Menu(Loc("Home", List("index"), "Home", LocGroup("top-level"))) :: 
     Menu(Loc("Catalog", List("browse"), "Item catalog", LocGroup("top-level"))) ::
+    Menu(Loc("CartContents", List("cart"), "Cart Contents", IfLoggedIn)) ::
     Menu(Loc("Checkout", List("checkout"), "Checkout", IfLoggedIn)) ::
     Menu(Loc("Item Details", List("item"), "Item details")) ::
     Menu(Loc("contact", List("contact", "index"), "contact", LocGroup("top-level"))) ::
