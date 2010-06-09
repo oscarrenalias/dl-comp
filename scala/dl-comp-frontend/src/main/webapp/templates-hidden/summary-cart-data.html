@@ -1,10 +1,10 @@
 <div id="cart-container">
 	<div class="cart_icon">
-		<a href="/index"><img src="images/shoppingcart.png" alt="" width="35" height="35" border="0" /></a>
+		<a href="/index"><img src="/images/shoppingcart.png" alt="" width="35" height="35" border="0" /></a>
 	</div>	
 	<lift:ShoppingCartData.info>
-		<cart:number_of_items /> items
-		<span class="border_cart"></span><span class="price"> Total: <cart:total_price withCurrency="yes" /> €</span>
+		<cart:number_of_items />
+		<span class="border_cart"></span><span class="price"><cart:total_price withCurrency="yes" /></span>
 	</lift:ShoppingCartData.info>
 	<div id="cart-operations">
 		<lift:Menu.item name="Checkout" /><br/>

@@ -606,3 +606,18 @@ a.contact {
 	color: #666666;
 	padding: 10px 0 0 60px;
 }
+
+.shopping-cart-contents {
+}
+
+.shopping-cart-contents tr {
+	padding-bottom: 10px;
+}
+
+.shopping-cart-contents thead {
+	border-bottom: 2px solid black;
+}
+
+.shopping-cart-summary {
+	border-top: 2px solid blue;
+}

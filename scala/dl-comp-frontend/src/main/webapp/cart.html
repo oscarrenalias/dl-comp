@@ -1,8 +1,31 @@
 <lift:surround with="default" at="content">
 	<div class="center_title_bar">Shopping Cart</div>
-	<ul>
+	<table cols="3" class="shopping-cart-contents">
+		<thead>
+			<td>Item</td>
+			<td>Quantity</td>
+			<td>Price</td>
+		</thead>
+		<tbody>			
 		<lift:ShoppingCartData.list>  													
-			<li><item:amount/> <item:description /> <item:remove /></li>						
+			<tr item:id="">
+				<td><item:description /></td>				
+				<td>
+					<item:amount />
+					<item:remove />
+				</td>
+				<td>
+					<item:price withCurrency="yes" />					
+				</td>
+			</tr>
 		</lift:ShoppingCartData.list>
-	</ul>	
+		<tr class="shopping-cart-summary">
+			<lift:ShoppingCartData.info>
+				<td/>
+				<td><cart:number_of_items /></td>
+				<td><cart:total_price withCurrency="yes" /></td>
+			</lift:ShoppingCartData.info>	
+		</tr>
+		</tbody>
+	</table>
 </lift:surround>

@@ -14,23 +14,38 @@ import com.webshop.frontend.model.{Item=>ModelItem}
  * Snippet for displaying shopping cart data
  */
 class ShoppingCartData {
-  	def list(xhtml:NodeSeq): NodeSeq = {
+		
+  	def list(xhtml:NodeSeq): NodeSeq = {	
 		ShoppingCart.items.flatMap( item =>
     	  bind( "item", xhtml, 
     			"id" -> item._2.id, 
     			"amount" -> item._1.toString,
     			"description" -> item._2.description,       
-    			"price" -> item._2.price,
+    			"price" -> Text(item._2.price + "€"),
+				"total_price" -> Text(((item._1 * item._2.price.toDouble).toString) + "€"),
 				"remove" -> SHtml.a({() =>
-					ShoppingCart.removeItem(item._1, item._2)	
-					SetHtml("shopping-cart-", <lift:embed what="/templates-hidden/summary-cart-data.html" />)}, Text("Remove"))
+					ShoppingCart.removeItem(item._1, item._2)
+					SetHtml("shopping-cart-", <lift:embed what="/templates-hidden/summary-cart-data.html" />)}, Text(S.??("Remove")))
 			)
 		)
 	}
 	
 	def info(xhtml:NodeSeq): NodeSeq = {
-		bind("cart", xhtml, 
-			"number_of_items" -> ShoppingCart.items.length.toString,
-			"total_price" -> ShoppingCart.totalPrice.toString )
+		if(User.loggedIn_?) {
+			if(ShoppingCart.items.length == 0) {
+				Text(S.??("Your shopping cart is empty"))
+			}
+			else {
+				var itemsString = ""
+				if(ShoppingCart.items.length == 1) itemsString = S.??("item")
+				else itemsString = S.??("items")
+				bind("cart", xhtml, 
+					"number_of_items" -> Text(ShoppingCart.items.length.toString + " " + itemsString),
+					"total_price" -> Text(ShoppingCart.totalPrice.toString  +  "€"))
+			}
+		}
+		else {
+			Text(S.??("Please log in to add items"))
+		}
 	}
 }

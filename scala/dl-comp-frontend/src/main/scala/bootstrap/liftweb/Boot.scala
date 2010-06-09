@@ -26,8 +26,7 @@ class Boot {
     
     Schemifier.schemify(true, Log.infoF _, User)
     
-    // Build SiteMap
-    LiftRules.setSiteMap(SiteMap(MenuInfo.menu :_*))
+	MenuInfo.setSitemap
     
     /*
      * Show the spinny image when an Ajax call starts
@@ -52,12 +51,17 @@ object MenuInfo {
   import Loc._
   val IfLoggedIn = If(() => User.currentUser.isDefined, "You must be logged in")
   val CartHasItems = If(() => ShoppingCart.hasItems, "Nothing to check out")
+
+  def setSitemap = {
+	  // Build SiteMap
+	    LiftRules.setSiteMap(SiteMap(MenuInfo.menu :_*))		
+  }
   
   def menu: List[Menu] =  
 	Menu(Loc("Home", List("index"), "Home", LocGroup("top-level"))) :: 
     Menu(Loc("Catalog", List("browse"), "Item catalog", LocGroup("top-level"))) ::
-    Menu(Loc("CartContents", List("cart"), "Cart Contents", IfLoggedIn)) ::
-    Menu(Loc("Checkout", List("checkout"), "Checkout", IfLoggedIn)) ::
+    Menu(Loc("CartContents", List("cart"), "Cart Contents", CartHasItems)) ::
+    Menu(Loc("Checkout", List("checkout"), "Checkout", CartHasItems)) ::
     Menu(Loc("Item Details", List("item"), "Item details")) ::
     Menu(Loc("contact", List("contact", "index"), "contact", LocGroup("top-level"))) ::
     User.sitemap
