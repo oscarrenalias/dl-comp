@@ -339,14 +339,13 @@ a.join {
 }
 
 .cart_details {
-	width: 115px;
-	float: left;
+	width: 155px;
 	padding: 5px 0 0 15px;
 	text-align: left;
 }
 
 .cart_icon {
-	float: left;
+	float: right;
 	padding: 5px 0 0 5px;
 }
 
