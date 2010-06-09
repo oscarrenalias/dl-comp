@@ -22,6 +22,7 @@ class ShoppingCartData {
     			"amount" -> item._1.toString,
     			"description" -> item._2.description,       
     			"price" -> Text(item._2.price + "€"),
+				AttrBindParam("id", Text("FIXME"), "id"),
 				"total_price" -> Text(((item._1 * item._2.price.toDouble).toString) + "€"),
 				"remove" -> SHtml.a({() =>
 					ShoppingCart.removeItem(item._1, item._2)
