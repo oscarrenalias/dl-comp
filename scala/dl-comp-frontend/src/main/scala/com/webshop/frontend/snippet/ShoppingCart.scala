@@ -18,11 +18,12 @@ class ShoppingCartData {
   	def list(xhtml:NodeSeq): NodeSeq = {	
 		ShoppingCart.items.flatMap( item =>
     	  bind( "item", xhtml, 
-    			"id" -> item._2.id, 
+    			"id" -> item._2.id,
+				"link" -%> SHtml.link("/item", () => currentItem(Full(item._2)), Text(item._2.description)), 
     			"amount" -> item._1.toString,
     			"description" -> item._2.description,       
     			"price" -> Text(item._2.price + "€"),
-				AttrBindParam("id", Text("FIXME"), "id"),
+				AttrBindParam("id", Text(item._2.id), "id"),
 				"total_price" -> Text(((item._1 * item._2.price.toDouble).toString) + "€"),
 				"remove" -> SHtml.a({() =>
 					ShoppingCart.removeItem(item._1, item._2)
@@ -41,7 +42,7 @@ class ShoppingCartData {
 				if(ShoppingCart.items.length == 1) itemsString = S.??("item")
 				else itemsString = S.??("items")
 				bind("cart", xhtml, 
-					"number_of_items" -> Text(ShoppingCart.items.length.toString + " " + itemsString),
+					"number_of_items" -> Text(ShoppingCart.totalItems.toString + " " + itemsString),
 					"total_price" -> Text(ShoppingCart.totalPrice.toString  +  "€"))
 			}
 		}

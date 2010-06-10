@@ -40,4 +40,6 @@ object ShoppingCart extends SessionVar {
 		for((amount, item) <- items) total += amount*item.price.toDouble
 		total
 	}
+	
+	def totalItems = items.toList.foldLeft(0)((total, item) => item._1 + total)
 }

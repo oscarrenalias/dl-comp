@@ -1,15 +1,26 @@
-<table cols="3" class="shopping-cart-contents">
+<table class="shopping-cart-contents">
 	<thead>
-		<td>Item</td>
-		<td>Quantity</td>
-		<td>Price</td>
+		<tr>			
+			<th>Item</th>
+			<th>Quantity</th>
+			<th>Price</th>
+		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+		<lift:ShoppingCartData.info>
+			<td/>
+			<td><cart:number_of_items /></td>
+			<td><cart:total_price withCurrency="yes" /></td>
+		</lift:ShoppingCartData.info>	
+		</tr>
+	</tfoot>	
 	<tbody>			
 	<lift:ShoppingCartData.list>  													
 		<tr item:id="default">
-			<td><item:description /></td>				
+			<td><item:link /></td>				
 			<td>
-				<item:amount />
+				<item:amount /><br/>
 				<item:remove />
 			</td>
 			<td>
@@ -17,12 +28,5 @@
 			</td>
 		</tr>
 	</lift:ShoppingCartData.list>
-	<tr class="shopping-cart-summary">
-		<lift:ShoppingCartData.info>
-			<td/>
-			<td><cart:number_of_items /></td>
-			<td><cart:total_price withCurrency="yes" /></td>
-		</lift:ShoppingCartData.info>	
-	</tr>
 	</tbody>
 </table>

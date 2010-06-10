@@ -308,7 +308,6 @@ a.join {
 .center_title_bar {
 	width: 575px;
 	height: 31px;
-	float: left;
 	padding: 0 0 0 10px;
 	margin: 0 0 0 5px;
 	line-height: 31px;
@@ -608,14 +607,23 @@ a.contact {
 }
 
 .shopping-cart-contents {
+	width:100%;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 .shopping-cart-contents tr {
 	padding-bottom: 10px;
 }
 
-.shopping-cart-contents thead {
-	border-bottom: 2px solid black;
+.shopping-cart-contents th {
+	text-align: left;
+	background: none;
+	border-bottom: 2px solid #159DCC;
+}
+
+.shopping-cart-contents tfoot td {
+	border-top: 2px solid #159DCC;	
 }
 
 .shopping-cart-summary {
