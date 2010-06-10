@@ -1,13 +1,28 @@
-<div id="cart-container">
-X items <br />
-<ul>
+<table cols="3" class="shopping-cart-contents">
+	<thead>
+		<td>Item</td>
+		<td>Quantity</td>
+		<td>Price</td>
+	</thead>
+	<tbody>			
 	<lift:ShoppingCartData.list>  													
-		<li><item:amount/> <item:description /> <item:remove /></li>						
+		<tr item:id="default">
+			<td><item:description /></td>				
+			<td>
+				<item:amount />
+				<item:remove />
+			</td>
+			<td>
+				<item:price withCurrency="yes" />					
+			</td>
+		</tr>
 	</lift:ShoppingCartData.list>
-</ul>
-<lift:Menu.item name="Checkout" />
-<span class="border_cart"></span> Total: <span class="price"><!-- lift:ShoppingCartData.totalPrice withCurrency="yes" /--></span>
-<div class="cart_icon">
-	<a href="/index"><img src="images/shoppingcart.png" alt="" width="35" height="35" border="0" /></a>
-</div>
-</div>
+	<tr class="shopping-cart-summary">
+		<lift:ShoppingCartData.info>
+			<td/>
+			<td><cart:number_of_items /></td>
+			<td><cart:total_price withCurrency="yes" /></td>
+		</lift:ShoppingCartData.info>	
+	</tr>
+	</tbody>
+</table>
