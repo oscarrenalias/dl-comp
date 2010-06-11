@@ -52,6 +52,7 @@
 	    </div>
 	    <!-- end of left content -->
 		<div class="center_content">
+			<div id="messages"></div>
 			<lift:snippet type="msgs"/>
 			<lift:bind name="content" />		
 		</div>
@@ -74,13 +75,12 @@
 	        <a href="/index" class="join">search</a> 
 		  </div>
 	        
-	      <!-- shopping cart area -->
 	      <div class="shopping_cart">
 	      	<div class="title_box">Shopping cart</div>
 			<div class="cart_details" id="shopping-cart">
-				<lift:embed what="/templates-hidden/summary-cart-data.html" />
+				<lift:comet type="CartActor" />
 			</div>			
-		  </div>
+		  </div>		
 		  
 		  <!--  what's new area -->
 	      <div class="title_box">What’s new</div>

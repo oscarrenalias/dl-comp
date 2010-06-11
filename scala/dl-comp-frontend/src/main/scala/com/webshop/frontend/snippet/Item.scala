@@ -21,12 +21,10 @@ class Item {
     
     def showItemData(item: ModelItem): NodeSeq = {      
             
-      def addToCart(): JsCmd = {
-		  import bootstrap.liftweb.MenuInfo
-	
+      def addToCart() = {
+		  import bootstrap.liftweb.MenuInfo	
           ShoppingCart.addItem(amount.toInt, item)
 		  MenuInfo.setSitemap
-          JqSetHtml("shopping-cart", <lift:embed what="/templates-hidden/summary-cart-data.html" />)          
       }
       
       SHtml.ajaxForm(bind( "item", xhtml, 

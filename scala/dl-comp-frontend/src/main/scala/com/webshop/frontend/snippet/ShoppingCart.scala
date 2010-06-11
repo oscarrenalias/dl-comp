@@ -50,4 +50,21 @@ class ShoppingCartData {
 			Text(S.??("Please log in to add items"))
 		}
 	}
+	
+	private def showCartLinks: Boolean = User.loggedIn_? && ShoppingCart.totalItems > 0
+	
+	def showIfCond(xhtml:NodeSeq, test: () => Boolean): NodeSeq = {
+		if(test())
+			xhtml
+		else
+			NodeSeq.Empty
+	}
+	
+	def checkoutLink: NodeSeq = {
+		showIfCond(<a href="/checkout">{Text(S.?("Checkout"))}</a>, () => showCartLinks)
+	}
+	
+	def cartLink: NodeSeq = {		
+		showIfCond(<a href="/cart">{Text(S.?("Cart contents"))}</a>, () => showCartLinks)
+	}
 }

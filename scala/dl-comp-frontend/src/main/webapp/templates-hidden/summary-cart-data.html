@@ -7,7 +7,7 @@
 		<span class="border_cart"></span><span class="price"><cart:total_price withCurrency="yes" /></span>
 	</lift:ShoppingCartData.info>
 	<div id="cart-operations">
-		<lift:Menu.item name="Checkout" /><br/>
-		<lift:Menu.item name="CartContents" />
+		<lift:ShoppingCartData.checkoutLink /><br/>
+		<lift:ShoppingCartData.cartLink /><br/>
 	</div>
 </div>

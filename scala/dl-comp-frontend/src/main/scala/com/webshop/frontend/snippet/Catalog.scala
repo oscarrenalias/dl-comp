@@ -9,6 +9,7 @@ import net.liftweb.http.js.jquery.JqJsCmds._
 import net.liftweb.http.js.JE.JsRaw
 import net.liftweb.http.js._
 import com.webshop.frontend.model.ShoppingCart
+import com.webshop.frontend.comet._
 import com.webshop.frontend.model.{Item => ModelItem,Catalog => ModelCatalog,CatalogCategory,RootCatalogCategory,User}
 
 object currentCategory extends RequestVar[Box[CatalogCategory]](Empty)
@@ -91,8 +92,12 @@ class Catalog {
 	  val category = currentCategory openOr RootCatalogCategory
 	
       def addToCart(item:ModelItem): JsCmd = {
-       		ShoppingCart.addItem(1, item)          
-       		JqSetHtml("shopping-cart", <lift:embed what="/templates-hidden/summary-cart-data.html" />)
+		// no need to do anything else as ShoppingCart.addItem will notify the correct
+		// CartActor that there's been a change and will refresh the cart data on the browser screen
+       		ShoppingCart.addItem(1, item)
+
+			import net.liftweb.http.js.jquery.JqJsCmds.DisplayMessage 
+			new DisplayMessage("messages", Text(S.?("Item added to shopping cart")), 5000, 1000)
       }	
 	
 	  ModelCatalog.getItems(category.id) match {
