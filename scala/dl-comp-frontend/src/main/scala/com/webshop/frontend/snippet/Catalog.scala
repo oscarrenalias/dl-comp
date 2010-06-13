@@ -1,4 +1,5 @@
 package com.webshop.frontend.snippet
+
 import _root_.scala.xml.{NodeSeq,Text,Node,Elem}  
 import _root_.net.liftweb.common.{Box,Full,Empty}  
 import _root_.net.liftweb.util.Log
@@ -11,6 +12,8 @@ import net.liftweb.http.js._
 import com.webshop.frontend.model.ShoppingCart
 import com.webshop.frontend.comet._
 import com.webshop.frontend.model.{Item => ModelItem,Catalog => ModelCatalog,CatalogCategory,RootCatalogCategory,User}
+import com.webshop.frontend.snippet.bindings._
+import Bindings._
 
 object currentCategory extends RequestVar[Box[CatalogCategory]](Empty)
 
@@ -21,12 +24,8 @@ class Catalog {
 	 */
 	def list(xhtml:NodeSeq): NodeSeq = {	  
 	  val category = currentCategory openOr RootCatalogCategory	  
-      category.getChildren.flatMap( row =>
-      bind( "category", xhtml, 
-            "id" -> row.id,
-            "description" -> row.description, 
-            "name" -> SHtml.link("/browse", () => currentCategory(Full(row)), Text(row.name)))
-      )  
+	  implicit val catalogBinding = CatalogCategoryBinding
+      category.getChildren.flatMap( row => row.bind(xhtml))
 	}
 	
 	/**
@@ -35,12 +34,8 @@ class Catalog {
 	 */
 	def history(xhtml:NodeSeq): NodeSeq = {
 		val category = currentCategory openOr RootCatalogCategory
-		category.getParents.reverse.flatMap( row => 
-			bind( "category", xhtml,
-				  "id" -> row.id,
-				  "description" -> row.description,
-				  "name" -> SHtml.link("/browse", () => currentCategory(Full(row)), Text(row.name)))
-		)
+		implicit val catalogBinding = CatalogCategoryBinding
+		category.getParents.reverse.flatMap( row => row.bind(xhtml))
 	}
 	
 	/**
@@ -71,18 +66,11 @@ class Catalog {
   	 */
 	def category(xhtml:NodeSeq): NodeSeq = {
 
-	  def showCurrentCategory(c:CatalogCategory) = {
-		  bind("category", xhtml,
-			   "id" -> c.id,
-			   "description" -> c.description,
-			   "name" -> c.name,		
-			   "link" -> SHtml.link("/browse", () => currentCategory(Full(c)), Text(c.name)))		
-	  }
-		
-	  currentCategory.is match {
-		case Full(x) => showCurrentCategory(x)
-		case _ => NodeSeq.Empty
-	  }
+		implicit val catalogBinding = CatalogCategoryBinding		
+	  	currentCategory.is match {
+			case Full(x) => x.bind(xhtml)
+			case _ => NodeSeq.Empty
+	  	}
 	}
  
 	/**
@@ -91,44 +79,15 @@ class Catalog {
 	def items(xhtml:NodeSeq): NodeSeq = {	   
 	  val category = currentCategory openOr RootCatalogCategory
 	
-      def addToCart(item:ModelItem): JsCmd = {
-		// no need to do anything else as ShoppingCart.addItem will notify the correct
-		// CartActor that there's been a change and will refresh the cart data on the browser screen
-       		ShoppingCart.addItem(1, item)
-
-			import net.liftweb.http.js.jquery.JqJsCmds.DisplayMessage 
-			new DisplayMessage("messages", Text(S.?("Item added to shopping cart")), 5000, 1000)
-      }	
-	
 	  ModelCatalog.getItems(category.id) match {
 	    case None => {
 	      Text("Items not found")
 	      NodeSeq.Empty
 	    }
         case Some(i) => {
-			// TODO: this can probably be optimized a bit
-			if(User.loggedIn_?) i.flatMap( row =>
-			  bind( "item", xhtml, 
-					"id" -> row.id, 
-					"name" -> row.name,
-					"link" -%> SHtml.link("/item", () => currentItem(Full(row)), Text("Details")),
-					"add_to_cart" -%> SHtml.a(() => addToCart(row), Text("Add to Cart")),
-					"description" -> row.description,
-					"image" -%> <img src={row.getImage(0)} />,
-					"thumbnail" -%> <img src={row.getThumbnail(0)} />,
-					"currency" -> row.currency,
-					"price" -> row.price.toString ))
-			else i.flatMap( row =>
-			  bind( "item", xhtml, 
-					"id" -> row.id, 
-					"name" -> row.name,
-					"link" -%> SHtml.link("/item", () => currentItem(Full(row)), Text("Details")),
-					"add_to_cart" -> <span></span>,
-					"description" -> row.description,
-					"image" -%> <img src={row.getImage(0)} />,
-					"thumbnail" -%> <img src={row.getThumbnail(0)} />,
-					"currency" -> row.currency,
-					"price" -> row.price.toString ))			
+			implicit val itemBinding = ItemBinding
+			if(User.loggedIn_?) i.flatMap( row => row.bind(xhtml))
+			else i.flatMap( row => row.bind(xhtml))
         }
       }
 	}
@@ -143,13 +102,8 @@ class Catalog {
 		}
 
 		val cats = ModelCatalog.getCategories(catId.toInt)
-		if(cats.size > 0) cats.values.toList.sort({(a,b) => a.name < b.name}).flatMap(cat => 
-			bind("category", xhtml,
-			"id" -> cat.id,
-			"description" -> cat.description,
-			"name" -> cat.name,
-			"itemcount" -> cat.numProducts,
-			"link" -%> SHtml.link("/browse", () => currentCategory(Full(cat)), Text(cat.name))))
-		else Text("No subcategories found")
+		implicit val catalogBinding = CatalogCategoryBinding
+		if(cats.size > 0) cats.values.toList.sort({(a,b) => a.name < b.name}).flatMap(cat => cat.bind(xhtml))
+		else Text("No subcategories found")		
 	}
 }
