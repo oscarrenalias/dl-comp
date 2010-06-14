@@ -9,6 +9,7 @@ import net.liftweb.common.{Box,Full,Empty,Failure}
 import _root_.scala.xml.{NodeSeq,Text,Node,Elem}
 import com.webshop.frontend.snippet._
 import com.webshop.frontend.restclient._
+import com.webshop.frontend.model.Item
 
 case class AddressInfo(var address1: String, var address2: String, var city: String, var country: String, var postcode: String)
 case class ContactInfo(var name: String, var phone: String, var email: String)
@@ -16,6 +17,8 @@ case class LineItemInfo(var item: String, var amount: String) {
 	def getItem = Item.get(item)
 	
 	lazy val description = getItem.get.description
+	
+	lazy val boxedItem:Box[Item] = getItem
 }
 object LineItemInfo {
 	def apply(item:String, amount: Int) = new LineItemInfo(item, amount.toString)

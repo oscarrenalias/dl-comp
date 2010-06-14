@@ -74,3 +74,46 @@ object ShoppingCartBinding extends DataBinding[ShoppingCart] {
 			"total_price" -> Text(s.totalPrice.toString  +  "€"))
 	}
 }
+
+object AddressBinding extends DataBinding[AddressInfo] {
+	def apply(address: AddressInfo): Binding = bind("address", _,
+		"address1" -> address.address1,
+		"address2" -> address.address2,
+		"city" -> address.city,
+		"postcode" -> address.postcode,
+		"country" -> address.country)
+}
+
+object ContactBinding extends DataBinding[ContactInfo] {
+	def apply(contact: ContactInfo): Binding = bind("contact", _, 
+		"email" -> contact.email,
+		"phone" -> contact.phone )
+}
+
+
+
+trait OrderBinding extends DataBinding[Order] {
+	
+	implicit val addressBinding: DataBinding[AddressInfo]
+	implicit val contactBinding: DataBinding[ContactInfo]
+	
+	def apply(order: Order): Binding = (xhtml: NodeSeq) => 
+		bind("order", xhtml, 
+			"info_link" -%> SHtml.a({() =>
+				currentOrder(Full(order));
+				SetHtml("order-info-" + order.id, <lift:embed what="/templates-hidden/order-data.html" />)},
+				Text("Details")),
+			"info_container" -> <div id={order.id}></div>,
+			"id" -> order.id,						
+			"status" -> order.status,
+			"description" -> order.nicerDescription,
+			"address" -> order.address.bind(chooseTemplate("order", "address", xhtml)),
+			"contact" -> order.contact.bind(chooseTemplate("order", "contact", xhtml)) /*,
+			"items" -> order.items.bind(chooseTemplate("order", "items", xhtml))*/
+	)	
+}
+
+object DefaultOrderBinding extends OrderBinding {
+	val addressBinding = AddressBinding
+	val contactBinding = ContactBinding
+}
