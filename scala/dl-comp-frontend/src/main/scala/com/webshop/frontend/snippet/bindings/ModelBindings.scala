@@ -11,24 +11,46 @@ import Bindings._
 
 object ItemBinding extends DataBinding[ModelItem] {
 	
-    def addToCart(item:ModelItem): JsCmd = {
+    var amount = "1";
+
+	implicit val imageBinder = ItemImageDataBinding
+	
+    def addToCartAjax(item:ModelItem): JsCmd = {
      		ShoppingCart.addItem(1, item)
 			import net.liftweb.http.js.jquery.JqJsCmds.DisplayMessage 
 			new DisplayMessage("messages", Text(S.?("Item added to shopping cart")), 5000, 1000)
     }	
+
+    def addToCartForm(item:ModelItem) = ShoppingCart.addItem(amount.toInt, item)
 	
-	def apply(item: ModelItem): Binding = bind("item", _, 
+	def apply(item: ModelItem): Binding = (xhtml: NodeSeq) => bind("item", xhtml, 
 		"id" -> item.id, 
 		"name" -> item.name,
 		"link" -%> SHtml.link("/item", () => currentItem(Full(item)), Text("Details")),
-		"add_to_cart" -%> {(ns: NodeSeq) => 
-			if(User.loggedIn_?) SHtml.a(() => addToCart(item), Text(S.?("Add to Cart")))
+		"add_to_cart_ajax" -%> {(ns: NodeSeq) => 
+			if(User.loggedIn_?) SHtml.a(() => addToCartAjax(item), Text(S.?("Add to Cart")))
 			else <span></span> },
 		"description" -> item.description,
 		"image" -%> <img src={item.getImage(0)} />,
 		"thumbnail" -%> <img src={item.getThumbnail(0)} />,
+		"images" -> item.images.flatMap(image => image.bind(chooseTemplate("item", "images", xhtml))),
 		"currency" -> item.currency,
-		"price" -> item.price.toString )
+		"price" -> item.price.toString,
+		"amount_to_cart_form" -> SHtml.text(amount, amount = _),
+		"add_to_cart_form" -%> SHtml.submit(S.?("Add to cart"), () => addToCartForm(item)))
+}
+
+object ItemImageDataBinding extends DataBinding[ItemImageData] {
+	def apply(image: ItemImageData) =
+		bind("image", _, 
+		"small" -%> <img src={image.small} />,
+		"link" -%> <a href={image.large}><img src={image.small} /></a>, 
+		"large" -%> <img src={image.large} />,
+		AttrBindParam("small_src", Text(image.small), "src"),
+		AttrBindParam("small_href", Text(image.small), "href"),
+		AttrBindParam("large_href", Text(image.large), "href"),	
+		AttrBindParam("large_src", Text(image.large), "src"))
+		
 }
 
 object CatalogCategoryBinding extends DataBinding[CatalogCategory] {
@@ -38,4 +60,17 @@ object CatalogCategoryBinding extends DataBinding[CatalogCategory] {
 		"name" -> cat.name,
 		"itemcount" -> cat.numProducts,
 		"link" -%> SHtml.link("/browse", () => currentCategory(Full(cat)), Text(cat.name)))
+}
+
+object ShoppingCartBinding extends DataBinding[ShoppingCart] {
+	
+	def apply(s: ShoppingCart): Binding = (xhtml: NodeSeq) => {
+		var itemsString = ""
+		if(s.items.length == 1) itemsString = S.?("item")
+		else itemsString = S.?("items")
+		
+		bind("cart", xhtml,
+			"number_of_items" -> Text(s.totalItems.toString + " " + itemsString),
+			"total_price" -> Text(s.totalPrice.toString  +  "€"))
+	}
 }

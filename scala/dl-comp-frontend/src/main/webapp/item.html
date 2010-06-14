@@ -6,9 +6,18 @@
         <div class="center_prod_box_big">                         
              <div class="product_img_big">
              <div class="thumbs">
-				<lift:Item.thumbnails mode="withLinks">
-					<thumbnail:url />
-				</lift:Item.thumbnails>
+				<item:images>
+					<!--  
+					We can use either the construction below with image:large_href and image:small_src
+					or the tag below. The tag below will give us a construction with both <a> and <img> while
+					using the second one we have more control as to where we place what values
+					
+					<image:link class="item_thumbnail" alt="thumbnail"/>
+					-->
+					<a image:large_href="default">
+						<img image:small_src="default" alt="Thumbnail" />
+					</a>
+				</item:images>
              </div>
              </div>
                  <div class="details_big_box">
@@ -20,7 +29,7 @@
 						<span class="price"><item:price /><item:currency /></span>
 					</div>
 					 <lift:Login.loggedIn>
-				  		<item:amountToCart /><item:addToCart />
+				  		<item:amount_to_cart_form /><item:add_to_cart_form />
 					 </lift:Login.loggedIn>
 					<lift:Login.loggedOut>
 						<div id="please-log-in">

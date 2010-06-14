@@ -2,12 +2,12 @@
 	<div class="cart_icon">
 		<a href="/index"><img src="/images/shoppingcart.png" alt="" width="35" height="35" border="0" /></a>
 	</div>	
-	<lift:ShoppingCartData.info>
+	<lift:ShoppingCart.info>
 		<cart:number_of_items />
 		<span class="border_cart"></span><span class="price"><cart:total_price withCurrency="yes" /></span>
-	</lift:ShoppingCartData.info>
+	</lift:ShoppingCart.info>
 	<div id="cart-operations">
-		<lift:ShoppingCartData.checkoutLink /><br/>
-		<lift:ShoppingCartData.cartLink /><br/>
+		<lift:ShoppingCart.checkoutLink /><br/>
+		<lift:ShoppingCart.cartLink /><br/>
 	</div>
 </div>

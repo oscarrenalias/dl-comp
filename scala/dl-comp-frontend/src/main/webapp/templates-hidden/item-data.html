@@ -1,11 +1,13 @@
 <div class="prod_box">
     <div class="center_prod_box">            
          <div class="product_title"><item:name /></div>
-         <div class="product_img"><item:thumbnail class="item_thumbnail" alt="thumbnail"/></div>
+         <div class="product_img">
+			<item:thumbnail />
+		</div>
          <div class="prod_price"><span class="price"><item:price/><item:currency /></span></div>                        
     </div>
     <div class="prod_details_tab">
-		<item:add_to_cart class="prod_buy" />
+		<item:add_to_cart_ajax class="prod_buy" />
 		<item:link class="prod_details" />
     </div>                     
 </div>

@@ -1,4 +1,5 @@
 <table class="shopping-cart-contents">
+<lift:ShoppingCart.info>	
 	<thead>
 		<tr>			
 			<th>Item</th>
@@ -8,15 +9,13 @@
 	</thead>
 	<tfoot>
 		<tr>
-		<lift:ShoppingCartData.info>
 			<td/>
 			<td><cart:number_of_items /></td>
 			<td><cart:total_price withCurrency="yes" /></td>
-		</lift:ShoppingCartData.info>	
 		</tr>
 	</tfoot>	
 	<tbody>			
-	<lift:ShoppingCartData.list>  													
+		<cart:items>
 		<tr item:id="default">
 			<td><item:link /></td>				
 			<td>
@@ -27,6 +26,7 @@
 				<item:price withCurrency="yes" />					
 			</td>
 		</tr>
-	</lift:ShoppingCartData.list>
+		</cart:items>
 	</tbody>
+</lift:ShoppingCart.info>
 </table>

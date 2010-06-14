@@ -34,6 +34,7 @@ case class Order(var id: String, var description: String, var user: String, var 
     			status = x.status    			
     		}
     		case Failure(msg,x,y) => status = Order.Status.ERROR
+			case _ => Order.Status.ERROR
 		}
 		// we return the new order so that Failure messages are passed up to the UI
 		result
