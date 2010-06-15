@@ -90,30 +90,57 @@ object ContactBinding extends DataBinding[ContactInfo] {
 		"phone" -> contact.phone )
 }
 
-
+object OrderLineItemBinding extends DataBinding[LineItemInfo] {
+	
+	implicit val imageBinder = ItemImageDataBinding	
+	
+	def apply(l: LineItemInfo): Binding = (xhtml: NodeSeq) => {
+		bind("line", xhtml,
+			"amount" -> l.amount,
+			"item" -> { (ns: NodeSeq) => 
+				l.boxedItem match {					
+					case Full(item) => {
+						implicit val itemBinding = ItemBinding
+						item.bind(chooseTemplate("line", "item", xhtml))
+					}
+					case _ => Text("Item data not found")
+				}
+			}
+		)
+	}
+}
 
 trait OrderBinding extends DataBinding[Order] {
 	
 	implicit val addressBinding: DataBinding[AddressInfo]
 	implicit val contactBinding: DataBinding[ContactInfo]
+	implicit val itemBinding: DataBinding[ModelItem]
+	implicit val lineItemBinding: DataBinding[LineItemInfo]
 	
 	def apply(order: Order): Binding = (xhtml: NodeSeq) => 
 		bind("order", xhtml, 
-			"info_link" -%> SHtml.a({() =>
-				currentOrder(Full(order));
-				SetHtml("order-info-" + order.id, <lift:embed what="/templates-hidden/order-data.html" />)},
-				Text("Details")),
+			"details_link" -> SHtml.link("/order", () => currentOrder(Full(order)), Text(order.id)),
+			AttrBindParam("link", SHtml.link("/order", () => currentOrder(Full(order)), Text(order.id)), "href"),
 			"info_container" -> <div id={order.id}></div>,
 			"id" -> order.id,						
 			"status" -> order.status,
 			"description" -> order.nicerDescription,
 			"address" -> order.address.bind(chooseTemplate("order", "address", xhtml)),
-			"contact" -> order.contact.bind(chooseTemplate("order", "contact", xhtml)) /*,
-			"items" -> order.items.bind(chooseTemplate("order", "items", xhtml))*/
+			"contact" -> order.contact.bind(chooseTemplate("order", "contact", xhtml)),
+			"num_items" -> order.items.length.toString,
+			"total_items" -> order.getTotalItems.toString,
+			"total_price" -> order.getTotalPrice.toString,
+			"lines" -> order.items.flatMap(item => item.bind(chooseTemplate("order", "lines", xhtml)))
 	)	
 }
 
+/**
+ * Object that contains the default implicit bindings for displaying
+ * all the data within an Order object
+ */
 object DefaultOrderBinding extends OrderBinding {
 	val addressBinding = AddressBinding
 	val contactBinding = ContactBinding
+	val itemBinding = ItemBinding
+	val lineItemBinding = OrderLineItemBinding
 }

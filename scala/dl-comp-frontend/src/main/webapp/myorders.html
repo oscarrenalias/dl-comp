@@ -1,8 +1,11 @@
 <lift:surround with="default" at="content">
 	<div class="center_title_bar">My Orders</div>
+<div class="center_box_big">	
 	<lift:Orders.myOrders>
-		<order:info_link class="prod_details" /> <order:id /> - <order:description />
-		<order:info_container />
+		<order:details_link /> - <order:description/><br/>
+		Status: <order:status/><br/>
+		<order:total_items /> items, <order:total_price /> EUR<br/>
 		<br/>
-	</lift:Orders.myOrders>				
+	</lift:Orders.myOrders>	
+	</div>			
 </lift:surround>

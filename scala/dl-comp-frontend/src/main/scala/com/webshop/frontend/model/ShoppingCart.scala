@@ -18,20 +18,21 @@ class ShoppingCart {
   
 	var items = new ArrayBuffer[ShoppingCartLineItem]  
   
+
 	def addItem(amount: Int, item: ModelItem) = {
 	
 		CartActorManager ! CartItemAdded(item)
 		
-	  items += (amount, item)
-	  dumpCartData
+	  	items += (amount, item)
+	  	dumpCartData
 	}
   
 	def removeItem(amount: Int, item: ModelItem) = {
 		
 		CartActorManager ! CartItemRemoved(item)
 		
-	  items -= (amount, item)
-	  dumpCartData
+	  	items -= (amount, item)
+	  	dumpCartData
 	}
   
 	def getItems: ArrayBuffer[ShoppingCartLineItem] = items
@@ -39,8 +40,8 @@ class ShoppingCart {
 	def getItemsForOrder: List[LineItemInfo] = items.flatMap({x=>List(LineItemInfo(x._2.id, x._1))}).toList
   
 	def dumpCartData = {
-	  Log.debug("Items in cart " + items.size)
-	  items.foreach(i => Log.debug("item: " + i._2.id + " - amount:" + i._1.toString))
+	  	Log.debug("Items in cart " + items.size)
+	  	items.foreach(i => Log.debug("item: " + i._2.id + " - amount:" + i._1.toString))
 	}  
   
 	def empty = items.clear

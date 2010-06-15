@@ -21,7 +21,7 @@ case class LineItemInfo(var item: String, var amount: String) {
 	lazy val boxedItem:Box[Item] = getItem
 }
 object LineItemInfo {
-	def apply(item:String, amount: Int) = new LineItemInfo(item, amount.toString)
+	def apply(item:String, amount: Int) = new LineItemInfo(item, amount.toString)	
 }
 
 case class Order(var id: String, var description: String, var user: String, var status: String, var address: AddressInfo, var contact: ContactInfo, var items: List[LineItemInfo]) extends JsonSerializable { 	
@@ -42,6 +42,21 @@ case class Order(var id: String, var description: String, var user: String, var 
 		// we return the new order so that Failure messages are passed up to the UI
 		result
 	}
+
+	def getTotalPrice = {
+		var total = 0.0
+		for(item <- items) {
+			val price = item.boxedItem match {
+				case Full(x) => x.price.toDouble
+				case _ => 0.0
+			}
+			total += price * item.amount.toDouble			
+		}
+			
+		total
+	}
+	
+	def getTotalItems:Int = items.foldLeft(0)((total, item) => item.amount.toInt + total)
 	
 	/**
 	 * Check if the order can be submitted. We are not using Lift's Mapper 

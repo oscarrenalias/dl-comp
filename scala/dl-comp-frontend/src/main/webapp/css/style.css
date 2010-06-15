@@ -629,3 +629,11 @@ a.contact {
 .shopping-cart-summary {
 	border-top: 2px solid blue;
 }
+
+.center_box_big {
+	width: 554px;
+	height: auto;
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+}

@@ -64,6 +64,7 @@ object MenuInfo {
     Menu(Loc("Checkout", List("checkout"), "Checkout", IfLoggedIn)) ::
     Menu(Loc("Item Details", List("item"), "Item details")) ::
     Menu(Loc("contact", List("contact"), "contact", LocGroup("top-level"))) ::
+	Menu(Loc("order", List("order"), "order" )) ::
     User.sitemap
 }
 

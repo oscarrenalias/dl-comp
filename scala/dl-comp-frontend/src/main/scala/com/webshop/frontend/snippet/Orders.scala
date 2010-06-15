@@ -19,7 +19,7 @@ class Orders {
   
 	var checkoutOk = false
 	
-	
+	implicit val orderBinding = DefaultOrderBinding
   
 	def checkoutOk(xhtml: NodeSeq): NodeSeq = {
 	  if (checkoutOk) xhtml else Text("") 
@@ -85,28 +85,7 @@ class Orders {
 	def myOrders(xhtml: NodeSeq) = {
 		Order.getUserOrders(User.currentUser.get.email) match {
 			case Full(l) => {
-				l.flatMap( order => { 
-					var orderId = "order-info-" + order.id;
-					bind("order", xhtml, 
-						"info_link" -%> SHtml.a({() =>
-							currentOrder(Full(order));
-							SetHtml("order-info-" + order.id, <lift:embed what="/templates-hidden/order-data.html" />)},
-							Text("Details")),
-						"info_container" -> <div id={orderId}></div>,
-						"id" -> order.id,						
-						"status" -> order.status,
-						"description" -> order.nicerDescription,
-						"address1" -> order.address.address1,
-						"address2" -> order.address.address2,
-						"city" -> order.address.city,
-						"postcode" -> order.address.postcode,
-						"country" -> order.address.country,
-						"email" -> order.contact.email,
-						"phone" -> order.contact.phone,
-						"items" -> orderData(chooseTemplate("order", "items", xhtml))
-				)})
-				/*implicit val orderBinding = DefaultOrderBinding
-				l.flatMap( order => order.bind(xhtml))*/
+				l.flatMap( order => order.bind(xhtml))
 			}
 			case _ => Text("No previous orders found")
 		}
@@ -115,24 +94,8 @@ class Orders {
 	def order(xhtml: NodeSeq) = {
 		currentOrder.is match {
 			case Full(order) => {
-				bind("order", xhtml, "id" -> order.id)
-			}
-			case _ => Text("No order found")
-		}
-	}
-	
-	def orderData(xhtml: NodeSeq) = {
-		currentOrder.is match {
-			case Full(order) => {
-				implicit val itemBinding = ItemBinding	
-				order.items.flatMap(lineItem => {
-					// if we use the boxedItem field we're receiving a Box[Item], which
-					// will protect us in case the Item object was not found
-					lineItem.boxedItem match {
-						case Full(x) => x.bind(xhtml)
-						case _ => NodeSeq.Empty
-					}
-				})
+				implicit val orderBinding = DefaultOrderBinding
+				order.bind(xhtml)
 			}
 			case _ => Text("No order found")
 		}
