@@ -26,7 +26,8 @@ object ItemBinding extends DataBinding[ModelItem] {
 	def apply(item: ModelItem): Binding = (xhtml: NodeSeq) => bind("item", xhtml, 
 		"id" -> item.id, 
 		"name" -> item.name,
-		"link" -%> SHtml.link("/item", () => currentItem(Full(item)), Text("Details")),
+		"details_link" -%> SHtml.link("/item", () => currentItem(Full(item)), Text("Details")),
+		"link" -%> SHtml.link("/item", () => currentItem(Full(item)), Text(item.description)),
 		"add_to_cart_ajax" -%> {(ns: NodeSeq) => 
 			if(User.loggedIn_?) SHtml.a(() => addToCartAjax(item), Text(S.?("Add to Cart")))
 			else <span></span> },

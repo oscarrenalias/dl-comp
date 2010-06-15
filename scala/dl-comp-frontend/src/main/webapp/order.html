@@ -4,13 +4,33 @@
 			<div class="center_box_big">
 				<order:description /><br/>
 				Status: <order:status /><br/>		
-				<ul>
-					<order:lines>		
-					<li>
-						<line:item><item:description/></line:item> - <line:amount/>
-					</li>
+				<table class="shopping-cart-contents">
+				<thead>
+					<tr>			
+						<th>Item</th>
+						<th>Price</th>
+						<th>Quantity</th>						
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td/>
+						<td><order:total_items /></td>
+						<td><order:total_price /></td>
+					</tr>
+				</tfoot>
+				<tbody>
+				<order:lines>
+				<tr>
+					<line:item>
+						<td><item:link/></td>					
+						<td><item:price/></td>
+					</line:item>
+					<td><line:amount/></td>					
+				</tr>
 				</order:lines>
-				</ul>
+			</tbody>
+			</table>
 		</div>
 	</lift:Orders.order>
 </lift:surround>

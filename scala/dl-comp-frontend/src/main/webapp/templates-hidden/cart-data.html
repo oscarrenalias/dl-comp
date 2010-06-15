@@ -3,8 +3,8 @@
 	<thead>
 		<tr>			
 			<th>Item</th>
+			<th>Price</th>			
 			<th>Quantity</th>
-			<th>Price</th>
 		</tr>
 	</thead>
 	<tfoot>
@@ -19,11 +19,11 @@
 		<tr item:id="default">
 			<td><item:link /></td>				
 			<td>
+				<item:price withCurrency="yes" />					
+			</td>			
+			<td>
 				<item:amount /><br/>
 				<item:remove />
-			</td>
-			<td>
-				<item:price withCurrency="yes" />					
 			</td>
 		</tr>
 		</cart:items>

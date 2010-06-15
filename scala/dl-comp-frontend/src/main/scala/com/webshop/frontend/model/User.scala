@@ -101,7 +101,7 @@ object User extends User with MetaMegaProtoUser[User] {
                  If(notLoggedIn_? _, S.??("logout.first")))))
 
 	def myOrdersMenuLoc: Box[Menu] =
-   Full(Menu(Loc("myorders", List("myorders"), S.?("My Orders"),  
+   Full(Menu(Loc("myorders", List("myorders"), S.?("Order History"),  
 				   LocGroup("user-operations"),  
                  testLogginIn)))	
 }
