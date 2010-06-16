@@ -606,34 +606,32 @@ a.contact {
 	padding: 10px 0 0 60px;
 }
 
-.shopping-cart-contents {
+.item-table {
 	width:100%;
-	padding-left: 15px;
-	padding-right: 15px;
 }
 
-.shopping-cart-contents tr {
+.item-table tr {
 	padding-bottom: 10px;
 }
 
-.shopping-cart-contents th {
+.item-table th {
 	text-align: left;
 	background: none;
 	border-bottom: 2px solid #159DCC;
 }
 
-.shopping-cart-contents tfoot td {
+.item-table tfoot td {
 	border-top: 2px solid #159DCC;	
 }
 
-.shopping-cart-summary {
+.item-table-summary {
 	border-top: 2px solid blue;
 }
 
-.center_box_big {
+.center_box_big {	
+	padding: 0 0 0 10px;
+	margin: 0 0 0 5px;	
 	width: 554px;
 	height: auto;
 	float: left;
-	margin-left: 10px;
-	margin-right: 10px;
 }

@@ -1,4 +1,4 @@
-<table class="shopping-cart-contents">
+<table class="item-table">
 <lift:ShoppingCart.info>	
 	<thead>
 		<tr>			
@@ -10,8 +10,8 @@
 	<tfoot>
 		<tr>
 			<td/>
-			<td><cart:number_of_items /></td>
 			<td><cart:total_price withCurrency="yes" /></td>
+			<td><cart:number_of_items /></td>			
 		</tr>
 	</tfoot>	
 	<tbody>			
@@ -22,7 +22,7 @@
 				<item:price withCurrency="yes" />					
 			</td>			
 			<td>
-				<item:amount /><br/>
+				<item:amount />
 				<item:remove />
 			</td>
 		</tr>
