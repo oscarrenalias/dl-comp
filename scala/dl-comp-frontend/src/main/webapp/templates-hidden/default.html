@@ -6,7 +6,6 @@
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
     	<lift:CSS.blueprint />
-    	<lift:CSS.fancyType />		
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 		<!--[if IE 6]>
 		<link rel="stylesheet" type="text/css" href="/css/iecss.css" />
@@ -18,11 +17,6 @@
 <body>
 	<div id="main_container">
 	  <div id="header">
-	    <div class="top_right">
-	      <div class="big_banner"> 
-	      	<!-- a href="http://www.free-css.com/"><img src="/images/banner728.jpg" alt="" border="0" /></a --> 
-	      </div>
-	    </div>
 	    <div id="logo"> 
 	    	<a href="/index"><img src="/images/logo.png" alt="" border="0" width="336" height="129" /></a>
 	    </div>
@@ -53,8 +47,12 @@
 	    <!-- end of left content -->
 		<div class="center_content">
 			<div id="messages"></div>
-			<lift:snippet type="msgs"/>
-			<lift:bind name="content" />		
+			<lift:snippet type="msgs">
+				<lift:error_class>errorBox</lift:error_class>				
+				<lift:warning_class>warningBox</lift:warning_class>
+				<lift:notice_class>noticeBox</lift:notice_class>			
+			</lift:snippet>
+			<lift:bind name="content"/>
 		</div>
 	   <!-- end of center content -->
 	    <div class="right_content">

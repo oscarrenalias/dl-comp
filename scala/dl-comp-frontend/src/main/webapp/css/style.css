@@ -1,8 +1,8 @@
 body {
 	background: url(/images/bg.jpg) repeat-x #e4e9ec top;
 	padding: 0;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 13px;
 	margin: 0px auto auto auto;
 	color: #000;
 }
@@ -84,7 +84,7 @@ ul.menu {
 
 ul.menu li {
 	display: inline;
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 	line-height: 36px;
 }
@@ -149,7 +149,7 @@ span.current {
 	margin: 5px 0 0 0;
 	background: url(/images/menu_title_bg.gif) no-repeat center;
 	text-align: center;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: bold;
 	color: #159dcc;
 	line-height: 30px;
@@ -243,7 +243,7 @@ input.newsletter_input {
 	height: 16px;
 	border: 1px #ddd9d9 solid;
 	margin: 10px 0 5px 0;
-	font-size: 12px;
+	font-size: 13px;
 	padding: 3px;
 	color: #999999;
 }
@@ -279,7 +279,7 @@ a.join {
 }
 
 .oferta_title {
-	font-size: 15px;
+	font-size: 16px;
 	color: #159dcc;
 	font-weight: bold;
 }
@@ -292,7 +292,7 @@ a.join {
 
 .oferta_text {
 	padding: 5px 0 5px 0;
-	font-size: 12px;
+	font-size: 13px;
 	color: #159dcc;
 	text-align: justify;
 	line-height: 15px;
@@ -311,7 +311,7 @@ a.join {
 	padding: 0 0 0 10px;
 	margin: 0 0 0 5px;
 	line-height: 31px;
-	font-size: 12px;
+	font-size: 13px;
 	color: #159DCC;
 	font-weight: bold;
 	background: url(/images/bar_bg.gif) no-repeat center;
@@ -330,8 +330,7 @@ a.join {
 }
 
 .cart_title {
-	font-size: 12px;
-	font-size: 12px;
+	font-size: 13px;
 	color: #847676;
 	font-weight: bold;
 	padding: 0px;
@@ -460,11 +459,11 @@ a.prod_buy {
 	color: #ff8a00;
 	padding: 5px 0 5px 0;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 .specifications {
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: bold;
 	line-height: 18px;
 }
@@ -530,7 +529,7 @@ span.blue {
 label.contact {
 	width: 75px;
 	float: left;
-	font-size: 12px;
+	font-size: 13px;
 	text-align: right;
 	padding: 4px 5px 0 0;
 	color: #333333;
@@ -549,7 +548,7 @@ textarea.contact_textarea {
 	width: 253px;
 	height: 100px;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
+	font-size: 13px;
 	color: #999999;
 	background-color: #fff;
 	border: 1px #DFDFDF solid;
@@ -634,4 +633,28 @@ a.contact {
 	width: 554px;
 	height: auto;
 	float: left;
+}
+
+/**
+ * Classes for Lift's notice/warning/error messages
+ */
+.errorBox ul {
+	list-style-type: none;
+	padding: 0;
+	padding-bottom: 5px;
+	margin: 0;	
+}
+
+.warningBox  ul {
+	list-style-type: none;
+	padding: 0;
+	padding-bottom: 5px;
+	margin: 0;	
+}
+
+.noticeBox ul {
+	list-style-type: none;
+	padding: 0;
+	padding-bottom: 5px;
+	margin: 0;
 }

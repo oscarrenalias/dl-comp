@@ -1,3 +1,22 @@
 <lift:surround with="default" at="content">
-	Welcome!
+	<div class="center_box_big">
+		<p>
+			Welcome!
+		</p>
+	<lift:Login.loggedIn>
+		<p>
+			Feel free to browse the catalog using the categories on the left. Add items
+			to your shopping cart by using the "Add to Cart" links.
+		</p>
+		<p>
+			You can also see your previous order using the Order History link on the right.
+		</p>
+	</lift:Login.loggedIn>
+	<lift:Login.loggedOut>
+		<p>
+			You can browse the item catalog using the categories on the left, but must be
+			logged in order to add new items to the shopping cart.
+		</p>	
+	</lift:Login.loggedOut>
+	</div>
 </lift:surround>
