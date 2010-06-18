@@ -114,6 +114,7 @@
         <configuration>
           <contextPath>/</contextPath>
           <scanIntervalSeconds>5</scanIntervalSeconds>
+		  <webDefaultXml>src/test/resources/webdefault.xml</webDefaultXml>
         </configuration>
       </plugin>
       <plugin>
