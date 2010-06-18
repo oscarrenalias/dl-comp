@@ -9,19 +9,34 @@ import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js._
 import Bindings._
 
+/**
+ * Binding logic for the Item class.
+ * 
+ * Provides some presentation logic for adding items to the shopping cart
+ */
 object ItemBinding extends DataBinding[ModelItem] {
 	
     var amount = "1";
 
+	// implicit variable that defines which binding class to use for ItemImageData 
+	// objects
 	implicit val imageBinder = ItemImageDataBinding
 	
-    def addToCartAjax(item:ModelItem): JsCmd = {
-     		ShoppingCart.addItem(1, item)
-			import net.liftweb.http.js.jquery.JqJsCmds.DisplayMessage 
-			new DisplayMessage("messages", Text(S.?("Item added to shopping cart")), 5000, 1000)
+    def addToCartAjax(item:ModelItem) = {
+     	ShoppingCart.addItem(1, item)
+		S.notice(S.?("Item added to shopping cart"))
+		import net.liftweb.http.js.JsCmds._Noop 
+		//new DisplayMessage("messages", Text(S.?("Item added to shopping cart")), 5000, 1000)
+		
+		// we need to return a JsCmd but since we've already set the message via S.notice
+		// and we don't want to do anything else, we return this "no-op" response
+		_Noop
     }	
 
-    def addToCartForm(item:ModelItem) = ShoppingCart.addItem(amount.toInt, item)
+    def addToCartForm(item:ModelItem) = {
+		ShoppingCart.addItem(amount.toInt, item)
+		S.notice(S.?("Item added to shopping cart"))
+	}
 	
 	def apply(item: ModelItem): Binding = (xhtml: NodeSeq) => bind("item", xhtml, 
 		"id" -> item.id, 
@@ -41,6 +56,9 @@ object ItemBinding extends DataBinding[ModelItem] {
 		"add_to_cart_form" -%> SHtml.submit(S.?("Add to cart"), () => addToCartForm(item)))
 }
 
+/**
+ * Binding for the ItemImageData object
+ */
 object ItemImageDataBinding extends DataBinding[ItemImageData] {
 	def apply(image: ItemImageData) =
 		bind("image", _, 
@@ -54,6 +72,9 @@ object ItemImageDataBinding extends DataBinding[ItemImageData] {
 		
 }
 
+/**
+ * Binding logic for CatalogCategory objects
+ */
 object CatalogCategoryBinding extends DataBinding[CatalogCategory] {
 	def apply(cat: CatalogCategory): Binding = bind("category", _,
 		"id" -> cat.id,
@@ -63,6 +84,9 @@ object CatalogCategoryBinding extends DataBinding[CatalogCategory] {
 		"link" -%> SHtml.link("/browse", () => currentCategory(Full(cat)), Text(cat.name)))
 }
 
+/**
+ * Binding logic for the ShoppingCart data
+ */
 object ShoppingCartBinding extends DataBinding[ShoppingCart] {
 	
 	def apply(s: ShoppingCart): Binding = (xhtml: NodeSeq) => {
@@ -76,6 +100,9 @@ object ShoppingCartBinding extends DataBinding[ShoppingCart] {
 	}
 }
 
+/**
+ * Binding logic for AddressInfo objects
+ */
 object AddressBinding extends DataBinding[AddressInfo] {
 	def apply(address: AddressInfo): Binding = bind("address", _,
 		"address1" -> address.address1,
@@ -85,14 +112,21 @@ object AddressBinding extends DataBinding[AddressInfo] {
 		"country" -> address.country)
 }
 
+/**
+ * Binding lgoci for ContactInfo objects
+ */
 object ContactBinding extends DataBinding[ContactInfo] {
 	def apply(contact: ContactInfo): Binding = bind("contact", _, 
 		"email" -> contact.email,
 		"phone" -> contact.phone )
 }
 
+/**
+ * Binding logic for line items in Order objects
+ */
 object OrderLineItemBinding extends DataBinding[LineItemInfo] {
 	
+	// implicit used to define the binding class to be used for the ItemImageData objects
 	implicit val imageBinder = ItemImageDataBinding	
 	
 	def apply(l: LineItemInfo): Binding = (xhtml: NodeSeq) => {
@@ -111,6 +145,16 @@ object OrderLineItemBinding extends DataBinding[LineItemInfo] {
 	}
 }
 
+/**
+ * Trait that defines the binding logic for orders. Note how the composability
+ * and implicit features are used to define that "some" class will provide 
+ * an implicit reference to a data binding class for addresses, contacts,
+ * items and line items
+ *
+ * Since this class is a trait, it cannot be instantiated and it must be extended
+ * so that all the required implicit parameters are provided as object/class
+ * references
+ */
 trait OrderBinding extends DataBinding[Order] {
 	
 	implicit val addressBinding: DataBinding[AddressInfo]
@@ -137,7 +181,7 @@ trait OrderBinding extends DataBinding[Order] {
 
 /**
  * Object that contains the default implicit bindings for displaying
- * all the data within an Order object
+ * all the data within an Order object, extending the trait
  */
 object DefaultOrderBinding extends OrderBinding {
 	val addressBinding = AddressBinding

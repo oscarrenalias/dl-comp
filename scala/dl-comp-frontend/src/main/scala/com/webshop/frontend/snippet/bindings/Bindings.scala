@@ -11,6 +11,20 @@ import net.liftweb.util.Helpers._
 import Bindings._
 import scala.xml._
 
+/**
+ * This class implements composable and generic data binding for model classes 
+ * based on implicits. 
+ *
+ * The usage of implicits allows to call model.bind() in objects that don't have such
+ * but for which an implicit data binding class has been defined in the scope.
+ *
+ * The composability allows to provide binding logic for complex model objects, which
+ * may have internal references to other "bindable" model objects.
+ *
+ * Having separate classes for binding allows us to reuse the binding logic throughout
+ * several snippets, instead of littering the code with the same calls to flatMap and bind
+ * over and over again.
+ */
 object Bindings {
    type Binding = NodeSeq => NodeSeq
 
