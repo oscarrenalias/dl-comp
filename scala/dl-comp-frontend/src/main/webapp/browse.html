@@ -2,9 +2,10 @@
 	<lift:Catalog.category>
 		<div class="center_title_bar"><category:name/></div>
 	</lift:Catalog.category>	
+	<lift:embed what="/templates-hidden/messages" />
 		<!-- eager_eval is needed here so that Catalog.items is passed the results of
 		 	embedding the page, not the <lift:embed .../> code -->
 		<lift:Catalog.items eager_eval="true">
-			<lift:embed what="/templates-hidden/item-data.html" />		
+			<lift:embed what="/templates-hidden/item-data" />		
 		</lift:Catalog.items>				
 </lift:surround>

@@ -29,7 +29,7 @@ class ShoppingCart {
 					"total_price" -> Text(((item._1 * item._2.price.toDouble).toString) + " EUR"),
 					"remove" -> SHtml.a({() =>
 						ShoppingCart.removeItem(item._1, item._2)
-						SetHtml("shopping-cart-details", <lift:embed what="/templates-hidden/cart-data.html" />)}, Text(S.?("Remove")))
+						SetHtml("shopping-cart-details", <lift:embed what="/templates-hidden/cart-data" />)}, Text(S.?("Remove")))
 				)
 			)
 		}		

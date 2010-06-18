@@ -55,7 +55,7 @@ class CartActor extends CometActor {
 	
 	def render = {
 		if(User.loggedIn_?)
-			<lift:embed what="templates-hidden/summary-cart-data.html"/>
+			<lift:embed what="/templates-hidden/summary-cart-data"/>
 		else
 			<span>Please log in to add items to your shopping cart</span>
 	}

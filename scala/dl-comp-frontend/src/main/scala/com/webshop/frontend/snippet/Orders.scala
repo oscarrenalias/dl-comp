@@ -11,7 +11,7 @@ import net.liftweb.http.js.JsCmds
 import net.liftweb.http.js.jquery.JqJsCmds._
 import com.webshop.frontend.model._
 import com.webshop.frontend.snippet.bindings._
-import Bindings._
+import com.webshop.frontend.snippet.bindings.Bindings._
 
 object currentOrder extends RequestVar[Box[Order]](Empty)
 
@@ -86,9 +86,7 @@ class Orders {
 	 */
 	def myOrders(xhtml: NodeSeq) = {
 		Order.getUserOrders(User.currentUser.get.email) match {
-			case Full(l) => {
-				l.flatMap( order => order.bind(xhtml))
-			}
+			case Full(l) => l.flatMap( order => order.bind(xhtml))
 			case _ => Text("No previous orders found")
 		}
 	}

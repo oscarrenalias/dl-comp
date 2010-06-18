@@ -1,6 +1,7 @@
 <lift:surround with="default" at="content">
 	<lift:Orders.order>
 		<div class="center_title_bar">Order <order:id /></div>	
+		<lift:embed what="/templates-hidden/messages" />
 			<div class="center_box_big">
 				<order:description /><br/>
 				Status: <order:status /><br/>		

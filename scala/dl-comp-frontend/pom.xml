@@ -9,7 +9,8 @@
   <properties>
     <scala.version>2.7.7</scala.version>
 	<jersey.version>1.1.5.1</jersey.version>
-	<lift.version>1.1-M8</lift.version>
+	<!-- lift.version>1.1-M8</lift.version -->
+	<lift.version>2.0-RC2</lift.version>
   </properties>
   <repositories>
     <repository>

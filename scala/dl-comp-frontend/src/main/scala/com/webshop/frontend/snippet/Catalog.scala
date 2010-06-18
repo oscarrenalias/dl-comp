@@ -12,7 +12,7 @@ import net.liftweb.http.js._
 import com.webshop.frontend.comet._
 import com.webshop.frontend.model.{Item => ModelItem,Catalog => ModelCatalog,CatalogCategory,RootCatalogCategory,User}
 import com.webshop.frontend.snippet.bindings._
-import Bindings._
+import com.webshop.frontend.snippet.bindings.Bindings._
 
 object currentCategory extends RequestVar[Box[CatalogCategory]](Empty)
 

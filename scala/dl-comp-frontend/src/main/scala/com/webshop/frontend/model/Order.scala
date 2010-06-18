@@ -61,17 +61,18 @@ case class Order(var id: String, var description: String, var user: String, var 
 	/**
 	 * Check if the order can be submitted. We are not using Lift's Mapper 
 	 * classes so we need to do the validation manually
-	 * @return
+	 * @return A list of errors wrapped in an Option, or None if
+	 * no errors were found
 	 */
 	def validate: Option[List[NodeSeq]] = {
 		var errors = List[NodeSeq]()
-		if( address.address1 == "" ) errors + Text("Address cannot be empty")
-		if( address.city == "" ) errors + Text("City cannot be empty")
-		if( address.country == "" ) errors + Text("Country cannot be empty")
-		if( address.postcode == "" ) errors + Text("Postcode cannot be empty")
-		if( contact.name == "" ) errors + Text("Name cannot be empty")
-		if( contact.phone == "" ) errors + Text("Phone cannot be empty")
-		if( contact.email == "" ) errors + Text("Email cannot be empty")		
+		if( address.address1.equals("")) errors = Text("Address cannot be empty") :: errors
+		if( address.city.equals("")) errors = Text("City cannot be empty") :: errors
+		if( address.country.equals("")) errors = Text("Country cannot be empty") :: errors
+		if( address.postcode.equals("")) errors = Text("Postcode cannot be empty") :: errors
+		if( contact.name.equals("")) errors = Text("Name cannot be empty") :: errors
+		if( contact.phone.equals("")) errors = Text("Phone cannot be empty") :: errors
+		if( contact.email.equals("")) errors = Text("Email cannot be empty") :: errors
 		
 		if (errors.length == 0) None else Some(errors)
 	}

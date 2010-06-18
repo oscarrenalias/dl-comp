@@ -7,7 +7,7 @@ import net.liftweb.util.Helpers._
 import com.webshop.frontend.model.{Item=>ModelItem,_}
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js._
-import Bindings._
+import com.webshop.frontend.snippet.bindings.Bindings._
 
 /**
  * Binding logic for the Item class.
