@@ -3,18 +3,37 @@
 <lift:Orders.checkoutNotOk>
 	<div id="checkout">
 		<lift:Orders.add form="post">
-		 	<table>
-		 	<tr><td>Address Information</td></tr>
-		 	<tr><td>Address 1:</td><td><data:address1 /></td></tr>
-		 	<tr><td>Address 2:</td><td><data:address2 /></td></tr>
-		 	<tr><td>City:</td><td><data:city /></td></tr>
-		 	<tr><td>Postcode:</td><td><data:postcode /></td></tr>
-		 	<tr><td>Country:</td><td><data:country /></td></tr>
-		 	<tr><td>Contact Information</td></tr>
-		 	<tr><td>Phone:</td><td><data:phone /></td></tr>
-		 	<tr><td>Email:</td><td><data:email /></td></tr>
-		 	<tr><td><data:submit /></td></tr>
-		 	</table>
+		 	<span class="checkout-header">Address Information</span>
+			<label for="address1">Address 1:</label>
+			<data:address1 />
+			<br/>
+			
+			<label for="address2">Address 2:</label>
+			<data:address2 />
+			<br/>
+			
+			<label for="city">City:</label>
+			<data:city />
+			<br/>
+			
+			<label for="postcode">Postcode:</label>
+			<data:postcode />
+			<br/>
+			
+			<label for="country">Country:</label>
+			<data:country />
+			<br/>
+			
+			<span class="checkout-header">Contact Information</span>
+			<label for="phone">Phone:</label>
+			<data:phone />
+			<br/>
+			
+			<label for="email">Email:</label>
+			<data:email />
+			<br/>
+			
+			<data:submit />
 	 	</lift:Orders.add>
 	 </div>
 </lift:Orders.checkoutNotOk>

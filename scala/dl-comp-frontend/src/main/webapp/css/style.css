@@ -658,3 +658,19 @@ a.contact {
 	padding-bottom: 5px;
 	margin: 0;
 }
+
+#checkout {
+	color: #504B4B;
+}
+
+.checkout-header {
+	font-size: 14px;
+	border-bottom: 2px solid #159DCC;
+	display: block;
+	margin-top: 5px;
+	margin-bottom: 7px;
+}
+
+#checkout label {
+	display:block
+}

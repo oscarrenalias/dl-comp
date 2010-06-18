@@ -33,6 +33,8 @@ class Orders {
 	  
 	  val order = Order()
 	  
+	  val textFieldSize = "70"
+	  
 	  def submitOrder() = {
     
 		  order.items = ShoppingCart.getItemsForOrder
@@ -69,13 +71,13 @@ class Orders {
 	  }
         
       bind("data", xhtml,
-        "address1" -> SHtml.text(order.address.address1, order.address.address1 = _),
-        "address2" -> SHtml.text(order.address.address2, order.address.address2 = _),
-        "city" -> SHtml.text(order.address.city, order.address.city = _),
-        "postcode" -> SHtml.text(order.address.postcode, order.address.postcode = _),
-        "country" -> SHtml.text(order.address.country, order.address.country = _),
-        "phone" -> SHtml.text(order.contact.phone, order.contact.phone = _),
-        "email" -> SHtml.text(order.contact.email, order.contact.email = _),
+        "address1" -> SHtml.text(order.address.address1, order.address.address1 = _) % ("size" -> textFieldSize),
+        "address2" -> SHtml.text(order.address.address2, order.address.address2 = _) % ("size" -> textFieldSize),
+        "city" -> SHtml.text(order.address.city, order.address.city = _) % ("size" -> textFieldSize),
+        "postcode" -> SHtml.text(order.address.postcode, order.address.postcode = _) % ("size" -> textFieldSize),
+        "country" -> SHtml.text(order.address.country, order.address.country = _) % ("size" -> textFieldSize),
+        "phone" -> SHtml.text(order.contact.phone, order.contact.phone = _) % ("size" -> textFieldSize),
+        "email" -> SHtml.text(order.contact.email, order.contact.email = _) % ("size" -> textFieldSize),
         "submit" -> SHtml.submit("Checkout", validateAndSubmit))  
 	}
 	
