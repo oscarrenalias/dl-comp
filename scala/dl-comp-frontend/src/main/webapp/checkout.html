@@ -1,44 +1,4 @@
 <lift:surround with="default" at="content">
 <div class="center_title_bar">Checkout</div>
-<lift:embed what="/templates-hidden/messages" />
-<lift:Orders.checkoutNotOk>
-	<div id="checkout">
-		<lift:Orders.add form="post">
-		 	<span class="checkout-header">Address Information</span>
-			<label for="address1">Address 1:</label>
-			<data:address1 />
-			<br/>
-			
-			<label for="address2">Address 2:</label>
-			<data:address2 />
-			<br/>
-			
-			<label for="city">City:</label>
-			<data:city />
-			<br/>
-			
-			<label for="postcode">Postcode:</label>
-			<data:postcode />
-			<br/>
-			
-			<label for="country">Country:</label>
-			<data:country />
-			<br/>
-			
-			<span class="checkout-header">Contact Information</span>
-			<label for="phone">Phone:</label>
-			<data:phone />
-			<br/>
-			
-			<label for="email">Email:</label>
-			<data:email />
-			<br/>
-			
-			<data:submit />
-	 	</lift:Orders.add>
-	 </div>
-</lift:Orders.checkoutNotOk>
-<lift:Orders.checkoutOk>
-  	<a href="/">Continue shopping</a>
-</lift:Orders.checkoutOk>
+<lift:Checkout/>
 </lift:surround>

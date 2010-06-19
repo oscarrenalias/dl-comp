@@ -671,6 +671,21 @@ a.contact {
 	margin-bottom: 7px;
 }
 
-#checkout label {
+.form label {
 	display:block
+}
+
+.form input {
+	margin-bottom: 10px;
+	width:70%;
+}
+
+.lift_error {
+	color: red;
+	list-style-type: none;
+}
+
+.form li, .form ul {
+	padding: 0px;
+	margin: 0px;
 }
