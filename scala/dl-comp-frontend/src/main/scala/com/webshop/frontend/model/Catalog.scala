@@ -4,18 +4,25 @@ import com.webshop.frontend.restclient.RestClient
 import _root_.net.liftweb.common.{Box,Full,Empty} 
 
 object Catalog {
-   var data = Map(
-     1 -> new CatalogCategory(1,"Category 1","Description of category 1",0,List("1", "2")),
-     2 -> new CatalogCategory(2,"Category 2","Description of category 2",0,List("1", "2", "3", "4", "5", "6")),
-     3 -> new CatalogCategory(3,"Category 2.1","Description of category 2.1",2,List("4")),
-     4 -> new CatalogCategory(4,"Category 2.2","Description of category 2.2",2,List("5")),
-	 5 -> new CatalogCategory(5,"Category 2.2.1","Description of category 2.2.1",4,List("10", "15")),
- 	 6 -> new CatalogCategory(6,"Category 2.2.1.1","Description of category 2.2.1.1",5,List("20", "25")),
-     7 -> new CatalogCategory(2,"Category 3","Description of category 3",0,List("1", "2", "3")),
-     8 -> new CatalogCategory(2,"Category 4","Description of category 4",0,List("1", "2", "3")),
-     9 -> new CatalogCategory(2,"Category 5","Description of category 5",0,List("1", "2", "3")),
-     10 -> new CatalogCategory(2,"Category 6","Description of category 6",0,List("1", "2", "3")),
-     11 -> new CatalogCategory(2,"Category 7","Description of category 7",0,List("1", "2", "3"))
+   var data = Map(	
+     1 -> new CatalogCategory(1, "Xbox 360","Xbox 360 consoles, games and accessories", 0, List("1" ,"2", "3")),
+		4->new CatalogCategory(4, "Games","Xbox 360 games", 1, List("1" ,"2", "3")),
+			5->new CatalogCategory(5, "Racing games","Xbox 360 racing games", 4, List("1" ,"2", "3")),
+			6->new CatalogCategory(6, "Shooters","Xbox 360 shooters", 4, List("1" ,"2", "3")),
+			7->new CatalogCategory(7, "Sports","Xbox 360 sports games", 4, List("1" ,"2", "3")),
+		8->new CatalogCategory(8, "Accessories","Xbox 360 accessories", 1, List("1" ,"2", "3")),	
+     2 -> new CatalogCategory(2, "Playstation 3","Playstation 3 consoles, games and accessories", 0, List("1" ,"2", "3")),
+		9->new CatalogCategory(9, "Games","Playstation 3 games", 2, List("1" ,"2", "3")),
+			10->new CatalogCategory(10, "Racing games","Xbox 360 racing games", 9, List("1" ,"2", "3")),
+			11->new CatalogCategory(11, "Shooters","Playstation 3 shooters", 9, List("1" ,"2", "3")),
+			12->new CatalogCategory(12, "Sports","Playstation 3 sports games", 9, List("1" ,"2", "3")),
+		18->new CatalogCategory(18,"Accessories","Playstation 3 accessories", 2, List("1" ,"2", "3")),
+     3 -> new CatalogCategory(3,"Nintendo Wii","Nintendo Wii consoles, games and accessories", 0, List("1" ,"2", "3")),
+		13->new CatalogCategory(13, "Games","Nintendo Wii games", 3, List("1" ,"2", "3")),
+			14->new CatalogCategory(14, "Racing games","Nintendo Wii racing games", 13, List("1" ,"2", "3")),
+			15->new CatalogCategory(15, "Family","Nintendo Wii family ga,es", 13, List("1" ,"2", "3")),
+			16->new CatalogCategory(16, "Sports","Nintendo Wii sports games", 13, List("1" ,"2", "3")),
+		17->new CatalogCategory(17,"Accessories","Nintendo Wii accessories", 3, List("1" ,"2", "3"))
    )
    
    def getLevel(level: Int) = data.filter(c => c._2.parent == level)
