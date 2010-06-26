@@ -4,6 +4,10 @@ import com.webshop.frontend.restclient.RestClient
 import _root_.net.liftweb.common.{Box,Full,Empty} 
 
 object Catalog {
+	/**
+	 * This would of course come from the database in real life, but it was faster to implement
+	 * it as a static hard-coded structure for the purpose of this application
+	 */
    var data = Map(	
      1 -> new CatalogCategory(1, "Xbox 360","Xbox 360 consoles, games and accessories", 0, List("1" ,"2", "3")),
 		4->new CatalogCategory(4, "Games","Xbox 360 games", 1, List("1" ,"2", "3")),
