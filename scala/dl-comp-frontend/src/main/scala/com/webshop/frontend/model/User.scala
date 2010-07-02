@@ -103,6 +103,19 @@ object User extends User with MetaMegaProtoUser[User] {
    Full(Menu(Loc("myorders", List("myorders"), S.?("Order History"),  
 				   LocGroup("user-operations"),  
                  testLogginIn)))	
+
+	/**
+	 * Overridden method to add some testing information
+	 */
+	override def loginXhtml = {
+			    (<form method="post" action={S.uri}><div class="center_title_bar">{S.??("Login")}</div><table>
+					  <tr><td colspan="2"><b>Use a@a.com and 12345678 as the password for testing purposes</b></td></tr> 
+			          <tr><td>{S.??("email.address")}</td><td><user:email /></td></tr>
+			          <tr><td>{S.??("password")}</td><td><user:password /></td></tr>
+			          <tr><td><a href={lostPasswordPath.mkString("/", "/", "")}
+			                >{S.??("recover.password")}</a></td><td><user:submit /></td></tr></table>
+			     </form>)
+			  }
 }
 
 /**
