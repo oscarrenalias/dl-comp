@@ -10,44 +10,46 @@ import _root_.net.liftweb.common.{Box,Full,Empty}
 
 object ShoppingCart extends SessionVar[ShoppingCart](new ShoppingCart)
 
+/**
+ * Provides shopping cart functionality
+ */
 class ShoppingCart {
 	
-	Log.debug("Creating new shopping cart"); 
-	
-	type ShoppingCartLineItem = (Int, ModelItem)	
-  
+	type ShoppingCartLineItem = (Int, ModelItem)	  
 	var items = new ArrayBuffer[ShoppingCartLineItem]  
   
-
-	def addItem(amount: Int, item: ModelItem) = {
-	
-		CartActorManager ! CartItemAdded(item)
-		
+	def addItem(amount: Int, item: ModelItem) = {	
+		CartActorManager ! CartItemAdded(item)		
 	  	items += (amount, item)
-	  	dumpCartData
+		dumpCartData
 	}
   
-	def removeItem(amount: Int, item: ModelItem) = {
-		
-		CartActorManager ! CartItemRemoved(item)
-		
+	def removeItem(amount: Int, item: ModelItem) = {		
+		CartActorManager ! CartItemRemoved(item)		
 	  	items -= (amount, item)
 	  	dumpCartData
 	}
   
-	def getItems: ArrayBuffer[ShoppingCartLineItem] = items
-  
+	/**
+	 * Given the internal ArrayBuffer structure with the list of shopping cart items, returns a native
+	 * Scala list of LineItemInfo objects to that they can be directly added to an existing Order
+	 * object
+	 */
 	def getItemsForOrder: List[LineItemInfo] = items.flatMap({x=>List(LineItemInfo(x._2.id, x._1))}).toList
   
-	def dumpCartData = {
+	protected def dumpCartData = {
 	  	Log.debug("Items in cart " + items.size)
 	  	items.foreach(i => Log.debug("item: " + i._2.id + " - amount:" + i._1.toString))
 	}  
   
+	/**
+	 * Empties the shopping cart
+	 */
 	def empty = items.clear
   
 	def isEmpty = (items.length == 0)
 	def hasItems = (items.length > 0)
+	
 	def totalPrice = {
 		var total=0.0
 		for((amount, item) <- items) total += amount*item.price.toDouble

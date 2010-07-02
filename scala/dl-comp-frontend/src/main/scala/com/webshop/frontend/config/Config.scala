@@ -1,5 +1,8 @@
 package com.webshop
 
+/**
+ * Basic configuration object
+ */
 object Config {
 
 	/**
@@ -24,7 +27,7 @@ object Config {
 
 /**
  * Object that provides direct access to some of the key configuration properties
- * via (sort of) constants
+ * via lazy variables
  */
 object WebshopConfig {	
 	object URI {

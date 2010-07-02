@@ -17,16 +17,18 @@ object currentItem extends RequestVar[Box[ModelItem]](Empty)
 
 class Item {
   
-  def info(xhtml: NodeSeq): NodeSeq = {        
-	
-    def showItemData(item: ModelItem): NodeSeq = {
-		implicit val itemBinding = ItemBinding	
-		SHtml.ajaxForm(item.bind(xhtml) ++ SHtml.hidden(() => ItemBinding.addToCartForm(item)))
-	}
+	/**
+	 * Shows item-related data 
+	 */
+	def info(xhtml: NodeSeq): NodeSeq = {        	
+		def showItemData(item: ModelItem): NodeSeq = {
+			implicit val itemBinding = ItemBinding	
+			SHtml.ajaxForm(item.bind(xhtml) ++ SHtml.hidden(() => ItemBinding.addToCartForm(item)))
+		}
     
-    currentItem.is match {
-      case Full(item) => showItemData(item)
-      case _ =>  Text("Item not found")
-    }
-  }
+	currentItem.is match {
+			case Full(item) => showItemData(item)
+			case _ =>  Text("Item not found")
+		}
+	}
 }

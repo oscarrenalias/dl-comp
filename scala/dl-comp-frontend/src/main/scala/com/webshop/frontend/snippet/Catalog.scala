@@ -16,6 +16,9 @@ import com.webshop.frontend.snippet.bindings.Bindings._
 
 object currentCategory extends RequestVar[Box[CatalogCategory]](Empty)
 
+/**
+ * Catalog-related snippet methods
+ */
 class Catalog {
 	
 	/**

@@ -15,6 +15,9 @@ import com.webshop.frontend.model.{Item=>ModelItem}
  */
 class ShoppingCart {
 			
+	/**
+	 * Displays shopping cart data
+	 */
 	def info(xhtml:NodeSeq): NodeSeq = {
 		
 	  	def itemList(xhtml:NodeSeq): NodeSeq = {	
@@ -53,8 +56,10 @@ class ShoppingCart {
 		}
 	}
 	
-	private def showCartLinks: Boolean = User.loggedIn_? && ShoppingCart.totalItems > 0
-	
+	/**
+	 * Generic method that returns a NodeSeq object with xhtml data only if the given
+	 * condition is fulfilled
+	 */
 	def showIfCond(xhtml:NodeSeq, test: () => Boolean): NodeSeq = {
 		if(test())
 			xhtml
@@ -62,7 +67,11 @@ class ShoppingCart {
 			NodeSeq.Empty
 	}
 	
-	def checkoutLink: NodeSeq = showIfCond(<a href="/checkout">{Text(S.?("Checkout"))}</a>, () => showCartLinks)
-	
+	/**
+	 * These methods show/hide the checkout and cart content links depending on whether the cart
+	 * has any items in it
+	 */
+	protected def showCartLinks: Boolean = User.loggedIn_? && ShoppingCart.totalItems > 0	
+	def checkoutLink: NodeSeq = showIfCond(<a href="/checkout">{Text(S.?("Checkout"))}</a>, () => showCartLinks)	
 	def cartLink: NodeSeq = showIfCond(<a href="/cart">{Text(S.?("Cart contents"))}</a>, () => showCartLinks)
 }

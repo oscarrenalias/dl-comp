@@ -7,7 +7,10 @@ import com.webshop.frontend.restclient.JsonSerializable
 import com.webshop.WebshopConfig
 
 /**
- * Bean that holds information about an item  
+ * Bean class that holds information about an item. It is used by the Jersey client
+ * code to map a REST response from the server to an Item object.
+ *
+ * Also provides some basic accessor methods.
  */
 case class Item(var id: String, 
 				var name: String, 
@@ -29,8 +32,19 @@ case class Item(var id: String,
   def getImages = for (image <- images) yield image.large
 }
 
+/**
+ * Bean class used to map image data (thumbnail and large images) from REST
+ * to internal objects 
+ */
+case class ItemImageData (var small: String, var large: String)
+
+/**
+ * Singleton class to obtain item data via a REST call:
+ *
+ * <pre>
+ *  val item = Item.get(itemId)
+ * </pre>
+ */
 object Item extends JsonSerializable {      
   def get(id: String): Box[Item] = RestClient.Items.get(id)
 }
-
-case class ItemImageData (var small: String, var large: String)

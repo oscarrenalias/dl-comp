@@ -13,6 +13,9 @@ import _root_.net.liftweb.util.Log
 import com.webshop.frontend.model._
 import com.webshop.{WebshopConfig => config}
 
+/**
+ * Provides basic REST methods to any class that includes this trait
+ */
 trait RestfulOperator {
   
 	implicit val formats = net.liftweb.json.DefaultFormats  
@@ -35,6 +38,10 @@ trait RestfulOperator {
 	} 
 }
 
+/**
+ * Singleton that allows to execute REST calls. Each one of the model objects has its own
+ * REST set of methods implemented here
+ */
 object RestClient {
 
   object Items extends RestfulOperator {

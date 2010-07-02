@@ -7,9 +7,8 @@ import _root_.net.liftweb.http._
 import _root_.net.liftweb.sitemap._
 import _root_.net.liftweb.sitemap.Loc._
 
-
 /**
- * The singleton that has methods for accessing the database
+ * Class wrapping around user functionality, based on Lift's user classes
  */
 object User extends User with MetaMegaProtoUser[User] {
   override def dbTableName = "users" // define the DB table name

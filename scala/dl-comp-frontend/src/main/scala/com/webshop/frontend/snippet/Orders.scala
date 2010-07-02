@@ -19,6 +19,11 @@ import Helpers._
 
 object currentOrder extends RequestVar[Box[Order]](Empty)
 
+/**
+ * This class extends the LiftScreen objects so that we can generate a basic form
+ * and provide field validation without using Lift's Mapper classes (because we
+ * are not using Mapper objects anyway)
+ */
 object Checkout extends LiftScreen {
 	
 	// fields for the screen, including their validations and filters
@@ -62,7 +67,7 @@ object Checkout extends LiftScreen {
   	}	
 
 	// must be implemented since this method is marked as abstract in the LiftScreen trait,
-	// even though we don't really need it here
+	// even though we don't really use it here
 	override def finish() = Nil
 	
 	/**

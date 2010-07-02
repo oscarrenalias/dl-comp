@@ -7,24 +7,35 @@ import SHtml._
 import util._
 import net.liftweb.common.{Box,Full,Empty,Failure}
 import _root_.scala.xml.{NodeSeq,Text,Node,Elem}
-import com.webshop.frontend.snippet._
 import com.webshop.frontend.restclient._
 import com.webshop.frontend.model.Item
 
+// The following case classes are required for the json de-serialization logic
 case class AddressInfo(var address1: String, var address2: String, var city: String, var country: String, var postcode: String)
 case class ContactInfo(var name: String, var phone: String, var email: String)
 case class LineItemInfo(var item: String, var amount: String) {
-	def getItem = Item.get(item)
-	
-	lazy val description = getItem.get.description
-	
+	def getItem = Item.get(item)	
+	lazy val description = getItem.get.description	
 	lazy val boxedItem:Box[Item] = getItem
 }
 object LineItemInfo {
 	def apply(item:String, amount: Int) = new LineItemInfo(item, amount.toString)	
 }
 
-case class Order(var id: String, var description: String, var user: String, var status: String, var address: AddressInfo, var contact: ContactInfo, var items: List[LineItemInfo]) extends JsonSerializable { 	
+/**
+ * This class represents a sales order in the application.
+ *
+ * The long and hideous constructor is needed so that the Jersey client library
+ * can map from REST json responses to internal Order objects. If you need to create 
+ * an empty Order bean, please use the Order companion object instead
+ */
+case class Order(var id: String, 
+				 var description: String, 
+				 var user: String, 
+				 var status: String, 
+				 var address: AddressInfo, 
+				 var contact: ContactInfo, 
+				 var items: List[LineItemInfo]) extends JsonSerializable { 	
 
 	lazy val nicerDescription = (if(description.equals("")) "No description" else description)
 	
@@ -79,7 +90,7 @@ case class Order(var id: String, var description: String, var user: String, var 
 }
 
 /**
- * Companion of the Order class
+ * Companion of the Order class that provides static methods for creating and retrieving orders
  */
 object Order {
 	
@@ -89,32 +100,37 @@ object Order {
 	  val CREATED = "Created"
 	  val ERROR = "Error"		
 	}
-		
+	
+	/**
+	 * Used to create an empty Order object
+	 */
 	def apply() = {
 		new Order("", "", "", "",
 			 new AddressInfo("", "", "", "", ""), 
 			 new ContactInfo("", "", ""),
 			 List[LineItemInfo]())
 	}	
-  
-  def submit(order: Order): Box[Order] = {    
-    RestClient.Orders.create(order)
-  }
-  
-  def get(orderId: String): Box[Order] = {
-    RestClient.Orders.get(orderId)
-  }
-  
-  def getAll(): Box[List[Order]] = {
-    Empty
-  }
-  
-  def getUserOrders(userId: String): Box[List[Order]] = {
-	  // instead of passing the OrderList response directly, we will 
-	  // extract the List itself and return it as such, which is nicer to work with
-	  var userOrders = RestClient.Orders.getUserOrders(userId)
-	  if(userOrders.isDefined) Full(userOrders.get.orders) else Failure(userOrders.toString)
-  }
+	
+	/**
+	 * Creates a new order in the server 
+	 */
+	def submit(order: Order): Box[Order] = {    
+    	RestClient.Orders.create(order)
+	}
+	
+	/**
+	 * Retrieves the given order id from the server
+	 */
+	def get(orderId: String): Box[Order] = {
+    	RestClient.Orders.get(orderId)
+	}
+	
+	def getUserOrders(userId: String): Box[List[Order]] = {
+		// instead of passing the OrderList response directly, we will 
+		// extract the List itself and return it as such, which is nicer to work with
+		var userOrders = RestClient.Orders.getUserOrders(userId)
+		if(userOrders.isDefined) Full(userOrders.get.orders) else Failure(userOrders.toString)
+	}
 }
 
 /**
