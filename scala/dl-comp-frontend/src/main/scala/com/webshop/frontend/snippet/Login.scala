@@ -5,7 +5,6 @@ import _root_.scala.xml.{NodeSeq,Text,Node,Elem}
 import _root_.net.liftweb.common.{Box,Full,Empty}  
 import _root_.net.liftweb.util.Log
 import _root_.net.liftweb.util.Helpers._
-import com.webshop.frontend.logging._
 import com.webshop.frontend.model._
 
 /**
