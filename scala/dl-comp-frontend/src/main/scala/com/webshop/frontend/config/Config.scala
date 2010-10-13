@@ -16,26 +16,6 @@ object Config extends Logger {
 	
 	lazy val mode =  config.getString("mode").getOrElse("")
 
-	/**
-	 * This should come from a configuration file in real life
-	 */	
-	var data = List(
-		//"base_url" -> "http://ec2-67-202-14-141.compute-1.amazonaws.com:50000/demo.accenture.com~webshop~web/rest/",
-		"base_url" -> "http://localhost:9998",
-		"item_uri" -> "item",
-		"catalog_uri" -> "catalog",
-		"orders_uri" -> "orders",
-		"user_orders_uri" -> "orders/user",
-		"order_uri" -> "order",
-		"image_not_available_url" -> "http://server.com/imgs/image_not_available.png",
-		"thumbnail_not_available_url" -> "http://server.com/imgs/image_not_available.png"
-	)
-	
-	/*def get(key:String) = data.find(_._1.equals(key)) match {
-		case Some((x,y)) => Some(y)
-		case _ => None
-	}*/
-	
 	def get(key: String): Option[String] = config.getString(key) match {
 		case None => warn("No configuration value found for key:" + key); get(key, mode)
 		case Some(x) => Some(x)
