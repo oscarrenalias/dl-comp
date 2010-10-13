@@ -98,6 +98,14 @@
       <artifactId>mail</artifactId>
       <version>1.4.2</version>
     </dependency>
+	<!-- for the configgy jar -->
+    <dependency>
+      <groupId>net.lag</groupId>
+      <artifactId>configgy</artifactId>
+      <version>1.5.5</version>
+      <scope>system</scope>
+	  <systemPath>${basedir}/src/main/resources/lib/configgy-1.5.jar</systemPath>
+    </dependency>
   </dependencies>
   <build>
     <sourceDirectory>src/main/scala</sourceDirectory>
