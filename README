@@ -12,6 +12,14 @@ You can check that the backend is running by pointing your browser to http://loc
 
 Running the frontend
 --------------------
+Edit file *scala/dl-comp-frotend/config/webshop.conf* in the webshop frontend folder and change the value of variable "mode" to "localhost" if the REST backend
+is running locally, or "amazon" if you are testing with the REST backend running in the NetWeaver server currently
+located in AWS (note: that server is currently not available)
+
+mode = "localhost"
+
+Make sure that you start the REST server before starting the Scala frontend.
+
 In order to run the frontend Scala application, go to folder scala/dl-comp-frotend/ and type:
 
 		mvn jetty:run
