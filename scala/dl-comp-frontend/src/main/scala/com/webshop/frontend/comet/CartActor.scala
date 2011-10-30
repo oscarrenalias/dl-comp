@@ -2,7 +2,7 @@ package com.webshop.frontend.comet
 
 import scala.actors.Actor
 import scala.actors.Actor._
-import net.liftweb.http.CometActor 
+import net.liftweb.http.CometActor
 import net.liftweb.http.S
 import _root_.net.liftweb.util.Log
 import _root_.net.liftweb.util.Helpers._
@@ -32,14 +32,14 @@ case class Success(success:Boolean)
  */
 object CartActorManager extends Actor {
 	val listeners = new ListBuffer[CometActor]
-	
+
 	def act = {
-		loop { 
+		loop {
 			react {
 				// the add and remove listener messages are for the manager,
 				// but everything else must be passed to the listeners
 				case AddListener(listener) => {
-						listeners += listener 
+						listeners += listener
 						reply(Success(true))
 				}
 				case RemoveListener(listener) => {
@@ -51,7 +51,7 @@ object CartActorManager extends Actor {
 			}
 		}
 	}
-	
+
 	Log.info("Starting CartActorManager")
 	start
 }
@@ -65,9 +65,9 @@ object CartActorManager extends Actor {
  *  the ShoppingCart class
  */
 class CartActor extends CometActor {
-	
+
 	override def defaultPrefix = Full("cart")
-	
+
 	override def devMode = true
 
 	/**
@@ -80,7 +80,7 @@ class CartActor extends CometActor {
 		else
 			<span>Please log in to add items to your shopping cart</span>
 	}
-	
+
 	/**
 	 * Logic related to setting up the actor
 	 */
@@ -92,23 +92,23 @@ class CartActor extends CometActor {
             case _ => Log.error("There was an issue registering the listener")
         }
 	}
-	
+
 	/**
-	 * Removes itself from the listener manager 
+	 * Removes itself from the listener manager
 	 */
 	override def localShutdown = {
 		Log.debug("Shopping cart actor shutting down")
 		CartActorManager ! RemoveListener(this)
 	}
-	
+
 	/**
-	 * Processes messages 
+	 * Processes messages
 	 */
 	override def lowPriority = {
 		case CartUpdated => reRender(true)
 		case CartItemAdded(i) => reRender(true)
-		case CartItemRemoved(i) => reRender(true)		
-		case CartItemUpdated(i) => reRender(true)		
+		case CartItemRemoved(i) => reRender(true)
+		case CartItemUpdated(i) => reRender(true)
 		case _ => Log.error("The listener did not understand the message")
-	}	
+	}
 }

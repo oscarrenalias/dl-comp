@@ -10,7 +10,7 @@ import net.liftweb.json._
 import net.liftweb.json.Serialization.{read, write}
 import net.liftweb.json.JsonAST._
 import net.liftweb.json.JsonAST
-import net.liftweb.json.JsonDSL._  
+import net.liftweb.json.JsonDSL._
 import com.webshop.frontend.restclient._
 import com.webshop.frontend.model._
 
@@ -29,7 +29,7 @@ object AppTest {
 class JsonTests extends TestCase("json") {
 	def testEmptyOrder() = {
 		import com.webshop.frontend.model.Order
-		
+
 		val expected = """{"items":[],"contact":{"email":"","phone":"","name":""},"address":{"postcode":"","country":"","city":"","address2":"","address1":""},"status":"","user":"","description":"","id":""}"""
 		val o = Order()
 		assertEquals(expected, o.toJson)

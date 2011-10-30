@@ -623,16 +623,16 @@ a.contact {
 }
 
 .item-table tfoot td {
-	border-top: 2px solid #159DCC;	
+	border-top: 2px solid #159DCC;
 }
 
 .item-table-summary {
 	border-top: 2px solid blue;
 }
 
-.center_box_big {	
+.center_box_big {
 	padding: 0 0 0 10px;
-	margin: 0 0 0 5px;	
+	margin: 0 0 0 5px;
 	width: 554px;
 	height: auto;
 	float: left;
@@ -645,14 +645,14 @@ a.contact {
 	list-style-type: none;
 	padding: 0;
 	padding-bottom: 5px;
-	margin: 0;	
+	margin: 0;
 }
 
 .warningBox  ul {
 	list-style-type: none;
 	padding: 0;
 	padding-bottom: 5px;
-	margin: 0;	
+	margin: 0;
 }
 
 .noticeBox ul {

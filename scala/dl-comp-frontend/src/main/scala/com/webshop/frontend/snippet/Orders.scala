@@ -1,6 +1,6 @@
 package com.webshop.frontend.snippet
 
-import net.liftweb.http._ 
+import net.liftweb.http._
 import scala.collection.mutable.ArrayBuffer
 import _root_.net.liftweb.common.{Box,Full,Empty,Failure}
 import _root_.net.liftweb.util.Log
@@ -25,10 +25,10 @@ object currentOrder extends RequestVar[Box[Order]](Empty)
  * are not using Mapper objects anyway)
  */
 object Checkout extends LiftScreen {
-	
+
 	// fields for the screen, including their validations and filters
-	val name = field(S ? "Name", User.currentUser.get.firstName.is + " " + User.currentUser.get.lastName.is, 
-					 trim, valMinLen(2, S ? "Name is too short"))					
+	val name = field(S ? "Name", User.currentUser.get.firstName.is + " " + User.currentUser.get.lastName.is,
+					 trim, valMinLen(2, S ? "Name is too short"))
 	val address1 = field(S ? "Address 1", "", trim, valMinLen(5, S.?("Address is too short")))
 	val address2 = field(S ? "Address 2", "", trim)
 	val city = field(S ? "City", "", trim, valMinLen(2, S.?("A city must be provided")))
@@ -36,13 +36,13 @@ object Checkout extends LiftScreen {
 	val country = field(S ? "Country", "", trim, valMinLen(2, S.?("The country is not valid")))
 	val email = field(S ? "Email", User.currentUser.get.email.is, trim, valMinLen(2, S.?("Email address is not valid")))
 	val phone = field(S ? "Phone number", "", trim, valMinLen(2, S.?("Phone is not valid")))
-	
-	// use a custom template for the LiftScreen 
+
+	// use a custom template for the LiftScreen
 	override def allTemplatePath = List("templates-hidden", "checkout")
-	
+
 	// custom checkout button
 	override def finishButton: Elem = <button>{S.??("Checkout")}</button>
-	
+
 	/**
 	 * Method overriden from LiftScreen to provide our own logic. This was required
 	 * because in addition to the validations, we should also be able to stop
@@ -54,7 +54,7 @@ object Checkout extends LiftScreen {
       		case Nil => {
         		val snapshot = createSnapshot
 				submitOrder match {
-					case Full(o) => { 
+					case Full(o) => {
 						S.notice(S.?("Order created successfully with number ") + o.id)
 						redirectBack()
 					}
@@ -64,12 +64,12 @@ object Checkout extends LiftScreen {
 			}
       		case xs => S.error(xs)
     	}
-  	}	
+  	}
 
 	// must be implemented since this method is marked as abstract in the LiftScreen trait,
 	// even though we don't really use it here
 	override def finish() = Nil
-	
+
 	/**
 	 * Private method that takes care of creating an Order object,
 	 * submits it, and returns a Box with the results
@@ -88,19 +88,19 @@ object Checkout extends LiftScreen {
 		order.contact.email = email
 		order.contact.name = name
 		order.contact.phone = phone
-		
-		// set the line items 
-		order.items = ShoppingCart.getItemsForOrder		
-		
+
+		// set the line items
+		order.items = ShoppingCart.getItemsForOrder
+
 		val result = order.submit
-		result match {			
+		result match {
 			case Full(x) => ShoppingCart.empty
 			case _ => Nil
 		}
-		
+
 		result
 	}
-	
+
 	/**
 	 * Reimplemented from LiftScreen so that instead of going back to the referrer page
 	 * when the screen is over (default behaviour) we move the flow to another page
@@ -109,15 +109,15 @@ object Checkout extends LiftScreen {
 	override def redirectBack() {
 		S.seeOther("/index")
 	}
-}	
+}
 
 /**
  * Snippet that handles fetching and displaying orders
  */
 class Orders {
-  
+
 	implicit val orderBinding = DefaultOrderBinding
-	
+
 	/**
 	 * Snippet that fetches the user's most recent orders
 	 */
@@ -127,7 +127,7 @@ class Orders {
 			case _ => Text("No previous orders found")
 		}
 	}
-	
+
 	def order(xhtml: NodeSeq) = {
 		currentOrder.is match {
 			case Full(order) => order.bind(xhtml)

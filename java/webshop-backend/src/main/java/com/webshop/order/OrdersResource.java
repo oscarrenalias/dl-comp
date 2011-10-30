@@ -8,7 +8,7 @@ import javax.ws.rs.Produces;
 
 @Path("/orders")
 public class OrdersResource {
-	
+
 	/**
 	 * Retrieves all the users of a given user
 	 * @param user
@@ -17,9 +17,9 @@ public class OrdersResource {
     @GET
     @Produces("application/json")
     @Path("/user/{user}")
-    public OrderList getUserOrders(@PathParam("user") String user) {    	
+    public OrderList getUserOrders(@PathParam("user") String user) {
     	OrderList l = new OrderList();
-    	l.setOrders(OrderManager.getInstance().getUserOrders(user));    	
+    	l.setOrders(OrderManager.getInstance().getUserOrders(user));
     	return(l);
     }
 }

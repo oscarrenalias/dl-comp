@@ -5,7 +5,7 @@ import com.sun.jersey.api.client.config.ClientConfig
 import com.sun.jersey.api.client._
 import com.sun.jersey.client.impl.ClientRequestImpl
 import _root_.java.net.URI
-import javax.ws.rs.core.{Cookie, MediaType,MultivaluedMap,UriBuilder} 
+import javax.ws.rs.core.{Cookie, MediaType,MultivaluedMap,UriBuilder}
 
 /**
  * A Simplified Scala replacement for the Jersey Client WebResource class.

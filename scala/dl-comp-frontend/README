@@ -1,6 +1,6 @@
 How to get started
 -------------------
-1) Install the Scala plugin for Eclipse. Use the following URL as the source for the software in Eclipse 
+1) Install the Scala plugin for Eclipse. Use the following URL as the source for the software in Eclipse
 via (Help->Install new software...): http://www.scala-lang.org/node/94
 
 2) Install the Egit plugin for Eclipse. Use this URL for the software download: http://download.eclipse.org/egit/updates
@@ -9,7 +9,7 @@ via (Help->Install new software...): http://www.scala-lang.org/node/94
 
 3.1) In eclipse, go to File->Import...
 3.2) Select "Git Repository" under Git
-3.3) Enter the following data in the URI field: git+ssh://git@github.com/phunkphorce/dl-comp.git. Let 
+3.3) Enter the following data in the URI field: git+ssh://git@github.com/phunkphorce/dl-comp.git. Let
 the git importer fill in the rest of values
 3.4) Select the master branch
 3.5) Select where to import the project and click Finish
@@ -32,7 +32,7 @@ Team->Add to Version Control
 2) Commit your changes: "Team->Commit..." Write a relevant comment
 3) Once done, right click on the project name and then select Team->Push To... For some reason it is not possible
 to just select the default folder that we configured so we need to write the server and account settings to get it to push
-Use the following settings: 
+Use the following settings:
 
 URI: git+ssh://git@github.com/phunkphorce/dl-comp.git
 Host: github.com

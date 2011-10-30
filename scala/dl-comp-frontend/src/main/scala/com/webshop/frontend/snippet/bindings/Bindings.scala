@@ -4,7 +4,7 @@ import net.liftweb.http.TemplateFinder.findAnyTemplate
 import net.liftweb.common.{Box,Full,Empty,Failure}
 import net.liftweb.http._
 import net.liftweb.http.js.JsCmds._
-import net.liftweb.http.js.jquery.JqJsCmds._ 
+import net.liftweb.http.js.jquery.JqJsCmds._
 import net.liftweb.http.js.JE.JsRaw
 import net.liftweb.http.js._
 import net.liftweb.util.Helpers._
@@ -12,8 +12,8 @@ import com.webshop.frontend.snippet.bindings.Bindings._
 import scala.xml._
 
 /**
- * This class implements composable and generic data binding for model classes 
- * based on implicits. 
+ * This class implements composable and generic data binding for model classes
+ * based on implicits.
  *
  * The usage of implicits allows to call model.bind() in objects that don't have such
  * but for which an implicit data binding class has been defined in the scope.
