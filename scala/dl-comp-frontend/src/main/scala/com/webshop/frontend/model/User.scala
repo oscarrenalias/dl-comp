@@ -3,7 +3,7 @@ package com.webshop.frontend.model
 import _root_.net.liftweb.mapper._
 import _root_.net.liftweb.util._
 import _root_.net.liftweb.common._
-import _root_.net.liftweb.http._ 
+import _root_.net.liftweb.http._
 import _root_.net.liftweb.sitemap._
 import _root_.net.liftweb.sitemap.Loc._
 
@@ -21,95 +21,95 @@ object User extends User with MetaMegaProtoUser[User] {
   // comment this line out to require email validations
   override def skipEmailValidation = true
 
-   override lazy val sitemap: List[Menu] =  
-   List(loginMenuLoc, logoutMenuLoc, myOrdersMenuLoc, createUserMenuLoc,  
-        lostPasswordMenuLoc, resetPasswordMenuLoc,  
-        editUserMenuLoc, changePasswordMenuLoc,  
+   override lazy val sitemap: List[Menu] =
+   List(loginMenuLoc, logoutMenuLoc, myOrdersMenuLoc, createUserMenuLoc,
+        lostPasswordMenuLoc, resetPasswordMenuLoc,
+        editUserMenuLoc, changePasswordMenuLoc,
         ).flatten(a => a)
 
-   override def loginMenuLoc: Box[Menu] = {  
-     Full(Menu(Loc("Login", loginPath, S.??("login"),  
+   override def loginMenuLoc: Box[Menu] = {
+     Full(Menu(Loc("Login", loginPath, S.??("login"),
 				   LocGroup("user-operations"),
-                   If(notLoggedIn_? _, S.??("already.logged.in")),  
-                   Template(() => wrapIt(login)))))  
+                   If(notLoggedIn_? _, S.??("already.logged.in")),
+                   Template(() => wrapIt(login)))))
    }
 
-  override def logoutMenuLoc: Box[Menu] =  
-   Full(Menu(Loc("Logout", logoutPath, S.??("logout"),  
+  override def logoutMenuLoc: Box[Menu] =
+   Full(Menu(Loc("Logout", logoutPath, S.??("logout"),
 				   LocGroup("user-operations"),
-                 Template(() => wrapIt(logout)),  
-                 testLogginIn)))  
-   
-   /** 
-    * The menu item for creating the user/sign up (make this "Empty" to disable) 
-    */  
-   override def createUserMenuLoc: Box[Menu] =  
-   Full(Menu(Loc("CreateUser", signUpPath,  
-                 S.??("sign.up"),  
+                 Template(() => wrapIt(logout)),
+                 testLogginIn)))
+
+   /**
+    * The menu item for creating the user/sign up (make this "Empty" to disable)
+    */
+   override def createUserMenuLoc: Box[Menu] =
+   Full(Menu(Loc("CreateUser", signUpPath,
+                 S.??("sign.up"),
 				   LocGroup("user-operations"),
-                 Template(() => wrapIt(signupFunc.map(_()) openOr signup)),  
-                 If(notLoggedIn_? _, S.??("logout.first")))))  
-   
-   /** 
-    * The menu item for lost password (make this "Empty" to disable) 
-    */  
-   override def lostPasswordMenuLoc: Box[Menu] =  
-   Full(Menu(Loc("LostPassword", lostPasswordPath,  
-                 S.??("lost.password"),  
+                 Template(() => wrapIt(signupFunc.map(_()) openOr signup)),
+                 If(notLoggedIn_? _, S.??("logout.first")))))
+
+   /**
+    * The menu item for lost password (make this "Empty" to disable)
+    */
+   override def lostPasswordMenuLoc: Box[Menu] =
+   Full(Menu(Loc("LostPassword", lostPasswordPath,
+                 S.??("lost.password"),
 				   LocGroup("user-operations"),
-                 Template(() => wrapIt(lostPassword)),  
-                 If(notLoggedIn_? _, S.??("logout.first"))))) // not logged in  
-   
-   /** 
-    * The menu item for resetting the password (make this "Empty" to disable) 
-    */  
-   override def resetPasswordMenuLoc: Box[Menu] =  
-   Full(Menu(Loc("ResetPassword", (passwordResetPath, true),  
-                 S.??("reset.password"), 
-  				LocGroup("user-operations"), Hidden,  
-                 Template(() => wrapIt(passwordReset(snarfLastItem))),  
-                 If(notLoggedIn_? _,  
-                    S.??("logout.first"))))) //not Logged in  
-   
-   /** 
-    * The menu item for editing the user (make this "Empty" to disable) 
-    */  
-   override def editUserMenuLoc: Box[Menu] =  
-   Full(Menu(Loc("EditUser", editPath, S.??("edit.user"),  
+                 Template(() => wrapIt(lostPassword)),
+                 If(notLoggedIn_? _, S.??("logout.first"))))) // not logged in
+
+   /**
+    * The menu item for resetting the password (make this "Empty" to disable)
+    */
+   override def resetPasswordMenuLoc: Box[Menu] =
+   Full(Menu(Loc("ResetPassword", (passwordResetPath, true),
+                 S.??("reset.password"),
+  				LocGroup("user-operations"), Hidden,
+                 Template(() => wrapIt(passwordReset(snarfLastItem))),
+                 If(notLoggedIn_? _,
+                    S.??("logout.first"))))) //not Logged in
+
+   /**
+    * The menu item for editing the user (make this "Empty" to disable)
+    */
+   override def editUserMenuLoc: Box[Menu] =
+   Full(Menu(Loc("EditUser", editPath, S.??("edit.user"),
 				   LocGroup("user-operations"),
-                 Template(() => wrapIt(editFunc.map(_()) openOr edit)),  
-                 testLogginIn)))  
-   
-   /** 
-    * The menu item for changing password (make this "Empty" to disable) 
-    */  
-   override def changePasswordMenuLoc: Box[Menu] =  
-   Full(Menu(Loc("ChangePassword", changePasswordPath,  
-                 S.??("change.password"),  
+                 Template(() => wrapIt(editFunc.map(_()) openOr edit)),
+                 testLogginIn)))
+
+   /**
+    * The menu item for changing password (make this "Empty" to disable)
+    */
+   override def changePasswordMenuLoc: Box[Menu] =
+   Full(Menu(Loc("ChangePassword", changePasswordPath,
+                 S.??("change.password"),
 				   LocGroup("user-operations"),
-                 Template(() => wrapIt(changePassword)),  
-                 testLogginIn)))  
-   
-   /** 
-    * The menu item for validating a user (make this "Empty" to disable) 
-    */  
-   override def validateUserMenuLoc: Box[Menu] =  
-   Full(Menu(Loc("ValidateUser", (validateUserPath, true),  
-                 S.??("validate.user"), Hidden,  
-                 Template(() => wrapIt(validateUser(snarfLastItem))),  
+                 Template(() => wrapIt(changePassword)),
+                 testLogginIn)))
+
+   /**
+    * The menu item for validating a user (make this "Empty" to disable)
+    */
+   override def validateUserMenuLoc: Box[Menu] =
+   Full(Menu(Loc("ValidateUser", (validateUserPath, true),
+                 S.??("validate.user"), Hidden,
+                 Template(() => wrapIt(validateUser(snarfLastItem))),
                  If(notLoggedIn_? _, S.??("logout.first")))))
 
 	def myOrdersMenuLoc: Box[Menu] =
-   Full(Menu(Loc("myorders", List("myorders"), S.?("Order History"),  
-				   LocGroup("user-operations"),  
-                 testLogginIn)))	
+   Full(Menu(Loc("myorders", List("myorders"), S.?("Order History"),
+				   LocGroup("user-operations"),
+                 testLogginIn)))
 
 	/**
 	 * Overridden method to add some testing information
 	 */
 	override def loginXhtml = {
 			    (<form method="post" action={S.uri}><div class="center_title_bar">{S.??("Login")}</div><table>
-					  <tr><td colspan="2"><b>Use a@a.com and 12345678 as the password for testing purposes</b></td></tr> 
+					  <tr><td colspan="2"><b>Use a@a.com and 12345678 as the password for testing purposes</b></td></tr>
 			          <tr><td>{S.??("email.address")}</td><td><user:email /></td></tr>
 			          <tr><td>{S.??("password")}</td><td><user:password /></td></tr>
 			          <tr><td><a href={lostPasswordPath.mkString("/", "/", "")}

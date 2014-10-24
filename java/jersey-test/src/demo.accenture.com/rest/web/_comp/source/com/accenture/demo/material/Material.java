@@ -8,7 +8,7 @@ public class Material {
 	private String id;
 	private String name;
 	private String price;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -27,5 +27,5 @@ public class Material {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	
+
 }

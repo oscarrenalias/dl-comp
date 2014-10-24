@@ -19,13 +19,13 @@ public class Main {
     public static SelectorThread startServer() throws IOException {
         final Map<String, String> initParams = new HashMap<String, String>();
 
-        initParams.put("com.sun.jersey.config.property.packages", 
+        initParams.put("com.sun.jersey.config.property.packages",
                 "com.webshop");
         System.out.println("Starting grizzly...");
-        SelectorThread threadSelector = GrizzlyWebContainerFactory.create(BASE_URI, initParams);     
+        SelectorThread threadSelector = GrizzlyWebContainerFactory.create(BASE_URI, initParams);
         return threadSelector;
     }
-    
+
     public static void main(String[] args) throws IOException {
         SelectorThread threadSelector = startServer();
         System.out.println(String.format("Jersey app started with WADL available at "
@@ -33,5 +33,5 @@ public class Main {
                 BASE_URI));
         System.in.read();
         threadSelector.stopEndpoint();
-    }    
+    }
 }

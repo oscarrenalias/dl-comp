@@ -1,9 +1,9 @@
 <table class="item-table">
-<lift:ShoppingCart.info>	
+<lift:ShoppingCart.info>
 	<thead>
-		<tr>			
+		<tr>
 			<th>Item</th>
-			<th>Price</th>			
+			<th>Price</th>
 			<th>Quantity</th>
 		</tr>
 	</thead>
@@ -11,16 +11,16 @@
 		<tr>
 			<td/>
 			<td><cart:total_price withCurrency="yes" /></td>
-			<td><cart:number_of_items /></td>			
+			<td><cart:number_of_items /></td>
 		</tr>
-	</tfoot>	
-	<tbody>			
+	</tfoot>
+	<tbody>
 		<cart:items>
 		<tr item:id="default">
-			<td><item:link /></td>				
+			<td><item:link /></td>
 			<td>
-				<item:price withCurrency="yes" />					
-			</td>			
+				<item:price withCurrency="yes" />
+			</td>
 			<td>
 				<item:amount />
 				<item:remove />

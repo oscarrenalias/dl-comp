@@ -1,21 +1,21 @@
 <lift:surround with="default" at="content">
 	<lift:Orders.order>
-		<div class="center_title_bar">Order <order:id /></div>	
+		<div class="center_title_bar">Order <order:id /></div>
 		<lift:embed what="/templates-hidden/messages" />
 			<div class="center_box_big">
-				Status: <order:status /><br/>		
+				Status: <order:status /><br/>
 				<table class="item-table">
 				<thead>
-					<tr>			
+					<tr>
 						<th>Item</th>
 						<th>Price</th>
-						<th>Quantity</th>						
+						<th>Quantity</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
 						<td/>
-						<td><order:total_price /></td>						
+						<td><order:total_price /></td>
 						<td><order:total_items /></td>
 					</tr>
 				</tfoot>
@@ -23,10 +23,10 @@
 				<order:lines>
 				<tr>
 					<line:item>
-						<td><item:link/></td>					
+						<td><item:link/></td>
 						<td><item:price/></td>
 					</line:item>
-					<td><line:amount/></td>					
+					<td><line:amount/></td>
 				</tr>
 				</order:lines>
 			</tbody>

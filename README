@@ -5,7 +5,7 @@ Running the backend
 After you have cloned the repository from github, go to folder java/webshop-backend/ and type:
 
 	mvn exec:java
-	
+
 If this is the first time that the server is run, Maven will download the necessary dependencies, so it may take a while.
 
 You can check that the backend is running by pointing your browser to http://localhost:9998/item/2. You should get a nice Json response.
@@ -23,7 +23,7 @@ Make sure that you start the REST server before starting the Scala frontend.
 In order to run the frontend Scala application, go to folder scala/dl-comp-frotend/ and type:
 
 		mvn jetty:run
-		
-Again, if this is the first time that the server is run Maven will download all the necessary dependecies. 
+
+Again, if this is the first time that the server is run Maven will download all the necessary dependecies.
 
 The Scala application runs in http://localhost:8080/

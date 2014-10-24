@@ -17,25 +17,25 @@ import com.webshop.{WebshopConfig => config}
  * Provides basic REST methods to any class that includes this trait
  */
 trait RestfulOperator {
-  
-	implicit val formats = net.liftweb.json.DefaultFormats  
+
+	implicit val formats = net.liftweb.json.DefaultFormats
 	var c = Client.create
 	var r = new Resource(c, new URI(config.URI.BASE))
-	
+
 	def doGet(path: String) = {
 		Log.debug("Executing GET - path = " + path)
 		r.path(path).get(Request().acceptLanguageString("en"))
 	}
-	
+
 	def doPut(path: String, data: String) = {
 		Log.debug("Executing PUT - path = " + path)
 		r.path(path).put(Request(data).acceptLanguageString("en"))
 	}
- 
+
 	def doPost(path: String, data: String) = {
 		Log.debug("Executing POST - path = " + path)
 		r.path(path).post(Request(data).mediaType("application/json"))
-	} 
+	}
 }
 
 /**
@@ -45,21 +45,21 @@ trait RestfulOperator {
 object RestClient {
 
   object Items extends RestfulOperator {
-	  def get(id: String): Box[Item] = {	    
+	  def get(id: String): Box[Item] = {
         try {
-          val response:String = doGet(config.URI.ITEM + "/" + id).getEntity(classOf[String])	    
-	      Log.debug(config.URI.ITEM + "- item: " + id + " - response = " + response)  
-       
+          val response:String = doGet(config.URI.ITEM + "/" + id).getEntity(classOf[String])
+	      Log.debug(config.URI.ITEM + "- item: " + id + " - response = " + response)
+
           Full(parse(response).extract[Item])
-          
+
         } catch {
-          case e:Exception => Failure(e.getMessage, Full(e), Empty)                 
+          case e:Exception => Failure(e.getMessage, Full(e), Empty)
         }
       }
   }
-  
+
   object Orders extends RestfulOperator {
-    
+
     def get(id: String): Box[Order] = {
     	try {
     		var response:String = doGet(config.URI.ORDER + "/" + id).getEntity(classOf[String])
@@ -69,9 +69,9 @@ object RestClient {
     		case e:Exception => Failure(e.getMessage, Full(e), Empty)
     	}
     }
-    
+
     def create(o: Order): Box[Order] = {
-    	val jsonOrder = o.toJson 
+    	val jsonOrder = o.toJson
     	Log.debug("serialized json Order: " + jsonOrder)
     	// post the order to the server
     	try {
@@ -91,7 +91,7 @@ object RestClient {
     		Full(parse(response).extract[OrderList])
     	} catch {
     		case e:Exception => Failure(e.getMessage, Full(e), Empty)
-    	}		
+    	}
 	}
   }
 }

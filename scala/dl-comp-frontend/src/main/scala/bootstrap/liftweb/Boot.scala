@@ -23,11 +23,11 @@ class Boot {
 
     // where to search snippet
     LiftRules.addToPackages("com.webshop.frontend")
-    
+
     Schemifier.schemify(true, Log.infoF _, User)
-    
+
 	MenuInfo.setSitemap
-    
+
     /*
      * Show the spinny image when an Ajax call starts
      */
@@ -40,25 +40,25 @@ class Boot {
     LiftRules.ajaxEnd =
       Full(() => LiftRules.jsArtifacts.hide("ajax-loader").cmd)
 
-	LiftRules.early.append{ _.setCharacterEncoding("UTF-8") }    
-    
-	S.addAround(DB.buildLoanWrapper)    
-  } 
+	LiftRules.early.append{ _.setCharacterEncoding("UTF-8") }
+
+	S.addAround(DB.buildLoanWrapper)
+  }
 }
 
 object MenuInfo {
-    
+
   import Loc._
   val IfLoggedIn = If(() => User.currentUser.isDefined, "You must be logged in")
   val CartHasItems = If(() => ShoppingCart.hasItems, "Nothing to check out")
 
   def setSitemap = {
 	  // Build SiteMap
-	    LiftRules.setSiteMap(SiteMap(MenuInfo.menu :_*))		
+	    LiftRules.setSiteMap(SiteMap(MenuInfo.menu :_*))
   }
-  
-  def menu: List[Menu] =  
-	Menu(Loc("Home", List("index"), "Home", LocGroup("top-level"))) :: 
+
+  def menu: List[Menu] =
+	Menu(Loc("Home", List("index"), "Home", LocGroup("top-level"))) ::
     Menu(Loc("Catalog", List("browse"), "Item catalog", LocGroup("top-level"))) ::
     Menu(Loc("CartContents", List("cart"), "Cart Contents", IfLoggedIn)) ::
     Menu(Loc("Checkout", List("checkout"), "Checkout", IfLoggedIn)) ::

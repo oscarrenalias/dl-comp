@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @Path("/catalog")
 public class CatalogResource {
 
-    @GET 
+    @GET
     @Produces("application/json")
     public ArrayList<CatalogBean> getCatalog() {
     	return(CatalogManager.getInstance().getCatalog());

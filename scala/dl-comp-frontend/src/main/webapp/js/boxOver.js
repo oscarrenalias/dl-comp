@@ -28,13 +28,13 @@ function initboxOver() {
 	//oDv.appendChild(dvBdy);
 	oDv.style.position="absolute";
 	oDv.style.visibility='hidden';
-	document.body.appendChild(oDv);	
+	document.body.appendChild(oDv);
 }
 
 function defHdrStyle() {
 	//dvHdr.innerHTML='&nbsp;&nbsp;'+dvHdr.innerHTML;
 	dvHdr.style.maxWidth='auto';
-	dvHdr.style.width='auto';	
+	dvHdr.style.width='auto';
 	dvHdr.style.fontFamily='Verdana';
 	dvHdr.style.fontSize='11px';
 	dvHdr.style.border='1px solid #666666';
@@ -50,15 +50,15 @@ function defBdyStyle() {
 	dvBdy.style.borderLeft='none';
 	dvBdy.style.borderRight='none';
 	dvBdy.style.width='210px';
-	dvBdy.style.height='1px';	
+	dvBdy.style.height='1px';
 	dvBdy.style.padding='0';
-	dvBdy.style.margin='0';	
+	dvBdy.style.margin='0';
 	dvBdy.style.color='#999999';
 }
 
 function checkElemBO(txt) {
 if (!txt || typeof(txt) != 'string') return false;
-if ((txt.indexOf('header')>-1)&&(txt.indexOf('body')>-1)&&(txt.indexOf('[')>-1)&&(txt.indexOf('[')>-1)) 
+if ((txt.indexOf('header')>-1)&&(txt.indexOf('body')>-1)&&(txt.indexOf('[')>-1)&&(txt.indexOf('[')>-1))
    return true;
 else
    return false;
@@ -68,7 +68,7 @@ function scanBO(curNode) {
 	  if (checkElemBO(curNode.title)) {
          curNode.boHDR=getParam('header',curNode.title);
          curNode.boBDY=getParam('body',curNode.title);
-			curNode.boCSSBDY=getParam('cssbody',curNode.title);			
+			curNode.boCSSBDY=getParam('cssbody',curNode.title);
 			curNode.boCSSHDR=getParam('cssheader',curNode.title);
 			curNode.IEbugfix=(getParam('hideselects',curNode.title)=='on')?true:false;
 			curNode.fixX=parseInt(getParam('fixedrelx',curNode.title));
@@ -85,10 +85,10 @@ function scanBO(curNode) {
 				document.all?curNode.attachEvent('onclick',showHideBox):curNode.addEventListener('click',showHideBox,false);
 				document.all?curNode.attachEvent('onmouseover',hideBox):curNode.addEventListener('mouseover',hideBox,false);
 			}
-			else {// Note : if requireclick is on the stop clicks are ignored   			
+			else {// Note : if requireclick is on the stop clicks are ignored
    			if (getParam('doubleclickstop',curNode.title)!='off') {
    				document.all?curNode.attachEvent('ondblclick',pauseBox):curNode.addEventListener('dblclick',pauseBox,false);
-   			}	
+   			}
    			if (getParam('singleclickstop',curNode.title)=='on') {
    				document.all?curNode.attachEvent('onclick',pauseBox):curNode.addEventListener('click',pauseBox,false);
    			}
@@ -98,7 +98,7 @@ function scanBO(curNode) {
 			curNode.hasbox=1;
 	   }
 	   else
-	      curNode.hasbox=2;   
+	      curNode.hasbox=2;
 }
 
 
@@ -112,7 +112,7 @@ function getParam(param,list) {
 		return '';
 }
 
-function Left(elem){	
+function Left(elem){
 	var x=0;
 	if (elem.calcLeft)
 		return elem.calcLeft;
@@ -122,7 +122,7 @@ function Left(elem){
 		 	x+=parseInt(elem.currentStyle.borderLeftWidth);
 		 x+=elem.offsetLeft;
 		 elem=elem.offsetParent;
-	  } 
+	  }
 	oElem.calcLeft=x;
 	return x;
 	}
@@ -132,15 +132,15 @@ function Top(elem){
 	 if (elem.calcTop)
 	 	return elem.calcTop;
 	 var oElem=elem;
-	 while(elem){		
+	 while(elem){
 	 	 if ((elem.currentStyle)&& (!isNaN(parseInt(elem.currentStyle.borderTopWidth)))&&(x!=0))
-		 	x+=parseInt(elem.currentStyle.borderTopWidth); 
+		 	x+=parseInt(elem.currentStyle.borderTopWidth);
 		 x+=elem.offsetTop;
 	         elem=elem.offsetParent;
- 	 } 
+ 	 }
  	 oElem.calcTop=x;
  	 return x;
- 	 
+
 }
 
 var ah,ab;
@@ -157,14 +157,14 @@ function applyStyles() {
 	dvBdy.innerHTML=CBE.boBDY;
 	ah=false;
 	ab=false;
-	if (CBE.boHDR!='') {		
+	if (CBE.boHDR!='') {
 		oDv.appendChild(dvHdr);
 		ah=true;
-	}	
+	}
 	if (CBE.boBDY!=''){
 		oDv.appendChild(dvBdy);
 		ab=true;
-	}	
+	}
 }
 
 var CSE,iterElem,LSE,CBE,LBE, totalScrollLeft, totalScrollTop, width, height ;
@@ -177,9 +177,9 @@ function SHW() {
       height=document.body.clientHeight;
    }
    if (document.documentElement && (document.documentElement.clientWidth!=0) && (document.body.clientWidth + 20 >= document.documentElement.clientWidth)) {
-      width=document.documentElement.clientWidth;   
-      height=document.documentElement.clientHeight;   
-   }   
+      width=document.documentElement.clientWidth;
+      height=document.documentElement.clientHeight;
+   }
    return [width,height];
 }
 
@@ -188,23 +188,23 @@ var ID=null;
 function moveMouse(e) {
    //boxMove=true;
 	e?evt=e:evt=event;
-	
+
 	CSE=evt.target?evt.target:evt.srcElement;
-	
+
 	if (!CSE.hasbox) {
 	   // Note we need to scan up DOM here, some elements like TR don't get triggered as srcElement
 	   iElem=CSE;
 	   while ((iElem.parentNode) && (!iElem.hasbox)) {
 	      scanBO(iElem);
 	      iElem=iElem.parentNode;
-	   }	   
+	   }
 	}
-	
-	if ((CSE!=LSE)&&(!isChild(CSE,dvHdr))&&(!isChild(CSE,dvBdy))){		
+
+	if ((CSE!=LSE)&&(!isChild(CSE,dvHdr))&&(!isChild(CSE,dvBdy))){
 	   if (!CSE.boxItem) {
 			iterElem=CSE;
 			while ((iterElem.hasbox==2)&&(iterElem.parentNode))
-					iterElem=iterElem.parentNode; 
+					iterElem=iterElem.parentNode;
 			CSE.boxItem=iterElem;
 			}
 		iterElem=CSE.boxItem;
@@ -223,11 +223,11 @@ function moveMouse(e) {
 						if (ID!=null)
 							clearTimeout(ID);
 						COL=1;
-						ID=setTimeout("oDv.style.visibility='visible';ID=null;",CBE.delay);						
+						ID=setTimeout("oDv.style.visibility='visible';ID=null;",CBE.delay);
 					}
-				if (CBE.IEbugfix) {hideSelects();} 
+				if (CBE.IEbugfix) {hideSelects();}
 				fixposx=!isNaN(CBE.fixX)?Left(CBE)+CBE.fixX:CBE.absX;
-				fixposy=!isNaN(CBE.fixY)?Top(CBE)+CBE.fixY:CBE.absY;			
+				fixposy=!isNaN(CBE.fixY)?Top(CBE)+CBE.fixY:CBE.absY;
 				lockX=0;
 				lockY=0;
 				boxMove=true;
@@ -237,7 +237,7 @@ function moveMouse(e) {
 		}
 		else if (!isChild(CSE,dvHdr) && !isChild(CSE,dvBdy) && (boxMove))	{
 			// The conditional here fixes flickering between tables cells.
-			if ((!isChild(CBE,CSE)) || (CSE.tagName!='TABLE')) {   			
+			if ((!isChild(CBE,CSE)) || (CSE.tagName!='TABLE')) {
    			CBE=null;
    			if (ID!=null)
   					clearTimeout(ID);
@@ -250,14 +250,14 @@ function moveMouse(e) {
 	else if (((isChild(CSE,dvHdr) || isChild(CSE,dvBdy))&&(boxMove))) {
 		totalScrollLeft=0;
 		totalScrollTop=0;
-		
+
 		iterElem=CSE;
 		while(iterElem) {
 			if(!isNaN(parseInt(iterElem.scrollTop)))
 				totalScrollTop+=parseInt(iterElem.scrollTop);
 			if(!isNaN(parseInt(iterElem.scrollLeft)))
 				totalScrollLeft+=parseInt(iterElem.scrollLeft);
-			iterElem=iterElem.parentNode;			
+			iterElem=iterElem.parentNode;
 		}
 		if (CBE!=null) {
 			boxLeft=Left(CBE)-totalScrollLeft;
@@ -267,7 +267,7 @@ function moveMouse(e) {
 			doCheck();
 		}
 	}
-	
+
 	if (boxMove&&CBE) {
 		// This added to alleviate bug in IE6 w.r.t DOCTYPE
 		bodyScrollTop=document.documentElement&&document.documentElement.scrollTop?document.documentElement.scrollTop:document.body.scrollTop;
@@ -278,15 +278,15 @@ function moveMouse(e) {
 			mouseY < -oy?lockY=-mouseY-oy:lockY=0;
 			mouseX < -ox?lockX=-mouseX-ox:lockX=0;
 			mouseY > (SHW()[1]-oDv.offsetHeight-oy)?lockY=-mouseY+SHW()[1]-oDv.offsetHeight-oy:lockY=lockY;
-			mouseX > (SHW()[0]-dvBdy.offsetWidth-ox)?lockX=-mouseX-ox+SHW()[0]-dvBdy.offsetWidth:lockX=lockX;			
+			mouseX > (SHW()[0]-dvBdy.offsetWidth-ox)?lockX=-mouseX-ox+SHW()[0]-dvBdy.offsetWidth:lockX=lockX;
 		}
 		oDv.style.left=((fixposx)||(fixposx==0))?fixposx:bodyScrollLet+mouseX+ox+lockX+"px";
-		oDv.style.top=((fixposy)||(fixposy==0))?fixposy:bodyScrollTop+mouseY+oy+lockY+"px";		
-		
+		oDv.style.top=((fixposy)||(fixposy==0))?fixposy:bodyScrollTop+mouseY+oy+lockY+"px";
+
 	}
 }
 
-function doCheck() {	
+function doCheck() {
 	if (   (mouseX < boxLeft)    ||     (mouseX >boxRight)     || (mouseY < boxTop) || (mouseY > boxBottom)) {
 		if (!CBE.requireclick)
 			fadeOut();
@@ -324,18 +324,18 @@ function fadeIn2(fs) {
 		oDv.style.filter='alpha(opacity='+parseInt(100*COL)+')';
 		oDv.style.opacity=COL;
 		if (COL<1)
-		 setTimeout("fadeIn2("+fs+")",10);		
+		 setTimeout("fadeIn2("+fs+")",10);
 }
 
 
 function fadeOut() {
 	oDv.style.visibility='hidden';
-	
+
 }
 
 function isChild(s,d) {
 	while(s) {
-		if (s==d) 
+		if (s==d)
 			return true;
 		s=s.parentNode;
 	}

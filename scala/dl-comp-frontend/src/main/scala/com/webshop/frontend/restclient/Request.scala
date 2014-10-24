@@ -26,14 +26,14 @@ object Request {
  */
 class Request(val entity:Object) {
 	var metaData = new OutBoundHeaders()
-	
+
 	def mediaType(t:MediaType) = {
 		metaData.putSingle("Content-Type", t);
  		this
 	}
-	
+
 	def mediaType(t:String):Request = mediaType(MediaType.valueOf(t))
-	
+
 	def accept(mediaTypes:MediaType* ) = {
 		for (val m <- mediaTypes)
 		add("Accept", m)
@@ -58,7 +58,7 @@ class Request(val entity:Object) {
  		this
  	}
 
- 	def cookie(cookie:Cookie ) = add("Cookie", cookie)      
+ 	def cookie(cookie:Cookie ) = add("Cookie", cookie)
 
  	def header(name:String, value:Object ) = add(name, value)
 

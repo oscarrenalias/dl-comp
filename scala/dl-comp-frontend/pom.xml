@@ -55,7 +55,7 @@
       <groupId>org.apache.derby</groupId>
       <artifactId>derby</artifactId>
       <version>10.4.2.0</version>
-    </dependency>    
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
@@ -92,7 +92,7 @@
       <groupId>net.liftweb</groupId>
       <artifactId>lift-json</artifactId>
       <version>${lift.version}</version>
-    </dependency>	
+    </dependency>
     <dependency>
       <groupId>javax.mail</groupId>
       <artifactId>mail</artifactId>
@@ -253,7 +253,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>	  
+            </plugin>
     </plugins>
   </build>
   <reporting>

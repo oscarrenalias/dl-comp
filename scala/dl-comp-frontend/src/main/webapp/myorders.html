@@ -1,12 +1,12 @@
 <lift:surround with="default" at="content">
 	<div class="center_title_bar">My Orders</div>
 	<lift:embed what="/templates-hidden/messages" />
-<div class="center_box_big">	
+<div class="center_box_big">
 	<lift:Orders.myOrders>
 		<order:details_link /><br/>
 		Status: <order:status/><br/>
 		<order:total_items /> items, <order:total_price /> EUR<br/>
 		<br/>
-	</lift:Orders.myOrders>	
-	</div>			
+	</lift:Orders.myOrders>
+	</div>
 </lift:surround>
